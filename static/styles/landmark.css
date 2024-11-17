@@ -1,0 +1,472 @@
+/* General styling for the landmark card */
+.landmark-card {
+    width: 850px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #d1e7dd;
+    padding: 16px;
+    margin: 20px auto;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Name at the top */
+.landmark-name {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Styling for landmark total stars container */
+.landmark-total-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center align below the heading */
+    margin-bottom: 12px; /* Space below stars container */
+}
+
+/* Star rating and date styling within landmark-total-stars */
+.landmark-total-stars .landmark-stars {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between stars and date */
+}
+
+/* Styling for the stars and the date */
+.landmark-total-stars .stars-integer {
+    font-size: 16px;
+    color: #000; /* Black color for the date */
+    margin-right: 8px; /* Space between the date and stars */
+}
+
+.landmark-total-stars .star {
+    font-size: 24px; /* Larger size for visibility */
+    color: #FFD700; /* Gold for filled stars */
+}
+
+.landmark-total-stars .star.empty {
+    color: #ccc; /* Grey for empty stars */
+}
+
+
+/* Image styling */
+.landmark-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    margin-bottom: 12px;
+}
+
+/* Styling for the transition-card, similar to the post-card and info-card styles */
+.transition-card {
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 10px; /* Rounded corners to match your other cards */
+    padding: 20px; /* Inner padding for consistency */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    margin-bottom: 20px; /* Space below the card */
+    text-align: left; /* Align text to the left */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover transition */
+}
+
+/* Highlight transition availability in bold */
+.transition-availability {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333; /* Dark grey for emphasis */
+    margin-bottom: 10px; /* Space below title */
+}
+
+/* Layout for the transition info sections */
+.transition-info {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping if the container size changes */
+    gap: 20px; /* Space between left and right sections */
+}
+
+/* Styling for the left side of the transition info */
+.transition-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between elements for readability */
+    color: #555; /* Consistent text color */
+}
+
+/* Styling for the right side of the transition info */
+.transition-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between elements for readability */
+    color: #555; /* Consistent text color */
+}
+
+
+/* Location name styling */
+.landmark-location {
+    font-size: 16px;
+    color: #4c6e58;
+    margin-bottom: 8px;
+}
+
+/* Map image styling */
+.landmark-map img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+/* Add scaling and shadow effect on hover, consistent with info-card */
+.landmark-map:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Description of the location */
+.landmark-description {
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Likes and visits count */
+.landmark-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+/* Action buttons for interaction */
+.landmark-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    background-color: #4c6e58;
+    color: #ffffff;
+    width: 125px;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* MAP */
+/* Styling for the landmark map container */
+.landmark-map {
+    width: 100%;
+    max-width: 600px; /* Limit max width */
+    margin: 20px auto; /* Center align */
+    border-radius: 18px;
+    overflow: hidden; /* Rounds iframe corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Styling for the embedded map iframe */
+.map-frame {
+    width: 100%;
+    height: 450px;
+    border: 0;
+    display: block; /* Removes extra space */
+}
+
+
+/* General styling for the landmark review container */
+.landmark-review {
+    border-top: 1px solid #ccc; /* Separate from main card */
+    padding-top: 16px;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column; /* Organize elements vertically */
+    align-items: flex-start; /* Align contents to the left */
+    position: relative;
+}
+
+/* Individual comment section styling */
+.landmark-comment {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+/* Author image styling */
+.comment-author-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Comment content styling */
+.comment-content {
+    background-color: #f8f9fa; /* Light background for comment */
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 74px); /* Adjusted to accommodate author image */
+}
+
+/* Comment author name styling */
+.comment-author {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Stars and date container styling */
+.landmark-stars-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* Star rating container */
+.landmark-stars {
+    font-size: 20px; /* Larger size for easy readability */
+    color: #FFD700; /* Gold for stars */
+    display: flex;
+    gap: 5px;
+}
+
+.landmark-stars .star {
+    font-size: 24px; /* Size adjustment for better view */
+}
+
+.landmark-stars .star.empty {
+    color: #ccc; /* Grey color for empty stars */
+}
+
+/* Date styling */
+.comment-date {
+    font-size: 14px;
+    color: #777;
+    margin-left: auto;
+}
+
+/* Comment text styling */
+.comment-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+
+
+/* Add review */
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* Black with opacity */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Center the modal */
+    padding: 2em;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 8px;
+}
+
+.review-comment {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9; /* Light grey background */
+    min-height: 300px; /* Height similar to a typical textarea */
+    font-family: inherit; /* Same font as the rest of the page */
+    font-size: 1rem;
+    color: #333; /* Dark text for better readability */
+    overflow-y: auto; /* Scroll if the content is too long */
+    white-space: pre-wrap; /* Keep formatting and line breaks */
+    cursor: default; /* Normal cursor since it's not an editable area */
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Hide the radio buttons */
+#reviewStars input[type="radio"] {
+    display: none;
+}
+
+/* Style the stars using labels */
+#reviewStars label {
+    font-size: 2rem;
+    color: #ccc; /* Default grey for unselected stars */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* Highlight stars when selected and all previous stars */
+#reviewStars input[type="radio"]:checked ~ label {
+    color: gold; /* Reset remaining stars to grey */
+}
+
+/* Correct highlight from left to right */
+#reviewStars input[type="radio"]:checked + label,
+#reviewStars input[type="radio"]:checked + label ~ label {
+    color: gold;
+}
+
+/* Highlight stars on hover from left to right */
+#reviewStars label:hover,
+#reviewStars label:hover ~ label {
+    color: gold;
+}
+
+
+/* General form container styling */
+.landmark-form-container {
+    width: 850px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9fafb;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    font-family: Arial, sans-serif;
+}
+
+/* Form heading */
+.landmark-form-container h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #4c6e58;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Label styling */
+.landmark-form-container label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Input fields and textarea styling */
+.landmark-form-container input[type="text"],
+.landmark-form-container textarea,
+.landmark-form-container input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Add focus effect on inputs */
+.landmark-form-container input[type="text"]:focus,
+.landmark-form-container textarea:focus,
+.landmark-form-container input[type="file"]:focus {
+    border-color: #4c6e58;
+    outline: none;
+    background-color: #f1f9f5;
+}
+
+/* Textarea customization */
+.landmark-form-container textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* Submit button styling */
+.landmark-form-container .btn-submit {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #4c6e58;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+}
+
+/* Hover effect for button */
+.landmark-form-container .btn-submit:hover {
+    background-color: #3b5746;
+    transform: scale(1.02);
+}
+
+/* Error message styling */
+.landmark-form-container .error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* Instructions for optional fields */
+.landmark-form-container .field-instructions {
+    font-size: 14px;
+    color: #777;
+    margin-top: -12px;
+    margin-bottom: 12px;
+}
+
+/* Responsiveness for mobile devices */
+@media (max-width: 768px) {
+    .landmark-form-container {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .landmark-form-container h2 {
+        font-size: 20px;
+    }
+
+    .landmark-form-container input[type="text"],
+    .landmark-form-container textarea,
+    .landmark-form-container input[type="file"] {
+        font-size: 14px;
+    }
+
+    .landmark-form-container .btn-submit {
+        font-size: 16px;
+    }
+}
+

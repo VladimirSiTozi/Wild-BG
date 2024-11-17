@@ -1,0 +1,27 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+        <title>Landmark</title>
+    </head>
+    <body>
+
+    <div class="left-container"></div>
+    <div class="middle-container">
+        <div class="landmark-card">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn">Create Landmark</button>
+            </form>
+        </div>
+    </div>
+    <div class="right-container"></div>
+
+{% endblock %}

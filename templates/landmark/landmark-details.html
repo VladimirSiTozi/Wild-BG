@@ -1,0 +1,162 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Landmark</title>
+</head>
+<body>
+
+    <div class="left-container"></div>
+    <div class="middle-container">
+        <div class="landmark-card">
+            <h2 class="landmark-name">Пирин планина, връх Вихрен</h2>
+            <div class="landmark-total-stars">
+                <div class="landmark-stars">
+                    <span class="stars-integer">4.2 (517)</span>
+                    <div class="star-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star empty">☆</span>
+                    </div>           
+                </div>
+            </div>
+            
+            <div class="landmark-image">
+                <img src="images/mark-koch-KiRlN3jjVNU-unsplash.jpg" alt="Location Picture">
+            </div>
+            
+            <p class="landmark-location">България, област Благоевград</p>
+            
+            <p class="landmark-description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam natus nostrum autem dolorum eligendi architecto illum inventore, perferendis harum suscipit iste corrupti animi necessitatibus accusamus nulla aperiam aut expedita eius! Consequuntur quam enim incidunt numquam quod, officia dolores distinctio voluptate odit ratione adipisci suscipit illo perferendis consequatur aliquam, vitae ducimus eum minus animi. Ratione minima fuga porro sunt esse velit, magni facilis fugit, hic illum nostrum doloribus nemo libero quibusdam tempore doloremque? Molestias quam dolore unde dignissimos sequi quaerat accusamus, exercitationem facilis ea porro ipsam similique voluptates repudiandae recusandae harum neque inventore nemo atque nesciunt quod officia dicta! Error, aut!
+            </p>
+            
+            <div class="transition-card">
+                <div class="transition-availability">
+                    Преход: Да
+                </div>
+                <div class="transition-info">
+                    <div class="transition-left">
+                        <p>Време за перход: 30 минути</p>
+                        <p>Километри: 12 км</p>
+                        <p>Подходящо за деца: Да</p>
+                        <p>Места за ядене: Не</p>
+                        <p>Облагородено: Да</p>
+                    </div>
+                    <div class="transition-right">
+                        <p>Начална точка: Downtown Park</p>
+                        <p>Крайна точка: Riverside Area</p>
+                        <p>Лесно дотъпно за кола: Да</p>
+                        <p>Паркинг: Да</p>
+                        <p>Достъпно: Да</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+            <div class="landmark-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2870.388360349243!2d22.884846952750987!3d43.99269694359827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4753798d7c472e1d%3A0x9f1823d30e6ca936!2z0KHRgNC10LTQvdC-0LLQtdC60L7QstC90LAg0JrRgNC10L_QvtGB0YIg0JHQsNCx0LAg0JLQuNC00LA!5e0!3m2!1sbg!2sbg!4v1731613466914!5m2!1sbg!2sbg" 
+                    class="map-frame"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            
+            <div class="landmark-stats">
+                <p class="landmark-likes">Likes: 100</p>
+                <p class="landmark-visits">Visits: 250</p>
+            </div>
+            
+            <div class="landmark-actions">
+                <button class="btn landmark-btn">Like</button>
+                <button id="addReviewBtn" class="btn landmark-btn">Add review</button>
+                <button class="btn landmark-btn">Visited</button>
+            </div>
+            
+<!-- Modal for Add Review -->
+            <div id="reviewModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Add Your Review</h2>
+                    <form id="reviewForm">
+                        <label for="reviewStars">Your Rating:</label>
+                        <div id="reviewStars" class="review-star">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5" title="5 stars">&#9733;</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" title="4 stars">&#9733;</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3" title="3 stars">&#9733;</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" title="2 stars">&#9733;</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" title="1 star">&#9733;</label>
+                        </div>
+                        <textarea class="review-comment" id="reviewText" name="reviewText" rows="4" cols="50" placeholder="Write your review here..."></textarea><br>
+                        <button type="submit" class="btn submit-btn">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 1st review -->
+            <div class="landmark-review">
+                <div class="landmark-comment">
+                    <img src="images/anonymous_full.jpg" alt="Author Image" class="comment-author-img">
+                    <div class="comment-content">
+                        <p class="comment-author">
+                            <strong>Jane Doe</strong> 
+                        </p>
+                        <div class="landmark-stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star empty">☆</span>
+                            <span class="comment-date">Oct 10, 2023</span>
+                        </div>
+                        <p class="comment-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam quibusdam odio modi, est atque!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2nd review -->
+            <div class="landmark-review">
+                <div class="landmark-comment">
+                    <img src="images/anonymous_full.jpg" alt="Author Image" class="comment-author-img">
+                    <div class="comment-content">
+                        <p class="comment-author">
+                            <strong>Jane Doe</strong> 
+                        </p>
+                        <div class="landmark-stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star empty">☆</span>
+                            <span class="comment-date">Oct 10, 2023</span>
+                        </div>
+                        <p class="comment-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam quibusdam odio modi, est atque!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="right-container"></div>
+
+{% endblock %}

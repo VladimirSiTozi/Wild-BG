@@ -1,0 +1,180 @@
+/* Base styles for body and main elements */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+
+
+/* Make main take up the remaining space between header and footer */
+main {
+    flex: 1; /* Take up all available space between header and footer */
+    display: flex; /* Allow using flex inside main */
+    flex-direction: row; /* Arrange inner containers in a row */
+}
+
+
+/* Main container styles */
+.main-container {
+    display: flex;
+    width: 100%;
+}
+
+/* Left and right containers should be smaller */
+.left-container,
+.right-container {
+    flex: 1; /* Smaller relative to the middle container */
+    background-color: #d1e7dd; /* Light green background for visibility */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Sticky Profile Card in the Left Container */
+.profile-card {
+    position: sticky;
+    top: 1em;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.name-container {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.first-name,
+.last-name,
+.points,
+.level,
+.about-me {
+    display: block;
+    margin-top: 5px;
+}
+
+.profile-p-info {
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+/* Middle container should be the biggest and scrollable */
+.middle-container {
+    flex: 3; /* Three times wider than left and right */
+    background-color: #a3c99c; /* Dark green background for contrast */
+    padding: 20px;
+    overflow-y: auto; /* Allow vertical scrolling for excess content */
+    max-height: 100%; /* Height should not exceed the parent container */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between the post cards */
+}
+
+/* Styling for each post-card */
+.post-card {
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Right container - general styles, similar to left container */
+.right-container {
+    flex: 1; /* Same size as left container */
+    background-color: #d1e7dd; /* Light green background */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Right container card styling */
+.info-card {
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Inner padding for spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    text-align: center; /* Center align content */
+    margin-bottom: 20px; /* Space below the card */
+}
+
+.info-card .name {
+    font-size: 1.5em; /* Larger font for name */
+    font-weight: bold; /* Bold text for emphasis */
+    margin-bottom: 10px; /* Spacing below name */
+}
+
+.info-card .location {
+    font-size: 1em; /* Standard font size */
+    color: #555; /* Grey color for secondary info */
+    margin-bottom: 15px; /* Spacing below location */
+}
+
+.info-card .location-picture {
+    width: 100%; /* Full width image */
+    max-width: 300px; /* Limit maximum width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for the image */
+    object-fit: cover; /* Ensure it covers nicely */
+    margin-bottom: 15px; /* Spacing below image */
+}
+
+.info-card .description {
+    font-size: 1em; /* Standard font size */
+    color: #333; /* Dark grey text */
+    margin-bottom: 15px; /* Spacing below description */
+}
+
+.info-card .rating {
+    font-size: 1.5em; /* Bigger size for stars */
+    color: #ffc107; /* Gold color for stars */
+}
+
+.info-card .rating .empty {
+    color: #e0e0e0; /* Grey color for unfilled stars */
+}
+
+.info-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Responsive Design - Mobile Adjustments */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Stack containers vertically */
+    }
+    .left-container,
+    .right-container,
+    .middle-container {
+        flex: 1; /* Make all containers equal size when stacked vertically */
+    }
+    .middle-container {
+        max-height: none; /* Allow full height when stacked */
+        overflow-y: visible; /* Remove scroll restriction */
+    }
+}

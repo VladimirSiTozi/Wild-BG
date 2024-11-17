@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from wildBg.accounts.choices import UserLevelChoices
+from wildBg.landmark.models import Landmark
 
 UserModel = get_user_model()
 
@@ -30,9 +31,16 @@ class Profile(models.Model):
         null=True,
     )
 
-    profile_picture = models.URLField(
+    profile_picture = models.ImageField(
+        upload_to='profile_pictures/',
+        default='images/anonymous_full.jpg',
         blank=True,
         null=True,
+    )
+
+    background_image = models.ImageField(
+        upload_to='background_images/',
+        default='images/default_background.jpg',
     )
 
     points = models.IntegerField(
@@ -42,7 +50,13 @@ class Profile(models.Model):
     level = models.CharField(
         max_length=30,
         choices=UserLevelChoices.choices,
-        default=UserLevelChoices.AMATEUR
+        default=UserLevelChoices.BEGINNER
+    )
+
+    landmarks_visited = models.ManyToManyField(
+        Landmark,
+        related_name='visited_by_profiles',
+        blank=True,
     )
 
     def get_full_name(self):

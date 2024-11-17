@@ -1,0 +1,244 @@
+/* General styling for the post card */
+.post-card {
+    width: 850px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #d1e7dd;
+    padding: 16px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Post header for author and location */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.post-header-date {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 8px;
+}
+
+.post-author,
+.post-location,
+.post-date {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Post Author Info with Profile Picture */
+.post-author-info {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Spacing between image and author name */
+}
+
+.post-author-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+}
+
+.post-location-date {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+/* Description of the post */
+.post-description {
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #333;
+    padding: 1em;
+}
+
+/* Image styling */
+.post-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+    margin-bottom: 12px;
+}
+
+/* Likes and comments count */
+.post-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 12px;
+}
+
+/* Tagged section */
+.tagged-info {
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #e9f7ef;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Styling for each tagged person within the tagged info section */
+.tagged-people {
+    background-color: #e1ece9;
+    color: #4c6e58;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Action buttons for interaction */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.btn {
+    background-color: #4c6e58;
+    color: #ffffff;
+    width: 125px;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3b5343;
+}
+
+/* Section for the comments section */
+.post-comments {
+    font-size: 14px;
+    color: #333;
+    border-top: 1px solid #ccc;
+    padding-top: 8px;
+}
+
+/* Add Comment Section Styling */
+.add-comment {
+    display: flex;
+    align-items: center;
+    background-color: #a3c99c; /* Black background */
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+.comment-input::placeholder {
+    color: #aaa;
+}
+
+.comment-btn {
+    background-color: #4c6e58;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.comment-btn:hover {
+    background-color: #3b5343;
+}
+
+/* Individual comment styling */
+.comment {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Author image styling */
+.comment-author-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+/* Comment content styling */
+.comment-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Author and date styling */
+.comment-author {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #888;
+    margin-left: 8px;
+}
+
+/* Text of the comment */
+.comment-text {
+    margin-top: 6px;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.reply-btn {
+    margin-top: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the reply text box */
+.reply-box {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Styling for the reply section container */
+
+.reply-section .btn-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    margin-left: 10px;
+}
+

@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "wildBg.common.apps.CommonConfig",
     "wildBg.post.apps.PostConfig",
     "wildBg.reviews.apps.ReviewsConfig",
-    "wildBg.recommendations.apps.RecommendationsConfig"
+    "wildBg.landmark.apps.LandmarkConfig"
 ]
 
 MIDDLEWARE = [

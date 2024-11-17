@@ -1,0 +1,105 @@
+/* Wild Navigation Styles */
+.wild-nav {
+    /* background: linear-gradient(to right, #5a9a66, #3c7e3f); */
+    background: #4c6e58;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #2e552b; /* Dark green accent border */
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+    margin-right: 15px;
+    border-radius: 50%;
+    border: 2px solid #2e552b;
+}
+
+.nav-title {
+    font-size: 1.8rem;
+    color: #ffffff;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 3px #1a3718;
+}
+
+.nav-right {
+    flex-grow: 1;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    font-size: 1.1rem;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    padding: 8px 15px;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Link Hover Effect */
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+/* Animal-Inspired Background Patterns for Buttons */
+.nav-links a:before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    bottom: -3px;
+    left: -3px;
+    border-radius: 10px;
+    z-index: -1;
+    background: url('animal-pattern.png'); /* You can use a URL to an animal print or abstract wild design */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover:before {
+    opacity: 0.5;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .wild-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-right {
+        width: 100%;
+        margin-top: 15px;
+    }
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+    }
+    .nav-links li {
+        margin: 10px 0;
+    }
+    .nav-links a {
+        padding: 10px 0;
+        width: 100%;
+    }
+}

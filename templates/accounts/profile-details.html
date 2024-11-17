@@ -1,0 +1,188 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="left-container"></div>
+    <div class="middle-container">
+        <div class="profile-card">
+            <!-- Background image section -->
+            <div class="profile-background">
+                <img src="{% static 'images/mark-koch-KiRlN3jjVNU-unsplash.jpg'%}" alt="Background Image">
+            </div>
+        
+            <!-- Profile picture and name -->
+            <div class="profile-info">
+                <div class="profile-pic">
+                    <img src="{{ object.profile.profile_picture }}" alt="Profile Picture">
+                </div>
+                <div class="profile-details">
+                    <h2 class="profile-name">{{ object.profile.first_name }} {{ object.profile.last_name }}</h2>
+                    <p class="profile-dob">{{ object.profile.user.email }}</p>
+                    {% if not object.profile.date_of_birth %}
+                    	<p class="profile-dob">Date of Birth: - </p>
+                    {% else %}
+                        <p class="profile-dob">Date of Birth: {{ object.profile.date_of_birth}}</p>
+                    {% endif %} 
+                    
+                </div>
+            </div>
+        
+            <!-- Level and Points -->
+            <div class="profile-stats">
+                <p class="profile-level">Level: Proessional</p>
+                <p class="profile-points">Points: 1200</p>
+            </div>
+        
+            <!-- Places Visited -->
+            <div class="profile-places">
+                <h3>Places Visited</h3>
+                <ul class="places-list">
+                    <li>Paris, France</li>
+                    <li>New York, USA</li>
+                    <li>Tokyo, Japan</li>
+                </ul>
+            </div>
+        
+            <!-- Info Section -->
+            <div class="profile-info-section">
+                <p class="profile-info-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cupiditate doloremque unde quaerat? Obcaecati eaque recusandae atque nisi veritatis velit, eligendi adipisci quibusdam doloribus, at est dolorem provident deserunt nihil.
+                </p>
+            </div>
+        </div>
+
+        <div class="my-posts-header">
+            My Posts
+        </div>
+
+        <!-- 1st post -->
+        <div class="post-card">
+            <div class="post-header">
+                <div class="post-author-info">
+                    <div></div>
+                    <img src="{% static 'images/../../mediafiles/../../static/images/anonymous_full.jpg' %}" alt="Author Image" class="post-author-img">
+                    <p class="post-author">John Doe</p>
+                </div>
+                <div class="post-location-date">
+                    <p class="post-location">Location: Yosemite National Park</p>
+                    <p class="post-date">11.14.2024</p>
+                </div>     
+            </div>
+            
+            <div class="post-image">
+                <img src="{% static 'images/toa-heftiba-eqf6cKmrzeM-unsplash.jpg' %}" alt="Yosemite view">
+            </div>
+            <div class="tagged-info">
+                <p class="tagged-people">Ivan Ivanov</p>
+                <p class="tagged-people">Georgi Ivanov</p>
+            </div>
+            <div class="post-description">
+                <p>Exploring the beautiful trails of Yosemite. Nature is simply amazing!</p>
+            </div>
+            <div class="post-info">
+                <p class="post-likes-count">100 Likes</p>
+                <p class="post-comments-count">20 Comments</p>
+            </div>
+            <div class="post-actions">
+                <button class="btn like-btn">Like</button>
+                <button class="btn share-btn">Share</button>
+            </div>
+            <div class="post-comments">
+                <div class="add-comment">
+                    <input type="text" class="comment-input" placeholder="Add a new comment...">
+                    <button class="comment-btn">Post</button>
+                </div>
+                <div class="comment">
+                    <img src="{% static 'images/../../mediafiles/../../static/images/anonymous_full.jpg' %}" alt="Author Image" class="comment-author-img">
+                    <div class="comment-content">
+                        <p class="comment-author">
+                            <strong>Jane Doe</strong> - <span class="comment-date">Oct 10, 2023</span>
+                        </p>
+                        <p class="comment-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam quibusdam odio modi, est atque!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2nd post -->
+        <div class="post-card">
+            <div class="post-header">
+                <div class="post-author-info">
+                    <div></div>
+                    <img src="{% static 'images/../../mediafiles/../../static/images/anonymous_full.jpg' %}" alt="Author Image" class="post-author-img">
+                    <p class="post-author">John Doe</p>
+                </div>
+                <div class="post-location-date">
+                    <p class="post-location">Location: Yosemite National Park</p>
+                    <p class="post-date">11.14.2024</p>
+                </div>     
+            </div>
+            
+            <div class="post-image">
+                <img src="{% static 'images/mark-koch-KiRlN3jjVNU-unsplash.jpg' %}" alt="Yosemite view">
+            </div>
+            <div class="tagged-info">
+                <p class="tagged-people">Ivan Ivanov</p>
+                <p class="tagged-people">Georgi Ivanov</p>
+            </div>
+            <div class="post-description">
+                <p>Exploring the beautiful trails of Yosemite. Nature is simply amazing!</p>
+            </div>
+            <div class="post-info">
+                <p class="post-likes-count">100 Likes</p>
+                <p class="post-comments-count">20 Comments</p>
+            </div>
+            <div class="post-actions">
+                <button class="btn like-btn">Like</button>
+                <button class="btn share-btn">Share</button>
+            </div>
+            <div class="post-comments">
+                <div class="add-comment">
+                    <input type="text" class="comment-input" placeholder="Add a new comment...">
+                    <button class="comment-btn">Post</button>
+                </div>
+                <div class="comment">
+                    <img src="{% static 'images/../../mediafiles/../../static/images/anonymous_full.jpg' %}" alt="Author Image" class="comment-author-img">
+                    <div class="comment-content">
+                        <p class="comment-author">
+                            <strong>Jane Doe</strong> - <span class="comment-date">Oct 10, 2023</span>
+                        </p>
+                        <p class="comment-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam quibusdam odio modi, est atque!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <img src="{% static 'images/../../mediafiles/../../static/images/anonymous_full.jpg' %}" alt="Author Image" class="comment-author-img">
+                    <div class="comment-content">
+                        <p class="comment-author">
+                            <strong>Jane Doe</strong> - <span class="comment-date">Oct 10, 2023</span>
+                        </p>
+                        <p class="comment-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam quibusdam odio modi, est atque!
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="comment">
+                    <img src="{% static 'images/../../mediafiles/../../static/images/anonymous_full.jpg' %}" alt="Author Image" class="comment-author-img">
+                    <div class="comment-content">
+                        <p class="comment-author">
+                            <strong>Jane Doe</strong> - <span class="comment-date">Oct 10, 2023</span>
+                        </p>
+                        <p class="comment-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam quibusdam odio modi, est atque!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    
+    </div>
+
+    <div class="right-container"></div>
+{% endblock %}

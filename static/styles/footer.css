@@ -1,0 +1,41 @@
+.site-footer {
+    background-color: #4c6e58;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-link {
+    color: #a3c99c;
+    text-decoration: none;
+    /* margin-bottom: auto; */
+    margin-right: 15px;
+}
+
+.footer-link:last-of-type {
+    margin-right: 0;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.social-link {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.social-link:last-of-type {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #333; /* Тъмен фон за контраст */
+    color: #ffffff; /* Бял текст за видимост */
+    text-align: center;
+    padding: 20px;
+}
+

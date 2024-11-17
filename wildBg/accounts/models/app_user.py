@@ -19,6 +19,9 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     )
 
     USERNAME_FIELD = 'email'  # First credential to login in
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
+
+    def __str__(self):
+        return self.email
 
     objects = AppUserManager()
