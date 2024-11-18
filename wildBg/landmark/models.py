@@ -1,3 +1,5 @@
+import re
+
 from django.core.validators import MinLengthValidator
 from django.db import models
 
@@ -32,7 +34,7 @@ class Landmark(models.Model):
         blank=True,
     )
 
-    map_location = models.URLField(
+    map_location = models.TextField(
         null=False,
         blank=False,
     )
@@ -47,6 +49,13 @@ class Landmark(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        match = re.search(r'src="([^"]*)"', self.map_location)
+        if match:
+            self.map_location = match.group(1)
+
+        super().save(*args, **kwargs)
 
 
 class AdditionalLandmarkInfo(models.Model):

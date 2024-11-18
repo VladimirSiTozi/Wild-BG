@@ -1,4 +1,6 @@
 {% extends 'common/base.html' %}
+{% load duration_filter %}
+{% load static %}
 
 {% block content %}
     <!DOCTYPE html>
@@ -6,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
     <title>Landmark</title>
 </head>
 <body>
@@ -14,7 +16,7 @@
     <div class="left-container"></div>
     <div class="middle-container">
         <div class="landmark-card">
-            <h2 class="landmark-name">Пирин планина, връх Вихрен</h2>
+            <h2 class="landmark-name">{{ object.name }}</h2>
             <div class="landmark-total-stars">
                 <div class="landmark-stars">
                     <span class="stars-integer">4.2 (517)</span>
@@ -29,33 +31,101 @@
             </div>
             
             <div class="landmark-image">
-                <img src="images/mark-koch-KiRlN3jjVNU-unsplash.jpg" alt="Location Picture">
+                <img src="{{ object.image.url }}" alt="Location Picture">
             </div>
             
-            <p class="landmark-location">България, област Благоевград</p>
+            <p class="landmark-location">{{ object.location_name }}</p>
             
             <p class="landmark-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam natus nostrum autem dolorum eligendi architecto illum inventore, perferendis harum suscipit iste corrupti animi necessitatibus accusamus nulla aperiam aut expedita eius! Consequuntur quam enim incidunt numquam quod, officia dolores distinctio voluptate odit ratione adipisci suscipit illo perferendis consequatur aliquam, vitae ducimus eum minus animi. Ratione minima fuga porro sunt esse velit, magni facilis fugit, hic illum nostrum doloribus nemo libero quibusdam tempore doloremque? Molestias quam dolore unde dignissimos sequi quaerat accusamus, exercitationem facilis ea porro ipsam similique voluptates repudiandae recusandae harum neque inventore nemo atque nesciunt quod officia dicta! Error, aut!
+               {{ landmark.description }}
             </p>
             
             <div class="transition-card">
                 <div class="transition-availability">
-                    Преход: Да
+                    {% if object.additional_landmark_info.is_transition %}
+                        Преход: Да
+                    {% elif object.additional_landmark_info.is_transition %}
+                        Преход: Не
+                    {% endif %}
                 </div>
                 <div class="transition-info">
                     <div class="transition-left">
-                        <p>Време за перход: 30 минути</p>
-                        <p>Километри: 12 км</p>
-                        <p>Подходящо за деца: Да</p>
-                        <p>Места за ядене: Не</p>
-                        <p>Облагородено: Да</p>
+                        {% if object.additional_landmark_info.duration %}
+                            <p>Време за перход: {{ object.additional_landmark_info.duration|format_duration  }} </p>
+                        {% else %}
+                            <p>Време за перход: Няма</p>
+                        {% endif %}
+                        
+{#                        {% if object.additional_landmark_info.duration %}#}
+{#                        {% else %}#}
+{#                        {% endif %}#}
+{#                        <p>Време за перход: {{ object.additional_info.duration }} минути</p>#}
+                    
+                        {% if object.additional_landmark_info.distance_km %}
+                            <p>Километри: {{ object.additional_landmark_info.distance_km }} км</p>
+                        {% else %}
+                            <p>Километри: Няма</p>
+                        {% endif %}
+                        
+                    
+                        {% if object.additional_landmark_info.suitable_for_children %}
+                            <p>Подходящо за деца: Да</p>
+                        {% elif not bject.additional_landmark_info.suitable_for_children%}
+                            <p>Подходящо за деца: Не</p>
+                        {% else %}
+                            <p>Подходящо за деца: Няма информация</p>
+                        {% endif %}
+                        
+                        
+                        {% if object.additional_landmark_info.has_eating_places %}
+                            <p>Места за ядене: Да</p>
+                        {% elif not bject.additional_landmark_info.has_eating_places%}
+                            <p>Места за ядене: Не</p>
+                        {% else %}
+                            <p>Подходящо за деца: Няма информация</p>
+                        {% endif %}
+                        
+                        
+                        {% if object.additional_landmark_info.is_ennobled %}
+                             <p>Облагородено: Да</p>
+                        {% elif not bject.additional_landmark_info.is_ennobled%}
+                             <p>Облагородено: Не</p>
+                        {% else %}
+                            <p>Подходящо за деца: Няма информация</p>
+                        {% endif %}
+                       
                     </div>
                     <div class="transition-right">
-                        <p>Начална точка: Downtown Park</p>
-                        <p>Крайна точка: Riverside Area</p>
-                        <p>Лесно дотъпно за кола: Да</p>
-                        <p>Паркинг: Да</p>
-                        <p>Достъпно: Да</p>
+                        {% if object.additional_landmark_info.start_point %}
+                            <p>Начална точка: {{ object.additional_landmark_info.start_point }}</p>
+                        {% else %}
+                            <p>Начална точка: Няма информация</p>
+                        {% endif %}
+                    
+                        {% if object.additional_landmark_info.end_point %}
+                            <p>Крайна точка: {{ object.additional_landmark_info.end_point }}</p>
+                        {% else %}
+                            <p>Крайна точка: Няма информация</p>
+                        {% endif %}
+                    
+                        {% if object.additional_landmark_info.accessible_by_car %}
+                             <p>Лесно дотъпно за кола: Да</p>
+                        {% elif not bject.additional_landmark_info.accessible_by_car %}
+                             <p>Лесно дотъпно за кола: Не</p>
+                        {% else %}
+                            <p>Лесно дотъпно за кола: Няма информация</p>
+                        {% endif %}
+                    
+                        {% if object.additional_landmark_info.has_parking %}
+                             <p><p>Паркинг: Да</p></p>
+                        {% elif not bject.additional_landmark_info.has_parking %}
+                             <p><p>Паркинг: Не</p>
+                        {% else %}
+                            <p>Паркинг: Няма информация</p>
+                        {% endif %}
+                    
+                        <p>Последно обновено: {{ object.updated_at|date:"m.d.Y" }}</p>
+                    
                     </div>
                 </div>
             </div>
@@ -64,7 +134,7 @@
 
             <div class="landmark-map">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2870.388360349243!2d22.884846952750987!3d43.99269694359827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4753798d7c472e1d%3A0x9f1823d30e6ca936!2z0KHRgNC10LTQvdC-0LLQtdC60L7QstC90LAg0JrRgNC10L_QvtGB0YIg0JHQsNCx0LAg0JLQuNC00LA!5e0!3m2!1sbg!2sbg!4v1731613466914!5m2!1sbg!2sbg" 
+                    src="{{ object.map_location }}"
                     class="map-frame"
                     allowfullscreen="" 
                     loading="lazy" 

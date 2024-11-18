@@ -1,6 +1,6 @@
 from django import forms
 
-from wildBg.landmark.models import Landmark
+from wildBg.landmark.models import Landmark, AdditionalLandmarkInfo
 
 
 class LandmarkBaseForm(forms.ModelForm):
@@ -14,4 +14,18 @@ class LandmarkAddForm(LandmarkBaseForm):
 
 
 class LandmarkEditForm(LandmarkBaseForm):
+    pass
+
+
+class AdditionalLandmarkInfoBaseForm(forms.ModelForm):
+    class Meta:
+        model = AdditionalLandmarkInfo
+        exclude = ('landmark', )
+
+
+class AdditionalLandmarkInfoCreateForm(AdditionalLandmarkInfoBaseForm):
+    pass
+
+
+class AdditionalLandmarkInfoEditForm(AdditionalLandmarkInfoBaseForm):
     pass
