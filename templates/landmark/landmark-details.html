@@ -159,7 +159,8 @@
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <h2>Add Your Review</h2>
-                    <form id="reviewForm">
+                    <form id="reviewForm" method="post" action="add_review">
+                        {% csrf_token %}
                         <label for="reviewStars">Your Rating:</label>
                         <div id="reviewStars" class="review-star">
                             <input type="radio" id="star5" name="rating" value="5">
@@ -173,9 +174,10 @@
                             <input type="radio" id="star1" name="rating" value="1">
                             <label for="star1" title="1 star">&#9733;</label>
                         </div>
-                        <textarea class="review-comment" id="reviewText" name="reviewText" rows="4" cols="50" placeholder="Write your review here..."></textarea><br>
+                        <textarea class="review-comment" id="reviewText" name="comment" rows="4" cols="50" placeholder="Write your review here..."></textarea><br>
                         <button type="submit" class="btn submit-btn">Submit Review</button>
                     </form>
+
                 </div>
             </div>
 
@@ -228,5 +230,7 @@
         
     </div>
     <div class="right-container"></div>
+    
+     <script src="{% static 'js/script-landmark-review.js' %}"></script>
 
 {% endblock %}

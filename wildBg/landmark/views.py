@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 
-from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm
+from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm
 from wildBg.landmark.models import Landmark
 
 
@@ -54,11 +55,43 @@ class LandmarkAddView(CreateView):
             additional_info_form=additional_info_form
         ))
 
+
 class LandmarkDetailsView(DetailView):
     model = Landmark
     template_name = 'landmark/landmark-details.html'
 
-    # def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['likes'] = self.object.likes.all()
+        context['visits'] = self.object.visits.all()
+        context['review_form'] = ReviewForm
+
+        return context
+
+
+def add_review(request, pk):
+    landmark = get_object_or_404(Landmark, pk=pk)
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.landmark = landmark
+            review.rating = request.POST.get('rating')
+            review.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+
+    form = ReviewForm()
+    context = {
+        'landmark': landmark,
+        'form': form
+    }
+
+    return render(request, 'landmark/landmark-details.html', context)
 
 
 # class LandmarkEditView(UpdateView):

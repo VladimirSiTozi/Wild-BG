@@ -1,5 +1,6 @@
 import re
 
+from django.contrib.auth.decorators import login_required
 from django.core.validators import MinLengthValidator
 from django.db import models
 
@@ -122,6 +123,7 @@ class AdditionalLandmarkInfo(models.Model):
     )
 
 
+@login_required
 class Review(models.Model):
     user = models.ForeignKey(
         AppUser,
