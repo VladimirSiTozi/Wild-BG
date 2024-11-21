@@ -32,6 +32,10 @@ class Post(models.Model):
         blank=True,
     )
 
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
 
 class PostComment(models.Model):
     post = models.ForeignKey(
@@ -52,7 +56,7 @@ class PostComment(models.Model):
     )
 
     def __str__(self):
-        return f'Comment by {self.author.firs_name} on {self.created_at.strftime("%Y-%m-%d")}'
+        return f'Comment by {self.author.first_name} on {self.created_at.strftime("%Y-%m-%d")}'
 
 
 class ReplyPostComment(models.Model):

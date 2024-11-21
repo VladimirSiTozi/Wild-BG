@@ -1,0 +1,66 @@
+{% load static %}
+
+<div class="post-card">
+    <div class="post-header">
+        <div class="post-author-info">
+            {% if post.author.profile.profile_picture %}
+                <img src="{{ post.author.profile.profile_picture.url }}" alt="Author Image" class="post-author-img">
+            {% else %}
+                <img src="{% static 'images/anonymous_full.jpg' %}" alt="Author Image" class="post-author-img">
+            {% endif %}
+            <p class="post-author">{{ post.author.profile.first_name }} {{ post.author.profile.last_name }}</p>
+        </div>
+        <div class="post-location-date">
+            <p class="post-location">Location: {{ post.location.name }} {{ post.location.location_name }}</p>
+            <p class="post-date">{{ post.created_at }}</p>
+        </div>
+    </div>
+
+    <div class="post-image">
+        <img src="{{ post.post_image.url }}" alt="Location Picture">
+    </div>
+
+    <div class="tagged-info">
+        {% for person in post.tagged_people.all %}
+            <p class="tagged-people">{{ person }}</p>
+        {% endfor %}
+    </div>
+    <div class="post-description">
+        <p>{{ post.description }}</p>
+    </div>
+    <div class="post-info">
+        <p class="post-likes-count">100 Likes</p>
+        <p class="post-comments-count">20 Comments</p>
+    </div>
+    <div class="post-actions">
+        <button class="btn like-btn">Like</button>
+        <button class="btn share-btn">Share</button>
+    </div>
+    <div class="post-comments">
+        <div class="add-comment">
+            <input type="text" class="comment-input" placeholder="Add a new comment...">
+            <button class="comment-btn">Post</button>
+        </div>
+        <div class="comment">
+            <img src="images/anonymous_full.jpg" alt="Author Image" class="comment-author-img">
+            <div class="comment-content">
+                <p class="comment-author">
+                    <strong>Jane Doe</strong> - <span class="comment-date">Oct 10, 2023</span>
+                </p>
+                <p class="comment-text">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe
+                    atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam
+                    quibusdam odio modi, est atque!
+                </p>
+                <!-- Initially hidden buttons and input -->
+                <div class="reply-section" style="display: none;">
+                    <textarea class="reply-box" placeholder="Write a reply..."></textarea>
+                    <button class="btn send-btn">Send</button>
+                    <button class="btn cancel-btn">X</button>
+                </div>
+                <!-- Reply button always visible initially -->
+                <button class="btn reply-btn">Reply</button>
+            </div>
+        </div>
+    </div>
+</div>
