@@ -38,6 +38,8 @@ class Profile(models.Model):
         null=True,
     )
 
+    description = models.TextField()
+
     background_image = models.ImageField(
         upload_to='background_images/',
         default='images/default_background.jpg',

@@ -1,10 +1,15 @@
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
+from wildBg.accounts.models import Profile
 from wildBg.common.forms import SearchForm
 from wildBg.post.forms import PostCommentForm
 from wildBg.post.models import Post
+
+
+UserModel = get_user_model()
 
 
 class HomePageView(ListView):
@@ -19,8 +24,27 @@ class HomePageView(ListView):
 
         user = self.request.user
 
-        for post in context['all_posts']:
-            post.has_liked = post.like_set.filter(user=user).exists() if user.is_authenticated else False
+        if user.is_authenticated:
+            # try:
+            profile = user.profile  # Access the Profile model via the one-to-one relationship
+            context['user_profile'] = {
+                'first_name': profile.first_name,
+                'last_name': profile.last_name,
+                'profile_picture': profile.profile_picture if profile.profile_picture else None,
+                'points': profile.points,
+                'level': profile.level,
+                'description': profile.description,
+            }
+            # except Profile.DoesNotExist:
+            #     context['user_profile'] = {
+            #         'full_name': 'Anonymous',
+            #         'profile_picture': None,
+            #         'points': 0,
+            #         'level': 'Beginner',
+            #     }
+
+        # for post in context['all_posts']:
+        #     post.has_liked = post.like_set.filter(user=user).exists() if user.is_authenticated else False
 
         return context
 

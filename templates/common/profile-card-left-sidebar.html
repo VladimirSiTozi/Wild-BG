@@ -1,0 +1,17 @@
+<div class="profile-card">
+    {% if user.is_authenticated %}
+    <div class="name-container">
+        <span class="first-name">{{ user_profile.first_name }}</span>
+        <span class="last-name">{{ user_profile.last_name }}</span>
+        <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+        <span class="points">Points:</span>
+        <p class="profile-p-info">{{ user_profile.points }}</p>
+        <span class="level">Level:</span>
+        <p class="profile-p-info">{{ user_profile.level }}</p>
+        <span class="about-me">About me:</span>
+        <p class="profile-p-info">{{ user_profile.description }}</p>
+    </div>
+    {% else %}
+        <p>Please <a href="#">log in</a> to view your profile.</p>
+    {% endif %}
+</div>

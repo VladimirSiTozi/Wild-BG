@@ -16,12 +16,16 @@
 </header>
 
 <main>
-    <div class="left-container"></div>
+    <div class="left-container">
+        {% include 'common/profile-card-left-sidebar.html' %}
+    </div>
     <div class="middle-container">
         {% block content %}
         {% endblock %}
     </div>
-    <div class="right-container"></div>
+    <div class="right-container">
+        
+    </div>
 </main>
 
 <footer>
