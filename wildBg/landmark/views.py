@@ -5,6 +5,7 @@ from django.views.generic import CreateView, UpdateView, DetailView
 
 from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm
 from wildBg.landmark.models import Landmark
+from wildBg.mixins import SidebarContextMixin
 
 
 class LandmarkAddView(CreateView):
@@ -56,7 +57,7 @@ class LandmarkAddView(CreateView):
         ))
 
 
-class LandmarkDetailsView(DetailView):
+class LandmarkDetailsView(SidebarContextMixin, DetailView):
     model = Landmark
     template_name = 'landmark/landmark-details.html'
 

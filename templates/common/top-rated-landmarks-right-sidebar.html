@@ -1,0 +1,24 @@
+{% for landmark_data in top_rated_landmarks %}
+    <a href="{% url 'details-landmark' landmark_data.landmark.pk %}">
+        <div class="info-card">  {# onclick="window.location.href='https://example.com' #}
+            <h2 class="name">{{ landmark_data.landmark.user.profile.get_full_name }}</h2>
+            <p class="location">{{ landmark_data.landmark.name }}</p>
+            <img src="{{ landmark_data.landmark.image.url }}" alt="Location Picture" class="location-picture">
+            <p class="description">
+                {{ landmark_data.landmark.description }} - {{ landmark_data.empty_stars }}
+            </p>
+            <div class="rating">
+                {% for i in landmark_data.full_stars %}
+                    <span class="star">★</span>
+                {% endfor %}
+                {% if landmark_data.half_star %}
+                    <span class="star half">⯨</span>
+                {% endif %}
+                {% for i in landmark_data.empty_stars %}
+                    <span class="star empty">☆</span>
+                {% endfor %}
+            </div>
+            <p>({{ landmark_data.average_rating }}/{{ landmark_data.review_count }})</p>
+        </div>
+    </a>
+{% endfor %}
