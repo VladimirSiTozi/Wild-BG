@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('wildBg.common.urls')),
     path('accounts/', include('wildBg.accounts.urls')),
-    path('landmark/', include('wildBg.landmark.urls'))
+    path('landmark/', include('wildBg.landmark.urls')),
+    path('posts/', include('wildBg.post.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -75,7 +75,7 @@ class HomePageView(SidebarContextMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = super().get_queryset()  # get all objects .order_by('-date_of_publication')
+        queryset = super().get_queryset().order_by('-created_at')  # get all objects .order_by('-date_of_publication')
         user_name = self.request.GET.get('user_name')
 
         if user_name:

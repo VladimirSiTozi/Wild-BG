@@ -6,6 +6,5 @@ from wildBg.accounts import views
 urlpatterns = [
     path('profile/<int:pk>/', include([
         path('', views.ProfileDetailView.as_view(), name='profile-details'),
-
     ])),
 ]
