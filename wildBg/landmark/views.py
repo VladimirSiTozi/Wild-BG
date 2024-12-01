@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 
 from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm
-from wildBg.landmark.models import Landmark
+from wildBg.landmark.models import Landmark, Review
 from wildBg.mixins import SidebarContextMixin
 
 
@@ -67,6 +67,20 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
         context['likes'] = self.object.likes.all()
         context['visits'] = self.object.visits.all()
         context['review_form'] = ReviewForm
+
+        reviews_with_star_info = []
+        for review in self.object.reviews.all().order_by('-created_at'):
+            reviews_with_star_info.append({
+                'review': review,
+                'user': review.user,
+                'created_at': review.created_at,
+                'rating': review.rating,
+                'comment': review.comment,
+                'full_stars': range(int(review.rating)),
+                'empty_stars': range(5 - int(review.rating)),
+            })
+
+        context['reviews'] = reviews_with_star_info
 
         return context
 
