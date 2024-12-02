@@ -15,24 +15,47 @@
     <div class="middle-container">
         <div class="landmark-card">
             <h2 class="landmark-name">{{ object.name }}</h2>
-            <div class="landmark-total-stars">
-                <div class="landmark-stars">
-                    <span class="stars-integer">4.2 (517)</span>
-                    <div class="star-rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star empty">☆</span>
-                    </div>
-                </div>
-            </div>
+            <h3 class="landmark-location">{{ object.location_name }}</h3>
+
 
             <div class="landmark-image">
                 <img src="{{ object.image.url }}" alt="Location Picture">
             </div>
-
-            <p class="landmark-location">{{ object.location_name }}</p>
+        
+            <div class="landmark-total-stars">
+                <div class="landmark-stars">
+                    <div class="rating">
+                        {% for i in full_stars %}
+                            <span class="star">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z" fill="#FFD700"/>
+                                </svg>
+                            </span>
+                        {% endfor %}
+                        {% if half_star %}
+                            <span class="star half-star">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="half-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1"/>
+                                            <stop offset="50%" style="stop-color:#ccc;stop-opacity:1"/>
+                                        </linearGradient>
+                                        </defs>
+                                    <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z" fill="url(#half-gradient)"/>
+                                </svg>
+                            </span>
+                            {# <i class="fa-regular fa-star-half-stroke"></i> #}
+                        {% endif %}
+                        {% for i in empty_stars %}
+                            <span class="star empty"></span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z" fill="#ccc"/>
+                            </svg>
+                        {% endfor %}
+                    <p class="stars-integer">{{ average_rating }} ({{ total_reviews }})</p>
+                    </div>
+                </div>
+            </div>
 
             <p class="landmark-description">
                 {{ landmark.description }}
@@ -53,11 +76,6 @@
                         {% else %}
                             <p>Време за перход: Няма</p>
                         {% endif %}
-
-                        {#                        {% if object.additional_landmark_info.duration %}#}
-                        {#                        {% else %}#}
-                        {#                        {% endif %}#}
-                        {#                        <p>Време за перход: {{ object.additional_info.duration }} минути</p>#}
 
                         {% if object.additional_landmark_info.distance_km %}
                             <p>Километри: {{ object.additional_landmark_info.distance_km }} км</p>

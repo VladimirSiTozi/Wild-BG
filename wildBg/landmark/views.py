@@ -1,3 +1,4 @@
+from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -68,6 +69,15 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
         context['visits'] = self.object.visits.all()
         context['review_form'] = ReviewForm
 
+        total_reviews = self.object.reviews.count()
+        average_rating = self.object.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+
+        context['total_reviews'] = total_reviews
+        context['average_rating'] = round(average_rating, 1)
+        context['full_stars'] = range(int(average_rating))
+        context['half_star'] = (average_rating % 1) >= 0.5
+        context['empty_stars'] = range(5 - int(average_rating) - int((average_rating % 1) >= 0.5))
+
         reviews_with_star_info = []
         for review in self.object.reviews.all().order_by('-created_at'):
             reviews_with_star_info.append({
@@ -78,6 +88,7 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
                 'comment': review.comment,
                 'full_stars': range(int(review.rating)),
                 'empty_stars': range(5 - int(review.rating)),
+
             })
 
         context['reviews'] = reviews_with_star_info
