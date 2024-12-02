@@ -31,14 +31,16 @@ main {
 /* Left and right containers should be smaller */
 .left-container,
 .right-container {
-    flex: 1; /* Smaller relative to the middle container */
+    flex: 0.5; /* Smaller relative to the middle container */
+    /*width: 200px;*/
     background-color: #d1e7dd; /* Light green background for visibility */
     padding: 20px;
     text-align: center;
 }
 
 /* Sticky Profile Card in the Left Container */
-.profile-card {
+.profile-card-sidebar {
+    width: 300px;
     position: sticky;
     top: 1em;
     background-color: #ffffff;
@@ -160,6 +162,19 @@ main {
 .info-card:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent (removes default blue) */
+    cursor: pointer; /* Keep cursor pointer for clickable effect */
+    font-weight: normal; /* Make sure there's no boldness applied */
+}
+
+/* Optional: To remove hover styles if desired */
+a:hover, a:focus {
+    text-decoration: none; /* Remove underline on hover/focus */
+    color: inherit; /* No color change on hover */
 }
 
 
