@@ -165,12 +165,18 @@
 
 
             <div class="landmark-stats">
-                <p class="landmark-likes">Likes: 100</p>
-                <p class="landmark-visits">Visits: 250</p>
+                <p class="landmark-likes">Likes: {{ object.likes.count }}</p>
+                <p class="landmark-visits">Visits: {{ object.visits.count }}</p>
             </div>
 
             <div class="landmark-actions">
-                <button class="btn landmark-btn">Like</button>
+                <button class="btn landmark-btn" onclick="location.href='{% url 'like-landmark' landmark.pk %}'">
+                        {% if object.has_liked %}
+                            Liked <i class="fa-solid fa-heart" style="color: #ed4040;"></i>  <!-- Liked -->
+                        {% else %}
+                            Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
+                        {% endif %}
+                </button>
                 <button id="addReviewBtn" class="btn landmark-btn">Add review</button>
                 <button class="btn landmark-btn">Visited</button>
             </div>

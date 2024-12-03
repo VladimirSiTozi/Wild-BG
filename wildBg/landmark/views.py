@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 
 from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm
-from wildBg.landmark.models import Landmark, Review
+from wildBg.landmark.models import Landmark, Review, Like
 from wildBg.mixins import SidebarContextMixin
 
 
@@ -65,6 +65,7 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
 
         context['likes'] = self.object.likes.all()
         context['visits'] = self.object.visits.all()
@@ -115,3 +116,18 @@ def add_review(request, pk: int):
 
     return redirect(request.META.get('HTTP_REFERER', f'#{pk}'))
 
+
+@login_required
+def like_func(request, pk: int):
+    liked_object = Like.objects.filter(
+        landmark=pk,
+        user=request.user
+    ).first()
+
+    if liked_object:
+        liked_object.delete()
+    else:
+        like = Like(landmark_id=pk, user=request.user)
+        like.save()
+
+    return redirect(request.META.get('HTTP_REFERER') + f'#{pk}')
