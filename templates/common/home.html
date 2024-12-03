@@ -15,16 +15,16 @@
             </form>
             <!-- End Searchbar Form -->
 
-            <!-- Start Pet Photos Post Section -->
+            <!-- Start Post Section -->
             {% for post in all_posts %}
                 {% include 'common/post-card.html' %}
             {% endfor %}
-            <!-- End Pet Photos Post Section -->
+            <!-- End  Post Section -->
         
             <!-- Start Pagination -->
             <div class="pagination">
                 <span class="current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                 </span>
             
                 <span class="step-links-buttons">

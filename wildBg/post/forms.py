@@ -1,6 +1,6 @@
 from django import forms
 
-from wildBg.post.models import PostComment, Post
+from wildBg.post.models import PostComment, Post, ReplyPostComment
 
 
 class PostBaseForm(forms.Form):
@@ -24,6 +24,16 @@ class PhotoDeleteForm(PostBaseForm):
 class PostCommentForm(forms.ModelForm):
     class Meta:
         model = PostComment
+        fields = ['content']
+
+        widgets = {
+            'content': forms.Textarea(attrs={'placeholder': 'Add comment...'})
+        }
+
+
+class ReplyPostCommentForm(forms.ModelForm):
+    class Meta:
+        model = ReplyPostComment
         fields = ['content']
 
         widgets = {

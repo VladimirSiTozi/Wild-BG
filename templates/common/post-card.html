@@ -29,38 +29,83 @@
         <p>{{ post.description }}</p>
     </div>
     <div class="post-info">
-        <p class="post-likes-count">100 Likes</p>
-        <p class="post-comments-count">20 Comments</p>
+        <p class="post-likes-count">{{ post.likes.count }} Likes</p>
+        <p class="post-comments-count">{{ post.comments.count }} Comments</p>
     </div>
     <div class="post-actions">
-        <button class="btn like-btn">Like</button>
+        <a href="{% url 'post-like' post.pk %}" class="btn like-btn ">
+            {% if post.has_liked %}
+               <i class="fa-solid fa-heart" style="color: #ed4040;"></i> UnLike
+            {% else %}
+                <i class="fa-regular fa-heart"></i> Like
+            {% endif %}
+        </a>
         <button class="btn share-btn">Share</button>
     </div>
     <div class="post-comments">
         <div class="add-comment">
-            <input type="text" class="comment-input" placeholder="Add a new comment...">
-            <button class="comment-btn">Post</button>
+            <form method="post" action="{% url 'post-comment' post.pk %}">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+{#                <input type="text" class="comment-input" placeholder="Add a new comment...">#}
+                <button class="comment-btn">Post</button>
+            </form>
         </div>
-        <div class="comment">
-            <img src="images/anonymous_full.jpg" alt="Author Image" class="comment-author-img">
-            <div class="comment-content">
-                <p class="comment-author">
-                    <strong>Jane Doe</strong> - <span class="comment-date">Oct 10, 2023</span>
-                </p>
-                <p class="comment-text">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad molestias placeat molestiae saepe
-                    atque! Sunt recusandae, qui exercitationem soluta adipisci repellendus ullam praesentium ad magnam
-                    quibusdam odio modi, est atque!
-                </p>
-                <!-- Initially hidden buttons and input -->
-                <div class="reply-section" style="display: none;">
-                    <textarea class="reply-box" placeholder="Write a reply..."></textarea>
-                    <button class="btn send-btn">Send</button>
-                    <button class="btn cancel-btn">X</button>
+
+        {# Comment section #}
+        {% if all_comments %}
+            {# Show all comments for the post detail page #}
+            {% for detailed_comment in comments %}
+                <div class="comment">
+                    <img src="{{ detailed_comment.author_profile_picture.url }}" alt="Author Image"
+                         class="comment-author-img">
+                    <div class="comment-content">
+                        <p class="comment-author">
+                            <strong>{{ detailed_comment.author_name }}</strong> - <span
+                                class="comment-date">{{ detailed_comment.created_at }}</span>
+                        </p>
+                        <p class="comment-text">
+                            {{ detailed_comment.content }}
+                        </p>
+                        <div class="reply-section" style="display: none;">
+                            <textarea class="reply-box" placeholder="Write a reply..."></textarea>
+                            <button class="btn send-btn">Send</button>
+                            <button class="btn cancel-btn">X</button>
+                        </div>
+                        <button class="btn reply-btn">Reply</button>
+                        {% for detailed_reply in detailed_comment.replies %}
+                            <div class="comment">
+                                <img src="{{ detailed_reply.author_profile_picture.url }}" alt="Author Image"
+                                     class="comment-author-img">
+                                <div class="comment-content">
+                                    <p class="comment-author">
+                                        <strong>{{ detailed_reply.author_name }}</strong> - <span
+                                            class="comment-date">{{ detailed_reply.created_at }}</span>
+                                    </p>
+                                    <p class="comment-text">
+                                        {{ detailed_reply.content }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-                <!-- Reply button always visible initially -->
-                <button class="btn reply-btn">Reply</button>
-            </div>
-        </div>
+            {% endfor %}
+        {% elif last_comment_only %}
+            {# Show only the last comment for home page #}
+{#                <div class="comment">#}
+{#                    <img src="{{ post.last_comment.author_profile_picture.url }}" alt="Author Image"#}
+{#                         class="comment-author-img">#}
+{#                    <div class="comment-content">#}
+{#                        <p class="comment-author">#}
+{#                            <strong>{{ post.last_comment_data.author_name }}</strong> - <span#}
+{#                                class="comment-date">{{ detailed_comment.created_at }}</span>#}
+{#                        </p>#}
+{#                        <p class="comment-text">#}
+{#                            {{ detailed_comment.content }}#}
+{#                        </p>#}
+{#                    </div>#}
+{#                </div>#}
+        {% endif %}
     </div>
 </div>

@@ -139,6 +139,8 @@ STATICFILES_DIRS = (
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
+handler404 = 'wildBG.common.views.custom_404_view'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

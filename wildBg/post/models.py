@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from wildBg.accounts.models import AppUser
@@ -79,3 +80,19 @@ class ReplyPostComment(models.Model):
 
     def __str__(self):
         return f'Reply by {self.author.first_name} on {self.created_at.strftime("%Y-%m-%d")}'
+
+
+UserModel = get_user_model()
+
+
+class PostLike(models.Model):
+    to_post = models.ForeignKey(
+        to=Post,
+        on_delete=models.CASCADE,
+        related_name='likes'
+    )
+
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )
