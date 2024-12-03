@@ -8,5 +8,6 @@ urlpatterns = [
         path('', views.LandmarkDetailsView.as_view(), name='details-landmark'),
         path('add_review/', views.add_review, name='add_review'),
         path('like/', views.like_func, name='like-landmark'),
+        path('visit/', views.visit_func, name='visit-landmark'),
     ])),
 ]

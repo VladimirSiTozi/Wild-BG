@@ -172,13 +172,19 @@
             <div class="landmark-actions">
                 <button class="btn landmark-btn" onclick="location.href='{% url 'like-landmark' landmark.pk %}'">
                         {% if object.has_liked %}
-                            Liked <i class="fa-solid fa-heart" style="color: #ed4040;"></i>  <!-- Liked -->
+                            Liked <i class="fa-solid fa-heart" style="color: #FF0000;"></i>  <!-- Liked -->
                         {% else %}
                             Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
                         {% endif %}
                 </button>
                 <button id="addReviewBtn" class="btn landmark-btn">Add review</button>
-                <button class="btn landmark-btn">Visited</button>
+                <button class="btn landmark-btn" onclick="location.href='{% url 'visit-landmark' landmark.pk %}'">
+                    {% if object.has_visited %}
+                        Visited <i class="fa-solid fa-person-hiking" style="color: #FFFF00;"></i>  
+                    {% else %}
+                        Visit <i class="fa-solid fa-person-hiking"></i> 
+                    {% endif %}
+                </button>
             </div>
 
             <!-- Modal for Add Review -->
