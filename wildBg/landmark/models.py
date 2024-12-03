@@ -123,7 +123,6 @@ class AdditionalLandmarkInfo(models.Model):
     )
 
 
-@login_required
 class Review(models.Model):
     user = models.ForeignKey(
         AppUser,

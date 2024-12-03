@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -67,7 +68,7 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
 
         context['likes'] = self.object.likes.all()
         context['visits'] = self.object.visits.all()
-        context['review_form'] = ReviewForm
+        context['review_form'] = ReviewForm()
 
         total_reviews = self.object.reviews.count()
         average_rating = self.object.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
@@ -96,36 +97,21 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
         return context
 
 
-def add_review(request, pk):
-    landmark = get_object_or_404(Landmark, pk=pk)
-
+@login_required
+def add_review(request, pk: int):
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
+        landmark = Landmark.objects.get(pk=pk)
+        review_form = ReviewForm(request.POST)
+
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
             review.user = request.user
             review.landmark = landmark
+            review.comment = request.POST.get('comment')
             review.rating = request.POST.get('rating')
             review.save()
-            return JsonResponse({'success': True})
         else:
-            return JsonResponse({'success': False, 'errors': form.errors})
+            print('kles')
 
-    form = ReviewForm()
-    context = {
-        'landmark': landmark,
-        'form': form
-    }
+    return redirect(request.META.get('HTTP_REFERER', f'#{pk}'))
 
-    return render(request, 'landmark/landmark-details.html', context)
-
-
-# class LandmarkEditView(UpdateView):
-#     model = Landmark
-#     form_class = LandmarkEditForm
-#     template_name = 'landmark/landmark-edit.html'
-#
-#     def get_success_url(self):
-#         return reverse_lazy(
-#             'land'
-#         )
