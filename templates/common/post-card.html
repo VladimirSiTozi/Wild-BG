@@ -33,13 +33,13 @@
         <p class="post-comments-count">{{ post.comments.count }} Comments</p>
     </div>
     <div class="post-actions">
-        <a href="{% url 'post-like' post.pk %}" class="btn like-btn ">
+        <button class="btn landmark-btn" onclick="location.href='{% url 'post-like' post.pk %}'">
             {% if post.has_liked %}
-               <i class="fa-solid fa-heart" style="color: #ed4040;"></i> UnLike
+                Liked <i class="fa-solid fa-heart" style="color: #FF0000;"></i>  <!-- Liked -->
             {% else %}
-                <i class="fa-regular fa-heart"></i> Like
+                Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
             {% endif %}
-        </a>
+        </button>
         <button class="btn share-btn">Share</button>
     </div>
     <div class="post-comments">

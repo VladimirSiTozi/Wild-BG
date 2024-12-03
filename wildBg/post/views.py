@@ -18,10 +18,10 @@ class PostDetailView(SidebarContextMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = PostCommentForm()
-        post = self.get_object()
         context['all_comments'] = True  # To signal the template to show all comments
 
-        post.has_liked = self.object.likes.filter(user=self.request.user).exists()
+        post = self.get_object()
+        self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
 
         comments = post.comments.all().order_by('-created_at')
         comment_data = []
@@ -57,15 +57,17 @@ class PostDetailView(SidebarContextMixin, DetailView):
 
 
 @login_required
-def toggle_like(request, pk: int):
-    post = get_object_or_404(Post, pk=pk)  # This will trigger a 404 if the post doesn't exist
-
-    liked_object = PostLike.objects.filter(to_post=post, user=request.user).first()
+def like_post_func(request, pk: int):
+    liked_object = PostLike.objects.filter(
+        to_post=pk,
+        user=request.user
+    ).first()
 
     if liked_object:
         liked_object.delete()
     else:
-        PostLike.objects.create(to_post=post, user=request.user)
+        like = PostLike(to_post_id=pk, user=request.user)
+        like.save()
 
     return redirect(request.META.get('HTTP_REFERER', 'post-detail'))
 
