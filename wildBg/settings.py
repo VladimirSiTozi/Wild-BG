@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third-party apps
+    'rest_framework',
 
     # My apps
     "wildBg.accounts.apps.AccountsConfig",

@@ -180,9 +180,9 @@
                 <button id="addReviewBtn" class="btn landmark-btn">Add review</button>
                 <button class="btn landmark-btn" onclick="location.href='{% url 'visit-landmark' landmark.pk %}'">
                     {% if object.has_visited %}
-                        Visited <i class="fa-solid fa-person-hiking" style="color: #FFFF00;"></i>  
+                        Visited <i class="fa-solid fa-person-hiking" style="color: #FFFF00;"></i>
                     {% else %}
-                        Visit <i class="fa-solid fa-person-hiking"></i> 
+                        Visit <i class="fa-solid fa-person-hiking"></i>
                     {% endif %}
                 </button>
             </div>
