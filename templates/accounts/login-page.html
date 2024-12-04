@@ -1,0 +1,46 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="login-register-div">
+        <div class="login-register-box">
+            <h1>Login to Wild BG</h1>
+
+            <!-- Start Login Form -->
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                <!-- Username or Email Field -->
+                <div class="form-group">
+                    <label for="id_username">Username or Email:</label>
+                    <input type="text" name="username" id="id_username" required class="form-control" placeholder="Enter your username or email">
+                    {% if form.username.errors %}
+                        <div class="error">
+                            {{ form.username.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="id_password">Password:</label>
+                    <input type="password" name="password" id="id_password" required class="form-control" placeholder="Enter your password">
+                    {% if form.password.errors %}
+                        <div class="error">
+                            {{ form.password.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Login Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+            <!-- End Login Form -->
+
+        </div>
+        <div class="second-option">
+            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        </div>
+    </div>
+{% endblock %}
