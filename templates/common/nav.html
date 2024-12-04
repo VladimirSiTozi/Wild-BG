@@ -12,12 +12,15 @@
     <div class="nav-right">
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="#">New Post</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="{% url 'profile-details' request.user.pk %}">Profile</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Logout</a></li>
-            <li><a href="#">Register</a></li>
+            {% if not request.user.is_authenticated  %}
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Register</a></li>
+            {% else %}
+                <li><a href="#">New Post</a></li>
+                <li><a href="{% url 'profile-details' request.user.pk %}">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            {% endif %}
         </ul>
     </div>
 </nav>
