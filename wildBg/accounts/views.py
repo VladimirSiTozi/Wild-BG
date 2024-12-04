@@ -1,8 +1,10 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, CreateView
 
+from wildBg.accounts.forms import AppUserCreationForm
 from wildBg.accounts.models import Profile
 from wildBg.mixins import SidebarContextMixin
 
@@ -13,16 +15,20 @@ class ProfileDetailView(SidebarContextMixin, DetailView):
     model = UserModel
     template_name = 'accounts/profile-details.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #
-    #     user = self.get_object()
-    #
-    #     context['posts'] = user.posts.all()
-    #
-    #     return context
 
+class AppUserRegisterView(CreateView):
+    model = UserModel
+    form_class = AppUserCreationForm
+    template_name = 'accounts/register-page.html'
+    success_url = reverse_lazy('home')
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        # user = form.save()  # --> self.object
+        login(self.request, self.object)
+
+        return response
 
 
 

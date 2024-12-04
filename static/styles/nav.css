@@ -57,6 +57,45 @@
     position: relative;
 }
 
+/* Logout match the button style with navigation links */
+.nav-link-button {
+    font-size: 24px;
+    color: #ffffff;
+    background: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-link-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+/* Adding the same hover effect for animal background patterns */
+.nav-link-button:before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    bottom: -3px;
+    left: -3px;
+    border-radius: 10px;
+    z-index: -1;
+    background: url('animal-pattern.png'); /* The same background effect */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nav-link-button:hover:before {
+    opacity: 0.5;
+}
+
+
 /* Link Hover Effect */
 .nav-links a:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -73,7 +112,7 @@
     left: -3px;
     border-radius: 10px;
     z-index: -1;
-    background: url('animal-pattern.png'); /* You can use a URL to an animal print or abstract wild design */
+    /*background: url('animal-pattern.png'); !* You can use a URL to an animal print or abstract wild design *!*/
     opacity: 0;
     transition: opacity 0.3s;
 }

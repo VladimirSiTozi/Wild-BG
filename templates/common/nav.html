@@ -15,11 +15,16 @@
             <li><a href="#">About Us</a></li>
             {% if not request.user.is_authenticated  %}
                 <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
             {% else %}
                 <li><a href="#">New Post</a></li>
                 <li><a href="{% url 'profile-details' request.user.pk %}">Profile</a></li>
-                <li><a href="#">Logout</a></li>
+                <li>                    
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="button"><i>Logout</i></button>
+                    </form>
+                </li>
             {% endif %}
         </ul>
     </div>
