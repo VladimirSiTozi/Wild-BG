@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="profile-card-sidebar">
     {% if user.is_authenticated %}
     <div class="name-container">
@@ -12,6 +14,16 @@
         <p class="profile-p-info">{{ user_profile.description }}</p>
     </div>
     {% else %}
-        <p>Please <a href="#">log in</a> to view your profile.</p>
+        <p>
+            Welcome to Wild BG!
+        </p>
+        <img src="{% static 'images/tree.webp' %}" alt="Profile Tree" class="profile-tree">
+        <p>
+            Already have an account? <a href="#" style="color: blue; text-decoration: underline;">Log in</a>
+            to continue your journey.
+            <br><br>
+            You still don't have a profile? <a href="#" style="color: blue; text-decoration: underline;">Sign up now</a>
+            to unlock all the features and join the community!
+        </p>
     {% endif %}
 </div>
