@@ -31,27 +31,27 @@ class SidebarContextMixin:
                     'level': 'Beginner',
                 }
 
-            # Top 3 rated landmarks with calculated star ratings
-            top_landmarks = (
-                Landmark.objects.annotate(
-                    average_rating=Avg('reviews__rating'),  # Calculate average rating
-                    review_count=Count('reviews')  # Count total reviews
-                )
-                .filter(average_rating__isnull=False)
-                .order_by('-average_rating')[:3]
+        # Top 3 rated landmarks with calculated star ratings
+        top_landmarks = (
+            Landmark.objects.annotate(
+                average_rating=Avg('reviews__rating'),  # Calculate average rating
+                review_count=Count('reviews')  # Count total reviews
             )
+            .filter(average_rating__isnull=False)
+            .order_by('-average_rating')[:3]
+        )
 
-            # Prepare the data for each landmark
-            context['top_rated_landmarks'] = [
-                {
-                    'landmark': landmark,
-                    'average_rating': landmark.average_rating,
-                    'review_count': landmark.review_count,
-                    'full_stars': range(int(landmark.average_rating)),
-                    'half_star': (landmark.average_rating % 1) >= 0.5,
-                    'empty_stars': range(5 - int(landmark.average_rating) - int((landmark.average_rating % 1) >= 0.5)),
-                }
-                for landmark in top_landmarks
-            ]
+        # Prepare the data for each landmark
+        context['top_rated_landmarks'] = [
+            {
+                'landmark': landmark,
+                'average_rating': landmark.average_rating,
+                'review_count': landmark.review_count,
+                'full_stars': range(int(landmark.average_rating)),
+                'half_star': (landmark.average_rating % 1) >= 0.5,
+                'empty_stars': range(5 - int(landmark.average_rating) - int((landmark.average_rating % 1) >= 0.5)),
+            }
+            for landmark in top_landmarks
+        ]
 
         return context

@@ -1,8 +1,9 @@
 {% for landmark_data in top_rated_landmarks %}
     <a href="{% url 'details-landmark' landmark_data.landmark.pk %}">
-        <div class="info-card">  {# onclick="window.location.href='https://example.com' #}
-            <h2 class="name">{{ landmark_data.landmark.user.profile.get_full_name }}</h2>
-            <p class="location">{{ landmark_data.landmark.name }}</p>
+        <div class="info-card"> 
+{#            <h2 class="name">{{ landmark_data.landmark.user.profile.get_full_name }}</h2>#}
+            <h2 class="name">{{ landmark_data.landmark.name }}</h2>
+            <h2 class="location name">{{ landmark_data.landmark.location_name }}</h2>
             <img src="{{ landmark_data.landmark.image.url }}" alt="Location Picture" class="location-picture">
             <p class="description">
                 {{ landmark_data.landmark.description }}
@@ -27,7 +28,6 @@
                             <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z" fill="url(#half-gradient)"/>
                         </svg>
                     </span>
-                    {# <i class="fa-regular fa-star-half-stroke"></i> #}
                 {% endif %}
                 {% for i in landmark_data.empty_stars %}
                     <span class="star empty"></span>
