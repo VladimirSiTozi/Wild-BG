@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.db.models import Avg, Count
+from django.db.models import Avg, Count, Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
@@ -38,13 +38,17 @@ class HomePageView(SidebarContextMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset().order_by('-created_at')  # get all objects .order_by('-date_of_publication')
 
-        user_name = self.request.GET.get('user_name')
-        if user_name:
-            queryset = queryset.filter(  # filter the objects
-                tagged_people__name__icontains=user_name
-            )
+        search_query = self.request.GET.get('search_query')
+        if search_query:
+            queryset = queryset.filter(
+                Q(author__profile__first_name__icontains=search_query) |
+                Q(author__profile__last_name__icontains=search_query) |
+                Q(author__profile__first_name__icontains=search_query) & Q(author__profile__last_name__icontains=search_query) |
+                Q(location__name__icontains=search_query) |
+                Q(location__location_name__icontains=search_query)
+            ). distinct()
 
-        return queryset  # return new queryset
+        return queryset
 
 
 def custom_404_view(request, exception=None):

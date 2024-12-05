@@ -1,0 +1,28 @@
+.info-banner {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px; /* Rounded borders */
+    padding: 15px; /* Padding for inner spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for better visibility */
+}
+
+.image-container {
+    flex: 20%;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Optional: rounding for the image as well, for consistency */
+}
+
+.text-container {
+    flex: 80%;
+    padding-left: 15px;
+}
+
+.text-container p {
+    margin: 0;
+}

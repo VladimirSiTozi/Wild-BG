@@ -2,10 +2,11 @@ from django import forms
 
 
 class SearchForm(forms.Form):
-    user_name = forms.CharField(
+    search_query = forms.CharField(
+        label='',
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Search by user name...'},
+            attrs={'placeholder': 'Search by location or user...',},
         )
     )
 

@@ -5,17 +5,17 @@
     box-sizing: border-box;
 }
 html, body {
-    height: 100%; /* Настройка на височината на html и body на 100% */
-    margin: 0; /* Премахване на подразбиращите се марджини, за да не влияят на височината */
-    padding: 0; /* Премахване на подразбиращите се падинги */
-    box-sizing: border-box; /* За да се избегнат проблеми с ширината и падингите */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Pine Forest', helvetica;
-    display: flex; /* Използва се Flexbox за подреждане на основните секции */
-    flex-direction: column; /* Подрежда елементите вертикално (header, main, footer) */
-    min-height: 100vh; /* Задава минимална височина от 100% на екрана */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #f3f2ef;
     color: #2e2c29;
 }

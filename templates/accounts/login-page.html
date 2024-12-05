@@ -11,8 +11,9 @@
 
                 <!-- Username or Email Field -->
                 <div class="form-group">
-                    <label for="id_username">Username or Email:</label>
-                    <input type="text" name="username" id="id_username" required class="form-control" placeholder="Enter your username or email">
+                    <label for="id_username">Email:</label>
+                    <input type="text" name="username" id="id_username" required class="form-control"
+                           placeholder="Enter your email">
                     {% if form.username.errors %}
                         <div class="error">
                             {{ form.username.errors }}
@@ -23,7 +24,8 @@
                 <!-- Password Field -->
                 <div class="form-group">
                     <label for="id_password">Password:</label>
-                    <input type="password" name="password" id="id_password" required class="form-control" placeholder="Enter your password">
+                    <input type="password" name="password" id="id_password" required class="form-control"
+                           placeholder="Enter your password">
                     {% if form.password.errors %}
                         <div class="error">
                             {{ form.password.errors }}
@@ -37,10 +39,9 @@
                 </div>
             </form>
             <!-- End Login Form -->
-
-        </div>
-        <div class="second-option">
-            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+            <div class="second-option">
+                <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+            </div>
         </div>
     </div>
 {% endblock %}

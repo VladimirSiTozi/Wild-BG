@@ -6,6 +6,18 @@
     <div class="container">
         <div class="col-9">
 
+            <div class="info-banner">
+                <div class="image-container">
+                    <img src="{% static '/images/kolona3.jpg' %}" alt="Banner Image">
+                </div>
+                <div class="text-container">
+                    <p>Открийте магията на природата – вдъхновяващи пейзажи и уникални забележителности на една ръка разстояние!</p>
+                </div>
+                <div class="image-container">
+                    <img src="{% static '/images/kolona3-2.jpg' %}" alt="Banner Image">
+                </div>
+            </div>
+
             <!-- Start Searchbar Form -->
             <form class="searchbar" method="get">
                 {{ search_form }}
@@ -20,13 +32,13 @@
                 {% include 'common/post-card.html' %}
             {% endfor %}
             <!-- End  Post Section -->
-        
+
             <!-- Start Pagination -->
             <div class="pagination">
                 <span class="current">
                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                 </span>
-            
+
                 <span class="step-links-buttons">
                 
                     <!-- If there are previous and next photos -->
@@ -37,14 +49,14 @@
                         <a href="?{% url_query_append_tag request 'page' page_obj.next_page_number %}">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
-                        
-                    <!-- If there are only previous photos -->
+
+                        <!-- If there are only previous photos -->
                     {% elif page_obj.has_previous %}
                         <a href="?{% url_query_append_tag request 'page' page_obj.previous_page_number %}">
                             <i class="fa-solid fa-arrow-left"></i>
                         </a>
 
-                    <!-- If there are only next photos -->
+                        <!-- If there are only next photos -->
                     {% elif page_obj.has_next %}
                         <a href="?{% url_query_append_tag request 'page' page_obj.next_page_number %}">
                             <i class="fa-solid fa-arrow-right"></i>

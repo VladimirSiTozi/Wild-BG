@@ -1,0 +1,109 @@
+/* Main container for the login/register page */
+.login-register-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    background-color: #f0f2f5; /* Soft background color */
+}
+
+/* Box styling for the login/register form */
+.login-register-box {
+    background: #ffffff; /* White background for the form */
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Heading inside the form box */
+.login-register-box h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Form group to style each input field container */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Labels for input fields */
+.form-group label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Input fields styling */
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus styling */
+.form-control:focus {
+    border-color: #007bff; /* Highlight input border color when focused */
+}
+
+/* Error message styling */
+.error {
+    color: #ff4c4c;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Register link styling */
+.second-option {
+    margin-top: 20px;
+}
+
+.second-option p {
+    font-size: 14px;
+    color: #666;
+}
+
+.second-option a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Link hover effect */
+.second-option a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .login-register-box {
+        padding: 20px;
+    }
+}

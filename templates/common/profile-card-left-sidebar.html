@@ -3,15 +3,26 @@
 <div class="profile-card-sidebar">
     {% if user.is_authenticated %}
     <div class="name-container">
-        <span class="first-name">{{ user_profile.first_name }}</span>
-        <span class="last-name">{{ user_profile.last_name }}</span>
-        <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+
+        {% if not user_profile.profile_picture %}
+            <span class="first-name">{{ user_profile.first_name }}</span>
+            <span class="last-name">{{ user_profile.last_name }}</span>
+            <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+        {% else %}
+            <span class="first-name">Name: No name</span>
+            <span class="last-name"></span>
+            <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Profile Picture" class="profile-picture">
+        {% endif %}
         <span class="points">Points:</span>
         <p class="profile-p-info">{{ user_profile.points }}</p>
         <span class="level">Level:</span>
         <p class="profile-p-info">{{ user_profile.level }}</p>
         <span class="about-me">About me:</span>
-        <p class="profile-p-info">{{ user_profile.description }}</p>
+        {% if user_profile.profile_picture == '' %}
+            <p class="profile-p-info">No information</p>
+        {% else %}
+            <p class="profile-p-info">{{ user_profile.description }}</p>
+        {% endif %}
     </div>
     {% else %}
         <p>

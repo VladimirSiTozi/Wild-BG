@@ -1,0 +1,55 @@
+/* General container styling for search bar */
+.searchbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 300px; /* Limit the width */
+    margin: 20px auto; /* Center align with some space on top and bottom */
+    padding: 8px;
+    border-radius: 25px; /* Make it round for a modern look */
+    border: 1px solid #ccc; /* Subtle border */
+    background-color: #f9f9f9; /* Light grey background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+}
+
+/* Input field styling */
+.searchbar input[type="text"],
+.searchbar input[type="search"] {
+    flex: 1; /* Expand to take up available space */
+    padding: 10px 15px;
+    border: none; /* Remove default border */
+    outline: none; /* Remove default outline */
+    font-size: 16px;
+    background-color: transparent; /* Match with parent for consistent look */
+    color: #333; /* Dark text for readability */
+}
+
+/* Button styling for the search icon */
+.searchbar button {
+    background: none; /* No background for the button */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Pointer cursor to indicate clickable */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px; /* Space for comfortable click area */
+}
+
+.searchbar button img {
+    height: 35px; /* Slightly increase the height for a larger icon */
+    filter: grayscale(1); /* Optional: grayscale icon for subtlety */
+    transition: filter 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for button */
+.searchbar button:hover img {
+    filter: grayscale(0); /* Bring back full color on hover */
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Placeholder text styling */
+.searchbar input::placeholder {
+    color: #aaa; /* Light grey color for placeholder text */
+    font-style: italic; /* Slightly different styling to differentiate */
+}

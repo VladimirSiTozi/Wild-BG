@@ -16,7 +16,6 @@ class AppUserLoginView(LoginView):
     template_name = 'accounts/login-page.html'
 
 
-
 class ProfileDetailView(SidebarContextMixin, DetailView):
     model = UserModel
     template_name = 'accounts/profile-details.html'
