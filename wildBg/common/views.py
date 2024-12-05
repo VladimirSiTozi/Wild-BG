@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Avg, Count, Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from wildBg.accounts.models import Profile
 from wildBg.common.forms import SearchForm
@@ -49,6 +49,10 @@ class HomePageView(SidebarContextMixin, ListView):
             ). distinct()
 
         return queryset
+
+
+class AboutUsPageView(SidebarContextMixin, TemplateView):
+    template_name = 'common/about-us.html'
 
 
 def custom_404_view(request, exception=None):
