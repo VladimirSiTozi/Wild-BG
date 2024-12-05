@@ -16,8 +16,7 @@
         <div class="landmark-card">
             <h2 class="landmark-name">{{ object.name }}</h2>
             <h3 class="landmark-location">{{ object.location_name }}</h3>
-
-
+        
             <div class="landmark-image">
                 <img src="{{ object.image.url }}" alt="Location Picture">
             </div>
@@ -225,13 +224,22 @@
 
             <!-- reviews -->
             {% for review in reviews %}
+                {% if review.comment == '' %}
+                    
+                {% else %}
                 <div class="landmark-review">
                     <div class="landmark-comment">
                         <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image"
                              class="comment-author-img">
                         <div class="comment-content">
                             <p class="comment-author">
-                                <strong>{{ review.user.profile.get_full_name }}</strong>
+                                {% if review.user.profile.get_full_name == 'Anonymous'%}
+                                    <strong>{{ review.user.profile.get_full_name }}</strong>
+                                {% else %}
+                                <a href="{% url 'profile-details' review.user.profile.pk %}">
+                                    <strong>{{ review.user.profile.get_full_name }}</strong>
+                                </a>
+                                {% endif %}
                             </p>
                             <div class="landmark-stars">
                                 {% for star in review.full_stars %}
@@ -248,6 +256,9 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
+            {% empty %}
+                <p>There are no reviews yet.</p>
             {% endfor %}
 
         </div>

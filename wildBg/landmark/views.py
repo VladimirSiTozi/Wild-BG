@@ -65,8 +65,14 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
-        self.object.has_visited = self.object.visits.filter(user=self.request.user).exists()
+        user = self.request.user
+
+        if user.is_authenticated:
+            self.object.has_liked = self.object.likes.filter(user=user).exists()
+            self.object.has_visited = self.object.visits.filter(user=user).exists()
+        else:
+            self.object.has_liked = False
+            self.object.has_visited = False
 
         context['likes'] = self.object.likes.all()
         context['visits'] = self.object.visits.all()
