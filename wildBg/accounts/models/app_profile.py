@@ -33,7 +33,7 @@ class Profile(models.Model):
 
     profile_picture = models.ImageField(
         upload_to='profile_pictures/',
-        default='images/anonymous_full.jpg',
+        # default='images/anonymous_full.jpg',
         blank=True,
         null=True,
     )
@@ -42,7 +42,7 @@ class Profile(models.Model):
 
     background_image = models.ImageField(
         upload_to='background_images/',
-        default='images/default_background.jpg',
+        # default='images/default_background.jpg',
     )
 
     points = models.IntegerField(

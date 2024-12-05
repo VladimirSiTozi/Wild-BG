@@ -16,6 +16,7 @@ class SidebarContextMixin:
             try:
                 profile = user.profile  # Access the Profile model via the one-to-one relationship
                 context['user_profile'] = {
+                    'user': user,
                     'first_name': profile.first_name,
                     'last_name': profile.last_name,
                     'profile_picture': profile.profile_picture if profile.profile_picture else None,
@@ -23,6 +24,7 @@ class SidebarContextMixin:
                     'level': profile.level,
                     'description': profile.description,
                 }
+                print(user.profile.get_full_name())
             except Profile.DoesNotExist:
                 context['user_profile'] = {
                     'full_name': 'Anonymous',

@@ -3,26 +3,36 @@
 <div class="post-card">
     <div class="post-header">
         <div class="post-author-info">
+            <a href="{% url 'profile-details' post.author.profile.pk %}">
             {% if post.author.profile.profile_picture %}
-                <img src="{{ post.author.profile.profile_picture.url }}" alt="Author Image" class="post-author-img">
+                    <img src="{{ post.author.profile.profile_picture.url }}" alt="Author Image" class="post-author-img">
             {% else %}
                 <img src="{% static 'images/anonymous_full.jpg' %}" alt="Author Image" class="post-author-img">
             {% endif %}
-            <p class="post-author">{{ post.author.profile.first_name }} {{ post.author.profile.last_name }}</p>
+            </a>
+            <a href="{% url 'profile-details' post.author.profile.pk %}">
+                <p class="post-author">{{ post.author.profile.first_name }} {{ post.author.profile.last_name }}</p>
+            </a>
         </div>
         <div class="post-location-date">
-            <p class="post-location">Location: {{ post.location.name }} {{ post.location.location_name }}</p>
+            <a href="{% url 'details-landmark' post.location.pk %}">
+                <p class="post-location">Location: {{ post.location.name }} {{ post.location.location_name }}</p>
+            </a>            
             <p class="post-date">{{ post.created_at }}</p>
         </div>
     </div>
-
-    <div class="post-image">
-        <img src="{{ post.post_image.url }}" alt="Location Picture">
-    </div>
+    
+    <a href="{% url 'post-detail' post.pk %}">
+        <div class="post-image">
+            <img src="{{ post.post_image.url }}" alt="Location Picture">
+        </div>
+    </a>
 
     <div class="tagged-info">
         {% for person in post.tagged_people.all %}
-            <p class="tagged-people">{{ person }}</p>
+            <a href="{% url 'profile-details' person.profile.pk %}">
+                <p class="tagged-people">{{ person.profile.get_full_name }}</p>
+            </a>
         {% endfor %}
     </div>
     <div class="post-description">
@@ -57,12 +67,19 @@
             {# Show all comments for the post detail page #}
             {% for detailed_comment in comments %}
                 <div class="comment">
-                    <img src="{{ detailed_comment.author_profile_picture.url }}" alt="Author Image"
-                         class="comment-author-img">
+                    <a href="{% url 'profile-details' detailed_comment.comment.author.pk %}">
+                        {% if detailed_comment.author_profile_picture.url %}
+                            <img src="{{ detailed_comment.author_profile_picture.url }}" alt="Author Image" class="comment-author-img">
+                        {% else %}
+                            <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Author Image" class="post-author-img">
+                        {% endif %}
+                    </a>
                     <div class="comment-content">
                         <p class="comment-author">
-                            <strong>{{ detailed_comment.author_name }}</strong> - <span
-                                class="comment-date">{{ detailed_comment.created_at }}</span>
+                            <a href="{% url 'profile-details' detailed_comment.comment.author.pk %}">
+                                <strong>{{ detailed_comment.comment.author.profile.get_full_name }}</strong> 
+                            </a>
+                            <span class="comment-date">{{ detailed_comment.created_at }}</span>
                         </p>
                         <p class="comment-text">
                             {{ detailed_comment.content }}

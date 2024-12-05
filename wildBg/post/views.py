@@ -21,7 +21,12 @@ class PostDetailView(SidebarContextMixin, DetailView):
         context['all_comments'] = True  # To signal the template to show all comments
 
         post = self.get_object()
-        self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
+        user = self.request.user
+
+        if user.is_authenticated:
+            self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
+        else:
+            self.object.has_liked = False
 
         comments = post.comments.all().order_by('-created_at')
         comment_data = []

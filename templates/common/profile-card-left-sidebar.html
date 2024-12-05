@@ -4,12 +4,12 @@
     {% if user.is_authenticated %}
     <div class="name-container">
 
-        {% if not user_profile.profile_picture %}
+        {% if not user.profile.get_full_name == 'Anonymous' %}
             <span class="first-name">{{ user_profile.first_name }}</span>
             <span class="last-name">{{ user_profile.last_name }}</span>
             <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
         {% else %}
-            <span class="first-name">Name: No name</span>
+            <span class="first-name">Anonymous bear</span>
             <span class="last-name"></span>
             <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Profile Picture" class="profile-picture">
         {% endif %}
@@ -18,7 +18,7 @@
         <span class="level">Level:</span>
         <p class="profile-p-info">{{ user_profile.level }}</p>
         <span class="about-me">About me:</span>
-        {% if user_profile.profile_picture == '' %}
+        {% if user_profile.description == '' %}
             <p class="profile-p-info">No information</p>
         {% else %}
             <p class="profile-p-info">{{ user_profile.description }}</p>
