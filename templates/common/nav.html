@@ -13,19 +13,20 @@
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'about-us' %}">About Us</a></li>
-            {% if not request.user.is_authenticated  %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
-            {% else %}
-                <li><a href="#">New Post</a></li>
-                <li><a href="{% url 'profile-details' request.user.pk %}">Profile</a></li>
-                <li>
-                    <a href="#" class="nav-link-button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                    <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
-                        {% csrf_token %}
-                    </form>
-                </li>
-            {% endif %}
+        {% if not request.user.is_authenticated  %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+        {% else %}
+            <li><a href="#">New Post</a></li>
+            <li><a href="{% url 'add-landmark' %}">New Landmark</a></li>
+            <li><a href="{% url 'profile-details' request.user.pk %}">Profile</a></li>
+            <li>
+                <a href="#" class="nav-link-button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+                    {% csrf_token %}
+                </form>
+            </li>
+        {% endif %}
         </ul>
     </div>
 </nav>

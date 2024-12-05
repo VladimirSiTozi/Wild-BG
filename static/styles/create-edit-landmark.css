@@ -1,0 +1,114 @@
+/* General styling for the form card */
+.landmark-card {
+    width: 850px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #d1e7dd;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+}
+
+/* Form header styling */
+.my-posts-header h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Styling for form fields */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group input[type="checkbox"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Checkbox styling */
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+/* Button styling */
+.btn {
+    background-color: #4c6e58;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3b5343;
+}
+
+/* Form Section Headers */
+.landmark-card h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+}
+
+/* Additional styles for accessibility */
+.landmark-card {
+    background-color: #e9f7ef; /* Softer background color to indicate form elements */
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border: 1px solid #4c6e58; /* Consistent border color on focus */
+    box-shadow: 0 0 4px rgba(76, 110, 88, 0.5);
+}
+
+/* Making the entire form more cohesive with the rest of the website */
+.landmark-card {
+    font-family: Arial, sans-serif;
+}
+
+.landmark-card h3 {
+    color: #4c6e58;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .landmark-card {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

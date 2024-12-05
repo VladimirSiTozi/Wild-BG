@@ -1,18 +1,118 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
-    <!-- Starts Edit Photo Section -->
-    <div class="edit-delete edit-photo">
-        <h2>Edit Landmark</h2>
-
-        <!-- Starts Edit Photo Form -->
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <button class="btn" type="submit">Edit Landmark</button>
-        </form>
-        <!-- End Edit Photo Form -->
-
+    <div class="my-posts-header">
+        <h3>Edit Landmark</h3>
     </div>
-    <!-- End Edit Photo Section -->
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="landmark-card">
+
+            <div class="form-group">
+                <label for="id_name">Name:</label>
+                <input type="text" id="id_name" name="name" maxlength="100" required value="{{ object.name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="id_location_name">Location Name:</label>
+                <input type="text" id="id_location_name" name="location_name" maxlength="100" required
+                       value="{{ object.location_name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="id_description">Description:</label>
+                <textarea id="id_description" name="description">{{ object.description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id_image">Image:</label>
+                <input type="file" id="id_image" name="image">
+                {% if object.image %}
+                    <p>Current Image: <a href="{{ object.image.url }}">{{ object.image.name }}</a></p>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="id_map_location">Map Location:</label>
+                <textarea id="id_map_location" name="map_location"
+                          placeholder="<iframe src=...>">{{ object.map_location }}"</textarea>
+            </div>
+
+            <h3>Additional Landmark Information</h3>
+
+            <div class="form-group">
+                <label for="id_is_transition">Is Transition:</label>
+                <input type="checkbox" id="id_is_transition" name="is_transition"
+                       {% if object.additional_landmark_info.is_transition %}checked{% endif %}>
+            </div>
+
+            <div class="form-group">
+                <label for="id_duration">Duration:</label>
+                <input type="text" id="id_duration" name="duration" placeholder="e.g., 1:30:00 for 1 hour 30 minutes"
+                       value="{{ object.additional_landmark_info.duration }}">
+            </div>
+
+            <div class="form-group">
+                <label for="id_is_accessible">Is Accessible:</label>
+                <input type="checkbox" id="id_is_accessible" name="is_accessible"
+                       {% if object.additional_landmark_info.is_accessible %}checked{% endif %}>
+            </div>
+
+            <div class="form-group">
+                <label for="id_distance_km">Distance (km):</label>
+                <input type="number" step="0.1" id="id_distance_km" name="distance_km" value="{{ object.additional_landmark_info.distance_km }}">
+            </div>
+
+            <div class="form-group">
+                <label for="id_suitable_for_children">Suitable for Children:</label>
+                <input type="checkbox" id="id_suitable_for_children" name="suitable_for_children"
+                       {% if object.additional_landmark_info.suitable_for_children %}checked{% endif %}>
+            </div>
+
+            <div class="form-group">
+                <label for="id_has_eating_places">Has Eating Places:</label>
+                <input type="checkbox" id="id_has_eating_places" name="has_eating_places"
+                       {% if object.additional_landmark_info.has_eating_places %}checked{% endif %}>
+            </div>
+
+            <div class="form-group">
+                <label for="id_is_ennobled">Is Ennobled:</label>
+                <input type="checkbox" id="id_is_ennobled" name="is_ennobled"
+                       {% if object.additional_landmark_info.is_ennobled %}checked{% endif %}>
+            </div>
+
+            <div class="form-group">
+                <label for="id_start_point">Start Point:</label>
+                <input type="text" id="id_start_point" name="start_point" maxlength="50"
+                       value="{{ object.additional_landmark_info.start_point }}">
+            </div>
+
+            <div class="form-group">
+                <label for="id_end_point">End Point:</label>
+                <input type="text" id="id_end_point" name="end_point" maxlength="50" value="{{ object.additional_landmark_info.end_point }}">
+            </div>
+
+            <div class="form-group">
+                <label for="id_accessible_by_car">Accessible by Car:</label>
+                <input type="checkbox" id="id_accessible_by_car" name="accessible_by_car"
+                       {% if object.additional_landmark_info.accessible_by_car %}checked{% endif %}>
+            </div>
+
+            <div class="form-group">
+                <label for="id_has_parking">Has Parking:</label>
+                <input type="checkbox" id="id_has_parking" name="has_parking"
+                       {% if object.additional_landmark_info.has_parking %}checked{% endif %}>
+            </div>
+                
+            <div class="form-buttons">
+                <button type="submit" class="btn">Update Landmark</button>
+                <a href="{% url 'delete-landmark' object.pk %}" class="btn btn-danger">Delete Landmark</a>
+            </div>
+        </div>
+    </form>
+    
 {% endblock %}
+

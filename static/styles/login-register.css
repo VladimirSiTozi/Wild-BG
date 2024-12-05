@@ -62,22 +62,45 @@
     margin-top: 5px;
 }
 
-/* Button styling */
-.btn-primary {
-    background-color: #007bff;
-    color: #ffffff;
+/* Common button styling */
+.btn {
     padding: 12px 20px;
     font-size: 16px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    width: 100%;
     transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-/* Button hover effect */
+/* Primary button styling (Update button) */
+.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+/* Danger button styling (Delete button) */
+.btn-danger {
+    background-color: #dc3545 !important; /* Red for delete action */
+}
+
+/* Button hover effects */
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.btn-danger:hover {
+    background-color: #c82333 !important; /* Darker red on hover */
+}
+
+/* Form buttons container styling */
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adds gap between the buttons */
+    margin: 30px 0; /* Adds some space above and below the button container */
 }
 
 /* Register link styling */
@@ -105,5 +128,14 @@
 @media (max-width: 500px) {
     .login-register-box {
         padding: 20px;
+    }
+
+    .form-buttons {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        gap: 15px; /* Reduced gap for smaller screens */
+    }
+
+    .btn {
+        width: 100%; /* Make buttons full-width for better usability on mobile */
     }
 }

@@ -1,20 +1,21 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 
-from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm
+from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm, \
+    AdditionalLandmarkInfoEditForm
 from wildBg.landmark.models import Landmark, Review, Like, Visit
 from wildBg.mixins import SidebarContextMixin
 
 
-class LandmarkAddView(CreateView):
+class LandmarkAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
     model = Landmark
     form_class = LandmarkAddForm
     template_name = 'landmark/landmark-create.html'
-    success_url = reverse_lazy('test-home')
 
     def get_context_data(self, **kwargs):
         # Add both forms to the context
@@ -49,7 +50,7 @@ class LandmarkAddView(CreateView):
         additional_info.landmark = landmark
         additional_info.save()
 
-        return redirect(self.success_url)
+        return super().form_valid(landmark_form)
 
     def forms_invalid(self, landmark_form, additional_info_form):
         # If either form is invalid, re-render the page with errors
@@ -57,6 +58,12 @@ class LandmarkAddView(CreateView):
             form=landmark_form,
             additional_info_form=additional_info_form
         ))
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'details-landmark',
+            kwargs={'pk': self.object.pk}
+        )
 
 
 class LandmarkDetailsView(SidebarContextMixin, DetailView):
@@ -103,6 +110,61 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
         context['reviews'] = reviews_with_star_info
 
         return context
+
+
+class LandmarkEditView(LoginRequiredMixin, UserPassesTestMixin, SidebarContextMixin, UpdateView):
+    model = Landmark
+    template_name = 'landmark/landmark-edit.html'
+
+    def get(self, request, *args, **kwargs):
+        landmark = get_object_or_404(Landmark, pk=self.kwargs['pk'])
+        additional_info = landmark.additional_landmark_info
+
+        landmark_form = LandmarkEditForm(instance=landmark)
+        additional_info_form = AdditionalLandmarkInfoEditForm(instance=additional_info)
+
+        return render(request, self.template_name, {
+            'landmark_form': landmark_form,
+            'additional_info_form': additional_info_form,
+            'object': landmark,
+        })
+
+    def post(self, request, *args, **kwargs):
+        landmark = get_object_or_404(Landmark, pk=self.kwargs['pk'])
+        additional_info = landmark.additional_landmark_info
+
+        landmark_form = LandmarkEditForm(request.POST, request.FILES, instance=landmark)
+        additional_info_form = AdditionalLandmarkInfoEditForm(request.POST, instance=additional_info)
+
+        if landmark_form.is_valid() and additional_info_form.is_valid():
+            landmark_form.save()
+            additional_info_form.save()
+            return redirect('details-landmark', pk=landmark.pk)
+
+        return render(request, self.template_name, {
+            'landmark_form': landmark_form,
+            'additional_info_form': additional_info_form,
+            'object': landmark,
+        })
+
+    def test_func(self):
+        photo = get_object_or_404(Landmark, pk=self.kwargs['pk'])
+        return self.request.user == photo.user
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'details-landmark',
+            kwargs={'pk': self.object.pk}
+        )
+
+
+@login_required
+def delete_photo(request, pk: int):
+    photo = Landmark.objects.get(pk=pk)
+
+    if request.user == photo.user:
+        photo.delete()
+    return redirect('home')
 
 
 @login_required
