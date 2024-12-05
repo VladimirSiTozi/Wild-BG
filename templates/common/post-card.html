@@ -50,7 +50,10 @@
                 Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
             {% endif %}
         </button>
-        <button class="btn share-btn">Share</button>
+        {% if request.user.pk == post.author.profile.pk %}
+        <button class="btn landmark-btn" onclick="location.href='{% url 'home' %}'">Edit Post</button>
+        {% endif %}
+        <button class="btn share-btn">Share <i class="fa-regular fa-share-from-square"></i></button>
     </div>
     <div class="post-comments">
         <div class="add-comment">

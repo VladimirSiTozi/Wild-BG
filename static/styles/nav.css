@@ -40,7 +40,7 @@
     display: flex;
     justify-content: flex-end;
     list-style: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .nav-links li {
@@ -48,11 +48,11 @@
 }
 
 .nav-links a {
-    font-size: 24px;
+    font-size: 21px;
     text-decoration: none;
     color: #ffffff;
     transition: all 0.3s ease-in-out;
-    padding: 8px 15px;
+    padding: 8px 10px;
     border-radius: 10px;
     position: relative;
 }
@@ -86,7 +86,6 @@
     left: -3px;
     border-radius: 10px;
     z-index: -1;
-    background: url('animal-pattern.png'); /* The same background effect */
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -94,7 +93,6 @@
 .nav-link-button:hover:before {
     opacity: 0.5;
 }
-
 
 /* Link Hover Effect */
 .nav-links a:hover {

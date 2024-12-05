@@ -6,12 +6,13 @@
             <img src="{% static 'images/wildbg-logo5.webp' %}" alt="Wild and Nature Logo" class="logo">
         </a>
         <a href="{% url 'home' %}">
-            <span class="nav-title">Wild & Nature</span>
+            <span class="nav-title">Divoto BG</span>
         </a>
     </div>
     <div class="nav-right">
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about-us' %}">Places</a></li>
             <li><a href="{% url 'about-us' %}">About Us</a></li>
         {% if not request.user.is_authenticated  %}
             <li><a href="{% url 'login' %}">Login</a></li>
