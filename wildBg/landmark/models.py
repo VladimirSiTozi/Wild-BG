@@ -5,6 +5,8 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 from wildBg.accounts.models import AppUser
+from wildBg.landmark.choices import LandmarkLevelChoices
+from multiselectfield import MultiSelectField
 
 
 class Landmark(models.Model):
@@ -31,13 +33,16 @@ class Landmark(models.Model):
 
     image = models.ImageField(
         upload_to='landmarks/',
-        null=True,
-        blank=True,
     )
 
     map_location = models.TextField(
         null=False,
         blank=False,
+    )
+
+    level = models.CharField(
+        max_length=20,
+        choices=LandmarkLevelChoices.choices
     )
 
     created_at = models.DateTimeField(

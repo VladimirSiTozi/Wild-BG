@@ -180,8 +180,6 @@ def add_review(request, pk: int):
             review.comment = request.POST.get('comment')
             review.rating = request.POST.get('rating')
             review.save()
-        else:
-            print('kles')
 
     return redirect(request.META.get('HTTP_REFERER', f'#{pk}'))
 

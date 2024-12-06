@@ -69,29 +69,41 @@
             <div class="transition-card">
                 <div class="transition-availability">
                     {% if object.additional_landmark_info.is_transition %}
-                        Преход: Да
-                    {% elif object.additional_landmark_info.is_transition %}
-                        Преход: Не
+                        Преход за достигане на забележителността: Има
+                    {% else %}
+                        Преход за достигане на забележителността: Няма
                     {% endif %}
                 </div>
                 <div class="transition-info">
                     <div class="transition-left">
-                        {% if object.additional_landmark_info.duration %}
-                            <p>Време за перход: {{ object.additional_landmark_info.duration|format_duration }} </p>
+                        {% if object.level == '1' %}
+                            <p>Ниво на трудност: Лесно</p>
+                        {% elif landmark.level == '2' %}
+                            <p>Ниво на трудност: Средно</p>
+                        {% elif landmark.level == '3' %}
+                            <p>Ниво на трудност: Трудно</p>
                         {% else %}
-                            <p>Време за перход: Няма</p>
+                            <p>Ниво на трудност: Много Трудно</p>
                         {% endif %}
-
-                        {% if object.additional_landmark_info.distance_km %}
-                            <p>Километри: {{ object.additional_landmark_info.distance_km }} км</p>
-                        {% else %}
-                            <p>Километри: Няма</p>
+                    
+                        {% if object.additional_landmark_info.is_transition %}
+                            {% if object.additional_landmark_info.duration %}
+                                <p>Времетраене: {{ object.additional_landmark_info.duration|format_duration }} </p>
+                            {% else %}
+                                <p>Времетраене: Няма информация</p>
+                            {% endif %}
+    
+                            {% if object.additional_landmark_info.distance_km %}
+                                <p>Километри: {{ object.additional_landmark_info.distance_km }} км</p>
+                            {% else %}
+                                <p>Километри: Няма</p>
+                            {% endif %}
                         {% endif %}
 
 
                         {% if object.additional_landmark_info.suitable_for_children %}
                             <p>Подходящо за деца: Да</p>
-                        {% elif not bject.additional_landmark_info.suitable_for_children %}
+                        {% elif not object.additional_landmark_info.suitable_for_children %}
                             <p>Подходящо за деца: Не</p>
                         {% else %}
                             <p>Подходящо за деца: Няма информация</p>
@@ -100,7 +112,7 @@
 
                         {% if object.additional_landmark_info.has_eating_places %}
                             <p>Места за ядене: Да</p>
-                        {% elif not bject.additional_landmark_info.has_eating_places %}
+                        {% elif not object.additional_landmark_info.has_eating_places %}
                             <p>Места за ядене: Не</p>
                         {% else %}
                             <p>Подходящо за деца: Няма информация</p>
@@ -109,7 +121,7 @@
 
                         {% if object.additional_landmark_info.is_ennobled %}
                             <p>Облагородено: Да</p>
-                        {% elif not bject.additional_landmark_info.is_ennobled %}
+                        {% elif not object.additional_landmark_info.is_ennobled %}
                             <p>Облагородено: Не</p>
                         {% else %}
                             <p>Подходящо за деца: Няма информация</p>
@@ -117,21 +129,23 @@
 
                     </div>
                     <div class="transition-right">
-                        {% if object.additional_landmark_info.start_point %}
-                            <p>Начална точка: {{ object.additional_landmark_info.start_point }}</p>
-                        {% else %}
-                            <p>Начална точка: Няма информация</p>
-                        {% endif %}
-
-                        {% if object.additional_landmark_info.end_point %}
-                            <p>Крайна точка: {{ object.additional_landmark_info.end_point }}</p>
-                        {% else %}
-                            <p>Крайна точка: Няма информация</p>
+                        {% if object.additional_landmark_info.is_transition %}
+                            {% if object.additional_landmark_info.start_point %}
+                                <p>Начална точка: {{ object.additional_landmark_info.start_point }}</p>
+                            {% else %}
+                                <p>Начална точка: Няма информация</p>
+                            {% endif %}
+    
+                            {% if object.additional_landmark_info.end_point %}
+                                <p>Крайна точка: {{ object.additional_landmark_info.end_point }}</p>
+                            {% else %}
+                                <p>Крайна точка: Няма информация</p>
+                            {% endif %}
                         {% endif %}
 
                         {% if object.additional_landmark_info.accessible_by_car %}
                             <p>Лесно дотъпно за кола: Да</p>
-                        {% elif not bject.additional_landmark_info.accessible_by_car %}
+                        {% elif not object.additional_landmark_info.accessible_by_car %}
                             <p>Лесно дотъпно за кола: Не</p>
                         {% else %}
                             <p>Лесно дотъпно за кола: Няма информация</p>
@@ -139,19 +153,32 @@
 
                         {% if object.additional_landmark_info.has_parking %}
                             <p><p>Паркинг: Да</p></p>
-                        {% elif not bject.additional_landmark_info.has_parking %}
+                        {% elif not object.additional_landmark_info.has_parking %}
                             <p><p>Паркинг: Не</p>
                         {% else %}
                             <p>Паркинг: Няма информация</p>
                         {% endif %}
 
                         <p>Последно обновено: {{ object.updated_at|date:"m.d.Y" }}</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="transition-card">
+                <div class="transition-availability">
+                    <p>Тип на забележителността</p>
+                </div>
+                
+                <div class="transition-info">
+                    <div class="transition-left">
+
+                    </div>
+                    <div class="transition-right">
 
                     </div>
                 </div>
             </div>
-
-
+        
             <div class="landmark-map">
                 <iframe
                         src="{{ object.map_location }}"

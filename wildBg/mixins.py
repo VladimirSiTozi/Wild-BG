@@ -24,7 +24,6 @@ class SidebarContextMixin:
                     'level': profile.level,
                     'description': profile.description,
                 }
-                print(user.profile.get_full_name())
             except Profile.DoesNotExist:
                 context['user_profile'] = {
                     'full_name': 'Anonymous',

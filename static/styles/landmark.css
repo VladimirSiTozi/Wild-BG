@@ -68,6 +68,9 @@
     margin-bottom: 20px; /* Space below the card */
     text-align: left; /* Align text to the left */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover transition */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically if needed */
+    text-align: center; /* Ensure any text is centered */
 }
 
 /* Highlight transition availability in bold */
@@ -99,7 +102,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between elements for readability */
+    gap: 5px; /* Space between elements for readability */
     color: #555; /* Consistent text color */
 }
 
@@ -124,7 +127,6 @@
     transform: scale(1.06);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 
 
 /* Description of the location */
@@ -276,7 +278,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5); /* Black with opacity */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
 }
 
 /* Modal content */
@@ -447,6 +449,7 @@
     margin-top: -12px;
     margin-bottom: 12px;
 }
+
 /* Responsiveness for mobile devices */
 @media (max-width: 768px) {
     .landmark-form-container {

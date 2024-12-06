@@ -10,3 +10,13 @@ class SearchForm(forms.Form):
         )
     )
 
+
+class SearchLandmarkForm(forms.Form):
+    search_query = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Search by location...',},
+        )
+    )
+

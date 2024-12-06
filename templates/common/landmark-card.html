@@ -1,0 +1,126 @@
+{% load static %}
+
+<div class="landmark-card">
+    <h2 class="landmark-name">{{ landmark.name }}</h2>
+    <h3 class="landmark-location">{{ landmark.location_name }}</h3>
+
+    <a href="{% url 'details-landmark' landmark.pk %}">
+        <div class="post-image">
+            <img src="{{ landmark.image.url }}" alt="Location Picture">
+        </div>
+    </a>
+
+    <div class="landmark-total-stars">
+        <div class="landmark-stars">
+            <div class="rating">
+                {% for i in landmark.full_stars %}
+                    <span class="star">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z"
+                                          fill="#FFD700"/>
+                                </svg>
+                            </span>
+                {% endfor %}
+                {% if landmark.half_star %}
+                    <span class="star half-star">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="half-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1"/>
+                                            <stop offset="50%" style="stop-color:#ccc;stop-opacity:1"/>
+                                        </linearGradient>
+                                        </defs>
+                                    <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z"
+                                          fill="url(#half-gradient)"/>
+                                </svg>
+                            </span>
+                    {# <i class="fa-regular fa-star-half-stroke"></i> #}
+                {% endif %}
+                {% for i in landmark.empty_stars %}
+                    <span class="star empty">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z"
+                                  fill="#ccc"/>
+                        </svg>
+                    </span>
+                {% endfor %}
+                <p class="stars-integer">{{ landmark.average_rating }} ({{ landmark.total_reviews }})</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-description">
+        <p>{{ landmark.description }}</p>
+    </div>
+    <div class="transition-card">
+        <div class="transition-availability">
+            {% if landmark.additional_landmark_info.is_transition %}
+                Преход за достигане на забележителността: Има
+            {% else %}
+                Преход за достигане на забележителността: Няма
+            {% endif %}
+        </div>
+        <div class="transition-info">
+            <div class="transition-left">
+                {% if landmark.level == '1' %}
+                    <p>Ниво на трудност: Лесно</p>
+                {% elif landmark.level == '2' %}
+                    <p>Ниво на трудност: Средно</p>
+                {% elif landmark.level == '3' %}
+                    <p>Ниво на трудност: Трудно</p>
+                {% else %}
+                    <p>Ниво на трудност: Много Трудно</p>
+                {% endif %}
+            </div>
+            <div class="transition-right">
+
+                {% if landmark.additional_landmark_info.is_ennobled %}
+                    <p>Облагородено: Да</p>
+                {% elif not bject.additional_landmark_info.is_ennobled %}
+                    <p>Облагородено: Не</p>
+                {% else %}
+                    <p>Подходящо за деца: Няма информация</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <div class="post-see-more">
+            <button class="btn landmark-btn" onclick="location.href='{% url 'details-landmark' landmark.pk %}'">See more
+                information
+            </button>
+        </div>
+    </div>
+    <div class="post-location-date">
+        <p class="post-date">Last updated: {{ landmark.created_at }}</p>
+    </div>
+
+    <div class="post-info">
+        <p class="post-likes-count">{{ landmark.likes.count }} Likes</p>
+        <p class="post-comments-count">{{ landmark.visits.count }} Visits</p>
+    </div>
+    <div class="post-actions">
+        <button class="btn landmark-btn" onclick="location.href='{% url 'like-landmark' landmark.pk %}'">
+            {% if landmark.has_liked %}
+                Liked <i class="fa-solid fa-heart" style="color: #FF0000;"></i>  <!-- Liked -->
+            {% else %}
+                Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
+            {% endif %}
+        </button>
+        {% if request.user.pk == landmark.user.profile.pk %}
+            <button class="btn landmark-btn" onclick="location.href='{% url 'home' %}'">Edit Post</button>
+        {% endif %}
+        <button class="btn share-btn">Share <i class="fa-regular fa-share-from-square"></i></button>
+        <button class="btn landmark-btn" onclick="location.href='{% url 'visit-landmark' landmark.pk %}'">
+            {% if object.has_visited %}
+                Visited <i class="fa-solid fa-person-hiking" style="color: #FFFF00;"></i>
+            {% else %}
+                Visit <i class="fa-solid fa-person-hiking"></i>
+            {% endif %}
+        </button>
+    </div>
+
+</div>
