@@ -18,7 +18,7 @@
             <li><a href="{% url 'login' %}">Login</a></li>
             <li><a href="{% url 'register' %}">Register</a></li>
         {% else %}
-            <li><a href="#">New Post</a></li>
+            <li><a href="{% url 'post-add' %}">New Post</a></li>
             <li><a href="{% url 'add-landmark' %}">New Landmark</a></li>
             <li><a href="{% url 'profile-details' request.user.pk %}">Profile</a></li>
             <li>

@@ -1,0 +1,90 @@
+/* General styling for form-group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Margin between form elements inside a form-group */
+.form-group label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input,
+.form-group select,
+.form-group button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 40%;
+    box-sizing: border-box; /* Ensure padding is inside the width */
+}
+
+/* Add some padding to the tagged people list */
+#tagged_people_list {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Styling each tagged person container */
+.tagged-person {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    background-color: #e9f7ef;
+    border-radius: 4px;
+}
+
+/* Add some padding to the remove button for better appearance */
+.remove-btn {
+    margin-left: 10px;
+    padding: 4px 8px;
+    background-color: #ff6b6b;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.remove-btn:hover {
+    background-color: #e60000;
+}
+
+/* Styling for the add button to have better appearance */
+#add_tagged_person {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-top: 10px;
+}
+
+#add_tagged_person:hover {
+    background-color: #218838;
+}
+
+/* Adjusting small text for instruction */
+.form-group small {
+    display: block;
+    margin-top: 10px;
+}
+
+/* Styling the create post button for consistency */
+.form-group .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.form-group .btn:hover {
+    background-color: #0056b3;
+}

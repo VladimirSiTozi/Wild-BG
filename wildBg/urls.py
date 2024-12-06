@@ -19,8 +19,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from wildBg.post.views import search_users
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('search-users/', search_users, name='search-users'),
     path('', include('wildBg.common.urls')),
     path('accounts/', include('wildBg.accounts.urls')),
     path('landmark/', include('wildBg.landmark.urls')),

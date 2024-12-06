@@ -1,0 +1,58 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="my-posts-header">
+        <h3>Create New Post</h3>
+    </div>
+
+    <div class="post-card">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h3>Post Information</h3>
+{#            {{ form }}#}
+
+            <div class="form-group">
+                <label for="id_location">Location:</label>
+                <select id="id_location" name="location">
+                    <option value="">-- Select a Landmark --</option>
+                    {% for landmark in landmarks %}
+                        <option value="{{ landmark.id }}">{{ landmark.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="id_post_image">Image:</label>
+                <input type="file" id="id_post_image" name="post_image">
+            </div>
+
+            <div class="form-group">
+                <label for="id_description">Description:</label>
+                <textarea id="id_description" name="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id_tagged_people">Tagged People:</label>
+                <input type="text" id="search_tagged_people" class="form-control" placeholder="Search for people...">
+                <select id="id_tagged_people" class="form-control">
+                    <!-- Options will be dynamically added here -->
+                </select>
+                <button type="button" id="add_tagged_person" class="btn">Add Person</button>
+                <div id="tagged_people_list" class="tagged-list">
+                    <!-- Added tagged people will be displayed here -->
+                </div>
+                <input type="hidden" id="id_tagged_people_hidden" name="tagged_people">
+                <small>Search and add multiple people to tag them in the post.</small>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Create Post</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+<script src="{% static 'js/script-post-create-form.js' %}"></script>
+    
+{% endblock %}

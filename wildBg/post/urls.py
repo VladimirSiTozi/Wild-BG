@@ -4,6 +4,7 @@ from wildBg.post import views
 from wildBg.post.views import like_post_func
 
 urlpatterns = [
+    path('add/', views.PostAddView.as_view(), name='post-add'),
     path('<int:pk>/', include([
         path('', views.PostDetailView.as_view(), name='post-detail'),
         path('like/', like_post_func, name='post-like'),

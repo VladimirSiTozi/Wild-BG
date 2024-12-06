@@ -1,14 +1,44 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.checks import messages
+from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 
-from wildBg.landmark.models import Like
+from wildBg.accounts.models import Profile, AppUser
+from wildBg.landmark.models import Like, Landmark
 from wildBg.mixins import SidebarContextMixin
-from wildBg.post.forms import PostCommentForm, ReplyPostCommentForm
+from wildBg.post.forms import PostCommentForm, ReplyPostCommentForm, PostAddForm
 from wildBg.post.models import Post, PostLike, PostComment
 
 from django.shortcuts import get_object_or_404
+
+
+class PostAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
+    model = Post
+    form_class = PostAddForm
+    template_name = 'post/post-create.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add landmarks to the context
+        context['landmarks'] = Landmark.objects.all()
+        context['tagged_people'] = AppUser.objects.all()
+        return context
+
+    def form_valid(self, form):
+        # Associate the post with the logged-in user
+        post = form.save(commit=False)
+        post.author = self.request.user
+        post.save()
+        form.save_m2m()  # Save many-to-many relationships, if any
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirect to a success page, e.g., details view for the created post
+        return reverse_lazy('post-detail', kwargs={'pk': self.object.pk})
 
 
 class PostDetailView(SidebarContextMixin, DetailView):
@@ -107,3 +137,20 @@ def add_reply(request, pk: int):
             reply.save()
 
     return redirect(request.META.get('HTTP_REFERER', f'#{pk}'))
+
+
+@login_required
+def search_users(request):
+    if 'query' in request.GET:
+        query = request.GET.get('query', '').strip()
+        users = Profile.objects.filter(
+            Q(first_name__icontains=query) | Q(last_name__icontains=query)
+        ).exclude(
+            Q(first_name__isnull=True) & Q(last_name__isnull=True)
+        )
+        users_data = [
+            {'id': user.user.id, 'name': user.get_full_name()}
+            for user in users
+        ]
+        return JsonResponse(users_data, safe=False)
+    return JsonResponse([], safe=False)

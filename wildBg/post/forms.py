@@ -3,10 +3,10 @@ from django import forms
 from wildBg.post.models import PostComment, Post, ReplyPostComment
 
 
-class PostBaseForm(forms.Form):
+class PostBaseForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ('user', )
+        exclude = ('author', )
 
 
 class PostAddForm(PostBaseForm):
