@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     "wildBg.accounts.apps.AccountsConfig",
     "wildBg.common.apps.CommonConfig",
     "wildBg.post.apps.PostConfig",
-    "wildBg.reviews.apps.ReviewsConfig",
     "wildBg.landmark.apps.LandmarkConfig"
 ]
 

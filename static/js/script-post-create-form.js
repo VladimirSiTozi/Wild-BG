@@ -1,82 +1,90 @@
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('search_tagged_people');
-        const taggedPeopleSelect = document.getElementById('id_tagged_people');
-        const addTaggedPersonButton = document.getElementById('add_tagged_person');
-        const taggedPeopleList = document.getElementById('tagged_people_list');
-        const hiddenTaggedPeopleInput = document.getElementById('id_tagged_people_hidden');
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('search_tagged_people');
+    const taggedPeopleSelect = document.getElementById('id_tagged_people');
+    const addTaggedPersonButton = document.getElementById('add_tagged_person');
+    const taggedPeopleList = document.getElementById('tagged_people_list');
+    const hiddenTaggedPeopleInput = document.getElementById('id_tagged_people_hidden');
 
-        let taggedPeopleIds = [];  // Array to keep track of added user IDs
+    // Parse pre-rendered tagged user IDs from the hidden input
+    let taggedPeopleIds = hiddenTaggedPeopleInput.value
+        ? hiddenTaggedPeopleInput.value.split(',').filter(Boolean) // Parse existing IDs
+        : [];
 
-        // Search Users and Update Select Options
-        searchInput.addEventListener('input', function() {
-            const query = searchInput.value;
+    function updateHiddenInput() {
+        hiddenTaggedPeopleInput.value = taggedPeopleIds.join(',');
+    }
 
-            if (query.length >= 2) {
-                fetch(`/search-users/?query=${query}`, {
-                    method: 'GET',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Clear existing options
-                    taggedPeopleSelect.innerHTML = '';
+    function addPersonToTaggedList(userId, userName) {
+        if (taggedPeopleIds.includes(userId)) {
+            alert(`${userName} is already tagged.`);
+            return;
+        }
 
-                    // Add new options from the fetched data
-                    data.forEach(user => {
+        // Add the user ID to the array and update the hidden input
+        taggedPeopleIds.push(userId);
+        updateHiddenInput();
+
+        // Create a new div for the tagged person
+        const taggedPersonDiv = document.createElement('div');
+        taggedPersonDiv.className = 'tagged-person';
+        taggedPersonDiv.dataset.userId = userId;
+        taggedPersonDiv.textContent = userName;
+
+        // Add a "Remove" button
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
+        removeButton.className = 'remove-btn';
+        removeButton.addEventListener('click', function () {
+            taggedPeopleIds = taggedPeopleIds.filter((id) => id !== userId);
+            updateHiddenInput();
+            taggedPersonDiv.remove();
+        });
+
+        taggedPersonDiv.appendChild(removeButton);
+        taggedPeopleList.appendChild(taggedPersonDiv);
+    }
+
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value;
+
+        if (query.length >= 2) {
+            fetch(`/search-users/?query=${query}`, {
+                method: 'GET',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    taggedPeopleSelect.innerHTML = ''; // Clear existing options
+
+                    // Populate the dropdown with fetched users
+                    data.forEach((user) => {
                         const option = document.createElement('option');
                         option.value = user.id;
                         option.textContent = user.name;
                         taggedPeopleSelect.appendChild(option);
                     });
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            } else {
-                // Clear the options if the input query is too short
-                taggedPeopleSelect.innerHTML = '';
-            }
-        });
-
-        // Add selected person to tagged people list
-        addTaggedPersonButton.addEventListener('click', function() {
-            const selectedOption = taggedPeopleSelect.selectedOptions[0];
-            if (selectedOption && !taggedPeopleIds.includes(selectedOption.value)) {
-                // Add selected person to tagged people array
-                taggedPeopleIds.push(selectedOption.value);
-
-                // Update the hidden input value (comma-separated user IDs)
-                hiddenTaggedPeopleInput.value = taggedPeopleIds.join(',');
-
-                // Add the person to the tagged people list
-                const taggedPersonDiv = document.createElement('div');
-                taggedPersonDiv.className = 'tagged-person';
-                taggedPersonDiv.dataset.userId = selectedOption.value;
-                taggedPersonDiv.textContent = selectedOption.textContent;
-
-                // Add a remove button
-                const removeButton = document.createElement('button');
-                removeButton.type = 'button';
-                removeButton.textContent = 'Remove';
-                removeButton.className = 'remove-btn';
-                removeButton.addEventListener('click', function() {
-                    // Remove person from tagged people array
-                    taggedPeopleIds = taggedPeopleIds.filter(id => id !== selectedOption.value);
-                    hiddenTaggedPeopleInput.value = taggedPeopleIds.join(',');
-
-                    // Remove the person from the tagged people list
-                    taggedPersonDiv.remove();
-                });
-
-                taggedPersonDiv.appendChild(removeButton);
-                taggedPeopleList.appendChild(taggedPersonDiv);
-            }
-        });
+                .catch((error) => console.error('Error fetching users:', error));
+        } else {
+            taggedPeopleSelect.innerHTML = ''; // Clear options if the input is too short
+        }
     });
+
+    addTaggedPersonButton.addEventListener('click', function () {
+        const selectedOption = taggedPeopleSelect.selectedOptions[0];
+        if (!selectedOption) {
+            alert('Please select a person to tag.');
+            return;
+        }
+
+        const userId = selectedOption.value;
+        const userName = selectedOption.textContent;
+
+        addPersonToTaggedList(userId, userName);
+
+        // Clear dropdown and search input after adding a user
+        taggedPeopleSelect.selectedIndex = -1;
+        searchInput.value = '';
+    });
+});

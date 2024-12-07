@@ -1,16 +1,16 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.checks import messages
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from wildBg.accounts.models import Profile, AppUser
 from wildBg.landmark.models import Like, Landmark
 from wildBg.mixins import SidebarContextMixin
-from wildBg.post.forms import PostCommentForm, ReplyPostCommentForm, PostAddForm
+from wildBg.post.forms import PostCommentForm, ReplyPostCommentForm, PostAddForm, PostEditForm
 from wildBg.post.models import Post, PostLike, PostComment
 
 from django.shortcuts import get_object_or_404
@@ -89,6 +89,38 @@ class PostDetailView(SidebarContextMixin, DetailView):
         context['tagged_people'] = post.tagged_people.all()
 
         return context
+
+
+class PostEditView(LoginRequiredMixin, UserPassesTestMixin, SidebarContextMixin, UpdateView):
+    model = Post
+    template_name = 'post/post-edit.html'
+    form_class = PostEditForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['landmarks'] = Landmark.objects.all()
+        context['tagged_people'] = [
+            {
+                'id': person.id,
+                'full_name': Profile.objects.get(user=person).get_full_name()
+            }
+            for person in self.object.tagged_people.all()
+        ]
+        return context
+
+    def form_valid(self, form):
+        # Handle additional logic if necessary
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        return self.request.user == post.author
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'post-detail',
+            kwargs={'pk': self.object.pk}
+        )
 
 
 @login_required

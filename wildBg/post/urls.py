@@ -7,6 +7,7 @@ urlpatterns = [
     path('add/', views.PostAddView.as_view(), name='post-add'),
     path('<int:pk>/', include([
         path('', views.PostDetailView.as_view(), name='post-detail'),
+        path('edit/', views.PostEditView.as_view(), name='post-edit'),
         path('like/', like_post_func, name='post-like'),
     ])),
 ]
