@@ -134,7 +134,6 @@ def delete_post(request, pk: int):
     return redirect('home')
 
 
-
 @login_required
 def like_post_func(request, pk: int):
     liked_object = PostLike.objects.filter(
