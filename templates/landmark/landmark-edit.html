@@ -106,13 +106,13 @@
                 <input type="checkbox" id="id_has_parking" name="has_parking"
                        {% if object.additional_landmark_info.has_parking %}checked{% endif %}>
             </div>
-                
+
             <div class="form-buttons">
                 <button type="submit" class="btn">Update Landmark</button>
                 <a href="{% url 'delete-landmark' object.pk %}" class="btn btn-danger">Delete Landmark</a>
             </div>
         </div>
     </form>
-    
+
 {% endblock %}
 

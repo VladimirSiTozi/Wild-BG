@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.checks import messages
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -121,6 +121,18 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, SidebarContextMixin,
             'post-detail',
             kwargs={'pk': self.object.pk}
         )
+
+
+@login_required
+def delete_post(request, pk: int):
+    post = Post.objects.get(pk=pk)
+
+    if request.user == post.author:
+        post.delete()
+    else:
+        raise Http404
+    return redirect('home')
+
 
 
 @login_required
