@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.checks import messages
@@ -9,12 +10,16 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from pyperclip import copy
 
 from wildBg.accounts.models import Profile, AppUser
+from wildBg.accounts.utils import give_profile_points
 from wildBg.landmark.models import Like, Landmark
 from wildBg.mixins import SidebarContextMixin
 from wildBg.post.forms import PostCommentForm, ReplyPostCommentForm, PostAddForm, PostEditForm
 from wildBg.post.models import Post, PostLike, PostComment
 
 from django.shortcuts import get_object_or_404
+
+
+UserModel = get_user_model()
 
 
 class PostAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
@@ -35,6 +40,9 @@ class PostAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
         post.author = self.request.user
         post.save()
         form.save_m2m()  # Save many-to-many relationships, if any
+
+        give_profile_points(self.request.user, 'post')
+
         return super().form_valid(form)
 
     def get_success_url(self):

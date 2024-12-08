@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 from pyperclip import copy
 
+from wildBg.accounts.utils import give_profile_points
 from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm, \
     AdditionalLandmarkInfoEditForm
 from wildBg.landmark.models import Landmark, Review, Like, Visit
@@ -50,6 +51,8 @@ class LandmarkAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
         additional_info = additional_info_form.save(commit=False)
         additional_info.landmark = landmark
         additional_info.save()
+
+        give_profile_points(self.request.user, 'post')
 
         return super().form_valid(landmark_form)
 
