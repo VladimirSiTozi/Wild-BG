@@ -46,13 +46,15 @@ class Profile(models.Model):
     )
 
     points = models.IntegerField(
-        default=0
+        default=0,
+        blank=True,
     )
 
     level = models.CharField(
         max_length=30,
         choices=UserLevelChoices.choices,
-        default=UserLevelChoices.BEGINNER
+        default=UserLevelChoices.BEGINNER,
+        blank=True
     )
 
     landmarks_visited = models.ManyToManyField(

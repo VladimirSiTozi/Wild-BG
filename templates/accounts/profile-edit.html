@@ -1,0 +1,69 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="middle-container">
+        <form method="post" enctype="multipart/form-data" class="profile-edit-form">
+            {% csrf_token %}
+{#            {{ form }}#}
+            <div class="profile-card">
+                <!-- Background image section -->
+                <div class="profile-background">
+                    {% if form.background_image.value %}
+                        <img src="{{ form.background_image.value.url }}" alt="Background Image">
+                    {% else %}
+                        <img src="{% static 'images/background-image.avif' %}" alt="Background Image">
+                    {% endif %}
+                    <div class="form-group">
+                        {{ form.background_image.label_tag }}
+                        {{ form.background_image }}
+                    </div>
+                </div>
+
+                <!-- Profile picture and name -->
+                <div class="profile-info">
+                    <div class="profile-pic">
+                        {% if form.profile_picture.value %}
+                            <img src="{{ form.profile_picture.value.url }}" alt="Profile Picture">
+                        {% else %}
+                            <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Profile Picture">
+                        {% endif %}
+                        <div class="form-group">
+                            {{ form.profile_picture.label_tag }}
+                            {{ form.profile_picture }}
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="form-group">
+                            {{ form.first_name.label_tag }}
+                            {{ form.first_name }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.last_name.label_tag }}
+                            {{ form.last_name }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.date_of_birth.label_tag }}
+                            {{ form.date_of_birth }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

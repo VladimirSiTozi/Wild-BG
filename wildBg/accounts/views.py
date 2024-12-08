@@ -3,10 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView, DeleteView
+from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
 
-from wildBg.accounts.forms import AppUserCreationForm
+from wildBg.accounts.forms import AppUserCreationForm, ProfileEditForm
 from wildBg.accounts.models import Profile, AppUser
+from wildBg.landmark.models import Landmark
 from wildBg.mixins import SidebarContextMixin
 
 UserModel = get_user_model()
@@ -19,6 +20,12 @@ class AppUserLoginView(LoginView):
 class ProfileDetailView(SidebarContextMixin, DetailView):
     model = UserModel
     template_name = 'accounts/profile-details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['places_visited'] = Landmark.objects.filter(visits__user=self.request.user).distinct()
+
+        return context
 
 
 class AppUserRegisterView(CreateView):
@@ -55,3 +62,16 @@ class ProfileDeleteView(SidebarContextMixin, LoginRequiredMixin, UserPassesTestM
 
         # Return the response for the DeleteView
         return super().delete(request, *args, **kwargs)
+
+
+class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Profile
+    form_class = ProfileEditForm
+    template_name = 'accounts/profile-edit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('profile-details', kwargs={'pk': self.object.pk})
+
+    def test_func(self):
+        profile = self.get_object()
+        return self.request.user == profile.user

@@ -159,11 +159,11 @@ class LandmarkEditView(LoginRequiredMixin, UserPassesTestMixin, SidebarContextMi
 
 
 @login_required
-def delete_photo(request, pk: int):
-    photo = Landmark.objects.get(pk=pk)
+def delete_landmark(request, pk: int):
+    landmark = Landmark.objects.get(pk=pk)
 
-    if request.user == photo.user:
-        photo.delete()
+    if request.user == landmark.user:
+        landmark.delete()
     else:
         raise Http404
     return redirect('home')

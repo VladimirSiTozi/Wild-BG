@@ -46,9 +46,11 @@
             <div class="profile-places">
                 <h3>Places Visited</h3>
                 <ul class="places-list">
-                    <li>Paris, France</li>
-                    <li>New York, USA</li>
-                    <li>Tokyo, Japan</li>
+                    {% for place in places_visited %}
+                        <li>{{ place.name }}</li>
+                    {% empty %}
+                        <li>No information</li>
+                    {% endfor %}
                 </ul>
             </div>
 
