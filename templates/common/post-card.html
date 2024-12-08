@@ -15,9 +15,13 @@
             </a>
         </div>
         <div class="post-location-date">
+            {% if post.location %}
             <a href="{% url 'details-landmark' post.location.pk %}">
                 <p class="post-location">Location: {{ post.location.name }} {{ post.location.location_name }}</p>
             </a>
+            {% else %}
+                <p class="post-location">Nowhere/Anywhere</p>
+            {% endif %}
             <p class="post-date">{{ post.created_at }}</p>
         </div>
     </div>

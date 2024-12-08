@@ -1,6 +1,10 @@
 from django import forms
+from django.contrib.auth import get_user_model
 
 from wildBg.post.models import PostComment, Post, ReplyPostComment
+
+
+UserModel = get_user_model()
 
 
 class PostBaseForm(forms.ModelForm):
@@ -30,6 +34,12 @@ class PostBaseForm(forms.ModelForm):
                 'required': True
             }),
         }
+
+    tagged_people = forms.ModelMultipleChoiceField(
+        queryset=UserModel.objects.all(),
+        required=False,  # Make the field optional
+        widget=forms.HiddenInput()  # Process via hidden input in the template
+    )
 
 
 class PostAddForm(PostBaseForm):
