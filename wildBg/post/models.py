@@ -4,6 +4,8 @@ from django.db import models
 from wildBg.accounts.models import AppUser
 from wildBg.landmark.models import Landmark
 
+UserModel = get_user_model()
+
 
 class Post(models.Model):
     author = models.ForeignKey(
@@ -37,6 +39,10 @@ class Post(models.Model):
         auto_now_add=True,
     )
 
+    def __str__(self):
+        location_name = self.location.name if self.location else "No Location"
+        return f"Post by {self.author.email} at {location_name}"
+
 
 class PostComment(models.Model):
     post = models.ForeignKey(
@@ -57,7 +63,10 @@ class PostComment(models.Model):
     )
 
     def __str__(self):
-        return f'Comment by {self.author.first_name} on {self.created_at.strftime("%Y-%m-%d")}'
+        # Access the author's profile safely
+        profile = getattr(self.author, 'profile', None)
+        first_name = profile.first_name if profile and profile.first_name else 'Anonymous'
+        return f'Comment by {first_name} on {self.created_at.strftime("%Y-%m-%d")}'
 
 
 class ReplyPostComment(models.Model):
@@ -79,10 +88,10 @@ class ReplyPostComment(models.Model):
     )
 
     def __str__(self):
-        return f'Reply by {self.author.first_name} on {self.created_at.strftime("%Y-%m-%d")}'
-
-
-UserModel = get_user_model()
+        # Access the author's profile safely
+        profile = getattr(self.author, 'profile', None)
+        first_name = profile.first_name if profile and profile.first_name else 'Anonymous'
+        return f'Reply by {first_name} on {self.created_at.strftime("%Y-%m-%d")}'
 
 
 class PostLike(models.Model):
@@ -96,3 +105,10 @@ class PostLike(models.Model):
         UserModel,
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        user_email = self.user.email
+        post_description = (self.to_post.description[:30] + "...") if len(
+            self.to_post.description) > 30 else self.to_post.description
+        return f"{user_email} liked: {post_description}"
+
