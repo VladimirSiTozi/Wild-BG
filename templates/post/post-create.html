@@ -11,26 +11,23 @@
             {% csrf_token %}
 
             <h3>Post Information</h3>
-{#            {{ form }}#}
 
             <div class="form-group">
-                <label for="id_location">Location:</label>
-                <select id="id_location" name="location">
-                    <option value="">-- Select a Landmark --</option>
-                    {% for landmark in landmarks %}
-                        <option value="{{ landmark.id }}">{{ landmark.name }}</option>
-                    {% endfor %}
-                </select>
+                {{ form.location.label_tag }}
+                {{ form.location }}
+                {{ form.location.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_post_image">Image:</label>
-                <input type="file" id="id_post_image" name="post_image">
+                {{ form.post_image.label_tag }}
+                {{ form.post_image }}
+                {{ form.post_image.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_description">Description:</label>
-                <textarea id="id_description" name="description" required></textarea>
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {{ form.description.errors }}
             </div>
 
             <div class="form-group">

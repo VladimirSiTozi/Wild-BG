@@ -6,113 +6,116 @@
         <h3>Edit Landmark</h3>
     </div>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="landmark-card">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-        <div class="landmark-card">
-
+            <h3>Landmark Information</h3>
             <div class="form-group">
-                <label for="id_name">Name:</label>
-                <input type="text" id="id_name" name="name" maxlength="100" required value="{{ object.name }}">
+                {{ landmark_form.name.label_tag }}
+                {{ landmark_form.name }}
+                {{ landmark_form.name.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_location_name">Location Name:</label>
-                <input type="text" id="id_location_name" name="location_name" maxlength="100" required
-                       value="{{ object.location_name }}">
+                {{ landmark_form.location_name.label_tag }}
+                {{ landmark_form.location_name }}
+                {{ landmark_form.location_name.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_description">Description:</label>
-                <textarea id="id_description" name="description">{{ object.description }}</textarea>
+                {{ landmark_form.description.label_tag }}
+                {{ landmark_form.description }}
+                {{ landmark_form.description.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_image">Image:</label>
-                <input type="file" id="id_image" name="image">
-                {% if object.image %}
-                    <p>Current Image: <a href="{{ object.image.url }}">{{ object.image.name }}</a></p>
-                {% endif %}
+                {{ landmark_form.image.label_tag }}
+                {{ landmark_form.image }}
+                {{ landmark_form.image.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_map_location">Map Location:</label>
-                <textarea id="id_map_location" name="map_location"
-                          placeholder="<iframe src=...>">{{ object.map_location }}"</textarea>
+                {{ landmark_form.map_location.label_tag }}
+                {{ landmark_form.map_location }}
+                {{ landmark_form.map_location.errors }}
+            </div>
+
+            <div class="form-group">
+                {{ landmark_form.level.label_tag }}
+                {{ landmark_form.level }}
+                {{ landmark_form.level.errors }}
             </div>
 
             <h3>Additional Landmark Information</h3>
 
             <div class="form-group">
-                <label for="id_is_transition">Is Transition:</label>
-                <input type="checkbox" id="id_is_transition" name="is_transition"
-                       {% if object.additional_landmark_info.is_transition %}checked{% endif %}>
+                {{ additional_info_form.is_transition.label_tag }}
+                {{ additional_info_form.is_transition }}
+                {{ additional_info_form.is_transition.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_duration">Duration:</label>
-                <input type="text" id="id_duration" name="duration" placeholder="e.g., 1:30:00 for 1 hour 30 minutes"
-                       value="{{ object.additional_landmark_info.duration }}">
+                {{ additional_info_form.duration.label_tag }}
+                {{ additional_info_form.duration }}
+                {{ additional_info_form.duration.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_is_accessible">Is Accessible:</label>
-                <input type="checkbox" id="id_is_accessible" name="is_accessible"
-                       {% if object.additional_landmark_info.is_accessible %}checked{% endif %}>
+                {{ additional_info_form.is_accessible.label_tag }}
+                {{ additional_info_form.is_accessible }}
+                {{ additional_info_form.is_accessible.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_distance_km">Distance (km):</label>
-                <input type="number" step="0.1" id="id_distance_km" name="distance_km" value="{{ object.additional_landmark_info.distance_km }}">
+                {{ additional_info_form.distance_km.label_tag }}
+                {{ additional_info_form.distance_km }}
+                {{ additional_info_form.distance_km.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_suitable_for_children">Suitable for Children:</label>
-                <input type="checkbox" id="id_suitable_for_children" name="suitable_for_children"
-                       {% if object.additional_landmark_info.suitable_for_children %}checked{% endif %}>
+                {{ additional_info_form.suitable_for_children.label_tag }}
+                {{ additional_info_form.suitable_for_children }}
+                {{ additional_info_form.suitable_for_children.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_has_eating_places">Has Eating Places:</label>
-                <input type="checkbox" id="id_has_eating_places" name="has_eating_places"
-                       {% if object.additional_landmark_info.has_eating_places %}checked{% endif %}>
+                {{ additional_info_form.has_eating_places.label_tag }}
+                {{ additional_info_form.has_eating_places }}
+                {{ additional_info_form.has_eating_places.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_is_ennobled">Is Ennobled:</label>
-                <input type="checkbox" id="id_is_ennobled" name="is_ennobled"
-                       {% if object.additional_landmark_info.is_ennobled %}checked{% endif %}>
+                {{ additional_info_form.is_ennobled.label_tag }}
+                {{ additional_info_form.is_ennobled }}
+                {{ additional_info_form.is_ennobled.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_start_point">Start Point:</label>
-                <input type="text" id="id_start_point" name="start_point" maxlength="50"
-                       value="{{ object.additional_landmark_info.start_point }}">
+                {{ additional_info_form.start_point.label_tag }}
+                {{ additional_info_form.start_point }}
+                {{ additional_info_form.start_point.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_end_point">End Point:</label>
-                <input type="text" id="id_end_point" name="end_point" maxlength="50" value="{{ object.additional_landmark_info.end_point }}">
+                {{ additional_info_form.end_point.label_tag }}
+                {{ additional_info_form.end_point }}
+                {{ additional_info_form.end_point.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_accessible_by_car">Accessible by Car:</label>
-                <input type="checkbox" id="id_accessible_by_car" name="accessible_by_car"
-                       {% if object.additional_landmark_info.accessible_by_car %}checked{% endif %}>
+                {{ additional_info_form.accessible_by_car.label_tag }}
+                {{ additional_info_form.accessible_by_car }}
+                {{ additional_info_form.accessible_by_car.errors }}
             </div>
 
             <div class="form-group">
-                <label for="id_has_parking">Has Parking:</label>
-                <input type="checkbox" id="id_has_parking" name="has_parking"
-                       {% if object.additional_landmark_info.has_parking %}checked{% endif %}>
+                {{ additional_info_form.has_parking.label_tag }}
+                {{ additional_info_form.has_parking }}
+                {{ additional_info_form.has_parking.errors }}
             </div>
-
-            <div class="form-buttons">
-                <button type="submit" class="btn">Update Landmark</button>
-                <a href="{% url 'delete-landmark' object.pk %}" class="btn btn-danger">Delete Landmark</a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
 {% endblock %}
 

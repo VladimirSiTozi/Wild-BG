@@ -8,6 +8,29 @@ class PostBaseForm(forms.ModelForm):
         model = Post
         exclude = ('author', )
 
+        labels = {
+            'location': 'Location',
+            'post_image': 'Image',
+            'description': 'Description',
+            'tagged_people': 'Tagged People',
+        }
+
+        widgets = {
+            'location': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': '-- Select a Landmark --'
+            }),
+            'post_image': forms.ClearableFileInput(attrs={
+                'class': 'form-control-file',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Enter a description of your post...',
+                'required': True
+            }),
+        }
+
 
 class PostAddForm(PostBaseForm):
     pass

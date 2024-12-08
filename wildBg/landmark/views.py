@@ -114,6 +114,7 @@ class LandmarkDetailsView(SidebarContextMixin, DetailView):
 
 class LandmarkEditView(LoginRequiredMixin, UserPassesTestMixin, SidebarContextMixin, UpdateView):
     model = Landmark
+    form_class = LandmarkEditForm
     template_name = 'landmark/landmark-edit.html'
 
     def get(self, request, *args, **kwargs):

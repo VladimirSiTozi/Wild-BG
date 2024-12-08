@@ -22,3 +22,7 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ('user', )
+        widgets = {
+            'date_of_birth': forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Write something about you...'})
+        }
