@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Avg, Count
 from django.http import JsonResponse, Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
+from pyperclip import copy
 
 from wildBg.landmark.forms import LandmarkAddForm, LandmarkEditForm, AdditionalLandmarkInfoCreateForm, ReviewForm, \
     AdditionalLandmarkInfoEditForm
@@ -217,3 +218,10 @@ def visit_func(request, pk: int):
         visit.save()
 
     return redirect(request.META.get('HTTP_REFERER') + f'#{pk}')
+
+
+def share_landmark_functionality(request, pk: int):
+    copy(request.META.get('HTTP_HOST') + resolve_url('details-landmark', pk))
+    # HTTP_HOST = http://127.0.0.1/   + landmark/<int:pk>/ => http://127.0.0.1/landamrk/<int:pk>/
+
+    return redirect(request.META.get('HTTP_REFERER'))

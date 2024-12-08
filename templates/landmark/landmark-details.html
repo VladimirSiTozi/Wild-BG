@@ -16,7 +16,7 @@
         <div class="landmark-card">
             <h2 class="landmark-name">{{ object.name }}</h2>
             <h3 class="landmark-location">{{ object.location_name }}</h3>
-        
+
             <div class="landmark-image">
                 <img src="{{ object.image.url }}" alt="Location Picture">
             </div>
@@ -76,23 +76,23 @@
                 </div>
                 <div class="transition-info">
                     <div class="transition-left">
-                        {% if object.level == '1' %}
+                        {% if landmark.level == 'Easy' %}
                             <p>Ниво на трудност: Лесно</p>
-                        {% elif landmark.level == '2' %}
+                        {% elif landmark.level == 'Medium' %}
                             <p>Ниво на трудност: Средно</p>
-                        {% elif landmark.level == '3' %}
+                        {% elif landmark.level == 'Hard' %}
                             <p>Ниво на трудност: Трудно</p>
                         {% else %}
                             <p>Ниво на трудност: Много Трудно</p>
                         {% endif %}
-                    
+
                         {% if object.additional_landmark_info.is_transition %}
                             {% if object.additional_landmark_info.duration %}
                                 <p>Времетраене: {{ object.additional_landmark_info.duration|format_duration }} </p>
                             {% else %}
                                 <p>Времетраене: Няма информация</p>
                             {% endif %}
-    
+
                             {% if object.additional_landmark_info.distance_km %}
                                 <p>Километри: {{ object.additional_landmark_info.distance_km }} км</p>
                             {% else %}
@@ -135,7 +135,7 @@
                             {% else %}
                                 <p>Начална точка: Няма информация</p>
                             {% endif %}
-    
+
                             {% if object.additional_landmark_info.end_point %}
                                 <p>Крайна точка: {{ object.additional_landmark_info.end_point }}</p>
                             {% else %}
@@ -163,12 +163,12 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="transition-card">
                 <div class="transition-availability">
                     <p>Тип на забележителността</p>
                 </div>
-                
+
                 <div class="transition-info">
                     <div class="transition-left">
 
@@ -178,7 +178,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="landmark-map">
                 <iframe
                         src="{{ object.map_location }}"
@@ -197,13 +197,15 @@
 
             <div class="landmark-actions">
                 <button class="btn landmark-btn" onclick="location.href='{% url 'like-landmark' landmark.pk %}'">
-                        {% if object.has_liked %}
-                            Liked <i class="fa-solid fa-heart" style="color: #FF0000;"></i>  <!-- Liked -->
-                        {% else %}
-                            Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
-                        {% endif %}
+                    {% if object.has_liked %}
+                        Liked <i class="fa-solid fa-heart" style="color: #FF0000;"></i>  <!-- Liked -->
+                    {% else %}
+                        Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
+                    {% endif %}
                 </button>
                 <button id="addReviewBtn" class="btn landmark-btn">Add review</button>
+                <button class="btn landmark-btn" onclick="location.href='{% url 'share-landmark' landmark.id %}'">Share
+                    <i class="fa-regular fa-share-from-square"></i></button>
                 <button class="btn landmark-btn" onclick="location.href='{% url 'visit-landmark' landmark.pk %}'">
                     {% if object.has_visited %}
                         Visited <i class="fa-solid fa-person-hiking" style="color: #FFFF00;"></i>
@@ -252,37 +254,37 @@
             <!-- reviews -->
             {% for review in reviews %}
                 {% if review.comment == '' %}
-                    
+
                 {% else %}
-                <div class="landmark-review">
-                    <div class="landmark-comment">
-                        <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image"
-                             class="comment-author-img">
-                        <div class="comment-content">
-                            <p class="comment-author">
-                                {% if review.user.profile.get_full_name == 'Anonymous'%}
-                                    <strong>{{ review.user.profile.get_full_name }}</strong>
-                                {% else %}
-                                <a href="{% url 'profile-details' review.user.profile.pk %}">
-                                    <strong>{{ review.user.profile.get_full_name }}</strong>
-                                </a>
-                                {% endif %}
-                            </p>
-                            <div class="landmark-stars">
-                                {% for star in review.full_stars %}
-                                    <span class="star">★</span>
-                                {% endfor %}
-                                {% for empty_star in review.empty_stars %}
-                                    <span class="star empty">☆</span>
-                                {% endfor %}
-                                <span class="comment-date">{{ review.created_at }}</span>
+                    <div class="landmark-review">
+                        <div class="landmark-comment">
+                            <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image"
+                                 class="comment-author-img">
+                            <div class="comment-content">
+                                <p class="comment-author">
+                                    {% if review.user.profile.get_full_name == 'Anonymous' %}
+                                        <strong>{{ review.user.profile.get_full_name }}</strong>
+                                    {% else %}
+                                        <a href="{% url 'profile-details' review.user.profile.pk %}">
+                                            <strong>{{ review.user.profile.get_full_name }}</strong>
+                                        </a>
+                                    {% endif %}
+                                </p>
+                                <div class="landmark-stars">
+                                    {% for star in review.full_stars %}
+                                        <span class="star">★</span>
+                                    {% endfor %}
+                                    {% for empty_star in review.empty_stars %}
+                                        <span class="star empty">☆</span>
+                                    {% endfor %}
+                                    <span class="comment-date">{{ review.created_at }}</span>
+                                </div>
+                                <p class="comment-text">
+                                    {{ review.comment }}
+                                </p>
                             </div>
-                            <p class="comment-text">
-                                {{ review.comment }}
-                            </p>
                         </div>
                     </div>
-                </div>
                 {% endif %}
             {% empty %}
                 <div class="landmark-review">

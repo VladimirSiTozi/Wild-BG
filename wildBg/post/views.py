@@ -200,8 +200,8 @@ def search_users(request):
     return JsonResponse([], safe=False)
 
 
-def share_functionality(request, pk: int):
+def share_post_functionality(request, pk: int):
     copy(request.META.get('HTTP_HOST') + resolve_url('post-detail', pk))
-    # HTTP_HOST = http://127.0.0.1/   + photos/<int:pk>/ => http://127.0.0.1/photos/<int:pk>/
+    # HTTP_HOST = http://127.0.0.1/   + post/<int:pk>/ => http://127.0.0.1/post/<int:pk>/
 
     return redirect(request.META.get('HTTP_REFERER'))
