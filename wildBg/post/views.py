@@ -3,9 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.checks import messages
 from django.db.models import Q
 from django.http import JsonResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from pyperclip import copy
 
 from wildBg.accounts.models import Profile, AppUser
 from wildBg.landmark.models import Like, Landmark
@@ -197,3 +198,10 @@ def search_users(request):
         ]
         return JsonResponse(users_data, safe=False)
     return JsonResponse([], safe=False)
+
+
+def share_functionality(request, pk: int):
+    copy(request.META.get('HTTP_HOST') + resolve_url('post-detail', pk))
+    # HTTP_HOST = http://127.0.0.1/   + photos/<int:pk>/ => http://127.0.0.1/photos/<int:pk>/
+
+    return redirect(request.META.get('HTTP_REFERER'))
