@@ -26,3 +26,67 @@
 .text-container p {
     margin: 0;
 }
+
+/*Pagination*/
+.pagination {
+    font-family: 'Lora', serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4caf50 40%, #cddc39);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+}
+
+.pagination .current {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.pagination .step-links-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.pagination .step-links-buttons a {
+    text-decoration: none;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.pagination .step-links-buttons a:hover {
+    background: #fff;
+    color: #4caf50;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.pagination .step-links-buttons i {
+    margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+    .pagination {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pagination .step-links-buttons {
+        margin-top: 10px;
+    }
+}

@@ -119,26 +119,88 @@
     opacity: 0.5;
 }
 
-/* Responsive Styling */
+/* Default styles for larger screens (already defined) */
+
+/* Responsive Styling for Tablets and Smaller Screens */
 @media (max-width: 768px) {
     .wild-nav {
-        flex-direction: column;
+        flex-direction: column; /* Stack items vertically */
         align-items: flex-start;
+        padding: 0.5rem 1rem; /* Adjust padding */
     }
+
+    .nav-left {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-title {
+        font-size: 1.5rem; /* Reduce title font size */
+    }
+
+    .logo {
+        height: 50px; /* Smaller logo size */
+        width: 50px;
+    }
+
     .nav-right {
         width: 100%;
-        margin-top: 15px;
+        margin-top: 10px; /* Add spacing between sections */
     }
+
     .nav-links {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: column; /* Stack navigation links vertically */
         align-items: flex-start;
-    }
-    .nav-links li {
-        margin: 10px 0;
-    }
-    .nav-links a {
-        padding: 10px 0;
         width: 100%;
+    }
+
+    .nav-links li {
+        width: 100%; /* Ensure each link takes full width */
+        margin: 8px 0; /* Add spacing between links */
+    }
+
+    .nav-links a {
+        padding: 10px 15px; /* Adjust padding for touch screens */
+        font-size: 18px; /* Reduce font size */
+        width: 100%; /* Full width for easier tapping */
+    }
+
+    .nav-link-button {
+        font-size: 18px; /* Reduce button font size */
+        padding: 10px 15px; /* Adjust padding */
+        width: 100%; /* Full width for consistency */
     }
 }
+
+/* Responsive Styling for Mobile Screens */
+@media (max-width: 480px) {
+    .wild-nav {
+        padding: 0.5rem; /* Further reduce padding */
+    }
+
+    .nav-title {
+        font-size: 1.2rem; /* Smaller title font */
+    }
+
+    .logo {
+        height: 40px; /* Further reduce logo size */
+        width: 40px;
+    }
+
+    .nav-links {
+        align-items: flex-start; /* Align links to the left */
+    }
+
+    .nav-links a {
+        font-size: 16px; /* Smaller link text */
+        padding: 8px 12px; /* Reduce padding */
+    }
+
+    .nav-link-button {
+        font-size: 16px; /* Adjust font size */
+        padding: 8px 12px; /* Reduce padding */
+    }
+}
+

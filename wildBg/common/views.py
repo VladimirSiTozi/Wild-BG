@@ -19,6 +19,7 @@ class HomePageView(SidebarContextMixin, ListView):
     model = Post
     template_name = 'common/home.html'
     context_object_name = 'all_posts'
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -59,6 +60,7 @@ class LandmarksHomePageView(SidebarContextMixin, ListView):
     model = Landmark
     template_name = 'common/landmarks-home.html'
     context_object_name = 'all_landmarks'
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

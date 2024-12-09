@@ -3,6 +3,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    background-color: #cfe4da;
 }
 
 header, footer {
@@ -17,16 +18,11 @@ header, footer {
 /* Make main take up the remaining space between header and footer */
 main {
     flex: 1; /* Take up all available space between header and footer */
-    display: flex; /* Allow using flex inside main */
+    display: flex;
+    width: 100%;
     flex-direction: row; /* Arrange inner containers in a row */
 }
 
-
-/* Main container styles */
-.main-container {
-    display: flex;
-    width: 100%;
-}
 
 /* Left and right containers should be smaller */
 .left-container,
@@ -40,7 +36,7 @@ main {
 
 /* Sticky Profile Card in the Left Container */
 .profile-card-sidebar {
-    width: 300px;
+    width: 240px;
     position: sticky;
     top: 1em;
     background-color: #ffffff;
@@ -90,7 +86,7 @@ main {
 
 /* Middle container should be the biggest and scrollable */
 .middle-container {
-    flex: 3; /* Three times wider than left and right */
+    flex: 3; /* Slightly reduce width compared to the original */
     background-color: #a3c99c; /* Dark green background for contrast */
     padding: 20px;
     overflow-y: auto; /* Allow vertical scrolling for excess content */
@@ -188,17 +184,49 @@ a:hover, a:focus {
 
 
 /* Responsive Design - Mobile Adjustments */
+/* Responsive styles */
 @media (max-width: 768px) {
-    .main-container {
+    main {
         flex-direction: column; /* Stack containers vertically */
     }
+
     .left-container,
-    .right-container,
-    .middle-container {
-        flex: 1; /* Make all containers equal size when stacked vertically */
+    .middle-container,
+    .right-container {
+        flex: 1; /* Equal width for all containers */
+        padding: 10px; /* Reduce padding on smaller screens */
     }
+
+    .left-container {
+        margin: auto;
+    }
+
     .middle-container {
         max-height: none; /* Allow full height when stacked */
-        overflow-y: visible; /* Remove scroll restriction */
+        overflow-y: visible; /* Remove scrolling */
+    }
+
+    .post-card {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .info-card {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .post-card, .info-card {
+        font-size: 14px; /* Smaller font size for smaller screens */
+        padding: 10px;
+    }
+
+    .left-container, .right-container {
+        display: none; /* Optionally hide sidebars on very small screens */
+    }
+
+    .middle-container {
+        flex: 1; /* Middle container takes up full width */
+        padding: 10px;
     }
 }

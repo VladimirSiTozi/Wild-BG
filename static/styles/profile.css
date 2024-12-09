@@ -211,3 +211,124 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Default styles for larger screens (already defined) */
+
+/* Adjust for tablets and smaller devices */
+@media (max-width: 768px) {
+    .profile-card {
+        width: 90%; /* Adjust width to fit within smaller screens */
+        padding: 15px; /* Reduce padding */
+        margin: 20px auto;
+    }
+
+    .profile-background img {
+        height: 150px; /* Reduce height of the background image */
+    }
+
+    .profile-pic img {
+        width: 80px; /* Smaller profile picture */
+        height: 80px;
+        border: 3px solid #fff;
+    }
+
+    .profile-name {
+        font-size: 20px; /* Adjust font size */
+    }
+
+    .profile-dob {
+        font-size: 14px; /* Smaller font size for additional info */
+    }
+
+    .profile-stats {
+        flex-direction: column; /* Stack stats vertically */
+        align-items: center;
+        gap: 8px; /* Add spacing between stats */
+    }
+
+    .profile-places h3 {
+        font-size: 16px; /* Slightly smaller font */
+    }
+
+    .places-list li {
+        font-size: 14px; /* Adjust font size for places list */
+    }
+
+    .profile-info-section {
+        font-size: 14px; /* Reduce font size for description */
+        padding: 10px; /* Adjust padding */
+    }
+
+    .my-posts-header {
+        font-size: 28px; /* Reduce header font size */
+    }
+
+    .no-posts-container {
+        height: 400px; /* Adjust height for smaller screens */
+        padding: 20px; /* Add padding for better spacing */
+    }
+
+    .no-posts-image {
+        max-width: 300px; /* Reduce image size */
+        margin-bottom: 15px;
+    }
+
+    .no-posts-text {
+        font-size: 1em; /* Slightly smaller font size */
+    }
+}
+
+/* Adjust for mobile devices */
+@media (max-width: 480px) {
+    .profile-card {
+        padding: 10px; /* Further reduce padding */
+        border-radius: 8px; /* Smaller border radius */
+    }
+
+    .profile-background img {
+        height: 120px; /* Further reduce height */
+    }
+
+    .profile-pic img {
+        width: 60px; /* Smaller profile picture */
+        height: 60px;
+    }
+
+    .profile-name {
+        font-size: 18px; /* Smaller font size for name */
+    }
+
+    .profile-dob {
+        font-size: 13px;
+    }
+
+    .profile-stats {
+        gap: 6px; /* Reduce spacing */
+        font-size: 13px; /* Smaller font size for stats */
+    }
+
+    .places-list li {
+        font-size: 12px; /* Smaller font size */
+    }
+
+    .profile-info-section {
+        font-size: 13px; /* Further reduce font size */
+    }
+
+    .my-posts-header {
+        font-size: 24px; /* Smaller font size */
+    }
+
+    .no-posts-container {
+        height: 300px; /* Further reduce height */
+    }
+
+    .no-posts-image {
+        max-width: 250px; /* Further reduce image size */
+    }
+
+    .no-posts-text {
+        font-size: 0.9em; /* Smaller text size */
+    }
+}
+

@@ -13,11 +13,10 @@
             <img src="{% static 'images/404-bear3.webp' %}" alt="Animated Bear" class="bear-image">
         </div>
         <div class="message-box">
-            <!-- <h1>404</h1> -->
             <h2>Oops! You seem lost in the wild ...</h2>
             <p>But don't worry, even the best explorers sometimes take a wrong turn. Take a deep breath and enjoy the adventure!</p>
             <p>Let me guide you back to the right path.</p>
-            <a href="#" class="home-button">Return Home</a>
+            <a href="{% url 'home' %}" class="home-button">Return Home</a>
         </div>
     </div>
 </body>

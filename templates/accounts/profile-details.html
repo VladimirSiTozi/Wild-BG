@@ -2,83 +2,81 @@
 {% load static %}
 
 {% block content %}
-    <div class="middle-container">
-        <div class="profile-card">
-            <!-- Background image section -->
-            <div class="profile-background">
-                {% if object.profile.background_image %}
-                    <img src="{{ object.profile.background_image.url }}" alt="Background Image">
+    <div class="profile-card">
+        <!-- Background image section -->
+        <div class="profile-background">
+            {% if object.profile.background_image %}
+                <img src="{{ object.profile.background_image.url }}" alt="Background Image">
+            {% else %}
+                <img src="{% static 'images/background-image.avif' %}" alt="Background Image">
+            {% endif %}
+        </div>
+
+        <!-- Profile picture and name -->
+        <div class="profile-info">
+            <div class="profile-pic">
+                {% if object.profile.profile_picture %}
+                    <img src="{{ object.profile.profile_picture.url }}" alt="Profile Picture">
                 {% else %}
-                    <img src="{% static 'images/background-image.avif' %}" alt="Background Image">
+                    <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Profile Picture">
                 {% endif %}
             </div>
+            <div class="profile-details">
+                <h2 class="profile-name">{{ object.profile.get_full_name }}</h2>
+                {% if request.user.is_authenticated %}
+                    <p class="profile-dob">{{ object.profile.user.email }}</p>
+                {% endif %}
+                {% if not object.profile.date_of_birth %}
+                    <p class="profile-dob">Date of Birth: </p>
+                {% else %}
+                    <p class="profile-dob">Date of Birth: {{ object.profile.date_of_birth }}</p>
+                {% endif %}
 
-            <!-- Profile picture and name -->
-            <div class="profile-info">
-                <div class="profile-pic">
-                    {% if object.profile.profile_picture %}
-                        <img src="{{ object.profile.profile_picture.url }}" alt="Profile Picture">
-                    {% else %}
-                        <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Profile Picture">
-                    {% endif %}
-                </div>
-                <div class="profile-details">
-                    <h2 class="profile-name">{{ object.profile.get_full_name }}</h2>
-                    {% if request.user.is_authenticated %}
-                        <p class="profile-dob">{{ object.profile.user.email }}</p>
-                    {% endif %}
-                    {% if not object.profile.date_of_birth %}
-                        <p class="profile-dob">Date of Birth: </p>
-                    {% else %}
-                        <p class="profile-dob">Date of Birth: {{ object.profile.date_of_birth }}</p>
-                    {% endif %}
-
-                </div>
-            </div>
-
-            <!-- Level and Points -->
-            <div class="profile-stats">
-                <p class="profile-level">Level: {{ object.profile.level }}</p>
-                <p class="profile-points">Points: {{ object.profile.points }}</p>
-            </div>
-
-            <!-- Places Visited -->
-            <div class="profile-places">
-                <h3>Places Visited</h3>
-                <ul class="places-list">
-                    {% for place in places_visited %}
-                        <li>{{ place.name }}</li>
-                    {% empty %}
-                        <li>No information</li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <!-- Info Section -->
-            <div class="profile-info-section">
-                <p class="profile-info-text">
-                    {% if object.profile.description %}
-                        {{ object.profile.description }}
-                    {% else %}
-                        No description added...
-                    {% endif %}
-                </p>
             </div>
         </div>
 
-        <div class="my-posts-header">
-            My Posts
+        <!-- Level and Points -->
+        <div class="profile-stats">
+            <p class="profile-level">Level: {{ object.profile.level }}</p>
+            <p class="profile-points">Points: {{ object.profile.points }}</p>
         </div>
 
-        <!-- Posts section -->
-        {% for post in object.posts.all %}
-            {% include 'common/post-card.html' %}
-        {% empty %}
-            <div class="no-posts-container">
-                <img src="{% static 'images/no-posts2.png' %}" alt="No Posts" class="no-posts-image">
-                <p class="no-posts-text">No posts available yet...</p> <!-- Optional text -->
-            </div>
-        {% endfor %}
-        
+        <!-- Places Visited -->
+        <div class="profile-places">
+            <h3>Places Visited</h3>
+            <ul class="places-list">
+                {% for place in places_visited %}
+                    <li>{{ place.name }}</li>
+                {% empty %}
+                    <li>No information</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Info Section -->
+        <div class="profile-info-section">
+            <p class="profile-info-text">
+                {% if object.profile.description %}
+                    {{ object.profile.description }}
+                {% else %}
+                    No description added...
+                {% endif %}
+            </p>
+        </div>
     </div>
+
+    <div class="my-posts-header">
+        My Posts
+    </div>
+
+    <!-- Posts section -->
+    {% for post in object.posts.all %}
+        {% include 'common/post-card.html' %}
+    {% empty %}
+        <div class="no-posts-container">
+            <img src="{% static 'images/no-posts2.png' %}" alt="No Posts" class="no-posts-image">
+            <p class="no-posts-text">No posts available yet...</p> <!-- Optional text -->
+        </div>
+    {% endfor %}
+
 {% endblock %}
