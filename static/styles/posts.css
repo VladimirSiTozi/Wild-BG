@@ -140,7 +140,12 @@
     gap: 8px;
 }
 
+.comment-form {
+    width: 100%;
+}
+
 .comment-input {
+    width: 78%;
     flex-grow: 1; /* Allow the input to take all available space */
     padding: 8px;
     border: none;
@@ -154,6 +159,7 @@
 }
 
 .comment-btn {
+    width: 20%;
     background-color: #4c6e58;
     color: #fff;
     border: none;
@@ -162,6 +168,7 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s;
+    margin-left: 6px;
 }
 
 .comment-btn:hover {
@@ -288,6 +295,15 @@
 
     .post-comments {
         font-size: 13px; /* Reduce comment font size */
+    }
+
+    .comment-input {
+        width: 100%;
+    }
+
+    .comment-btn {
+        width: 100%;
+        margin: 8px 0 0 0;
     }
 }
 

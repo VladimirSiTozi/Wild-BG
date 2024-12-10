@@ -13,8 +13,8 @@
 
                 <!-- Email Field -->
                 <div class="form-group">
-                    <label for="id_email">Email:</label>
-                    <input type="email" name="email" id="id_email" required class="form-control" placeholder="Enter your email">
+                    <label for="id_email">{{ form.email.label }}:</label>
+                    {{ form.email }}
                     {% if form.email.errors %}
                         <div class="error">
                             {{ form.email.errors }}

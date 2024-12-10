@@ -40,6 +40,11 @@ class Post(models.Model):
         auto_now_add=True,
     )
 
+    def total_comments_and_replies(self):
+        total_comments = self.comments.count()
+        total_replies = ReplyPostComment.objects.filter(comment__post=self).count()
+        return total_comments + total_replies
+
     def __str__(self):
         location_name = self.location.name if self.location else "No Location"
         return f"Post by {self.author.email} at {location_name}"

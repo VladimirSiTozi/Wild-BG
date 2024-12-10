@@ -8,7 +8,7 @@ urlpatterns = [
     path('<int:pk>/', include([
         path('', views.PostDetailView.as_view(), name='post-detail'),
         path('edit/', views.PostEditView.as_view(), name='post-edit'),
-        path('delete/', views.delete_post, name='delete-edit'),
+        path('delete/', views.delete_post, name='delete-post'),
         path('like/', like_post_func, name='post-like'),
     ])),
 ]

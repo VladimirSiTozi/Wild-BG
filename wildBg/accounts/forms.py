@@ -17,6 +17,21 @@ class AppUserCreationForm(UserCreationForm):
         model = UserModel
         fields = ('email', )
 
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control wide-input',
+                'placeholder': 'Enter your email address',
+            }),
+            'password1': forms.PasswordInput(attrs={
+                'class': 'form-control wide-input',
+                'placeholder': 'Enter your password',
+            }),
+            'password2': forms.PasswordInput(attrs={
+                'class': 'form-control wide-input',
+                'placeholder': 'Confirm your password',
+            }),
+        }
+
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:

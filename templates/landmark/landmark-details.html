@@ -12,29 +12,28 @@
         <title>Landmark</title>
     </head>
     <body>
-    <div class="middle-container">
-        <div class="landmark-card">
-            <h2 class="landmark-name">{{ object.name }}</h2>
-            <h3 class="landmark-location">{{ object.location_name }}</h3>
+    <div class="landmark-card">
+        <h2 class="landmark-name">{{ object.name }}</h2>
+        <h3 class="landmark-location">{{ object.location_name }}</h3>
 
-            <div class="landmark-image">
-                <img src="{{ object.image.url }}" alt="Location Picture">
-            </div>
+        <div class="landmark-image">
+            <img src="{{ object.image.url }}" alt="Location Picture">
+        </div>
 
-            <div class="landmark-total-stars">
-                <div class="landmark-stars">
-                    <div class="rating">
-                        {% for i in full_stars %}
-                            <span class="star">
+        <div class="landmark-total-stars">
+            <div class="landmark-stars">
+                <div class="rating">
+                    {% for i in full_stars %}
+                        <span class="star">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z"
                                           fill="#FFD700"/>
                                 </svg>
                             </span>
-                        {% endfor %}
-                        {% if half_star %}
-                            <span class="star half-star">
+                    {% endfor %}
+                    {% if half_star %}
+                        <span class="star half-star">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <defs>
@@ -47,254 +46,261 @@
                                           fill="url(#half-gradient)"/>
                                 </svg>
                             </span>
-                            {# <i class="fa-regular fa-star-half-stroke"></i> #}
-                        {% endif %}
-                        {% for i in empty_stars %}
-                            <span class="star empty"></span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z"
-                                      fill="#ccc"/>
-                            </svg>
-                        {% endfor %}
-                        <p class="stars-integer">{{ average_rating }} ({{ total_reviews }})</p>
-                    </div>
-                </div>
-            </div>
-
-            <p class="landmark-description">
-                {{ landmark.description }}
-            </p>
-
-            <div class="transition-card">
-                <div class="transition-availability">
-                    {% if object.additional_landmark_info.is_transition %}
-                        Преход за достигане на забележителността: Има
-                    {% else %}
-                        Преход за достигане на забележителността: Няма
+                        {# <i class="fa-regular fa-star-half-stroke"></i> #}
                     {% endif %}
-                </div>
-                <div class="transition-info">
-                    <div class="transition-left">
-                        {% if landmark.level == 'Easy' %}
-                            <p>Ниво на трудност: Лесно</p>
-                        {% elif landmark.level == 'Medium' %}
-                            <p>Ниво на трудност: Средно</p>
-                        {% elif landmark.level == 'Hard' %}
-                            <p>Ниво на трудност: Трудно</p>
-                        {% else %}
-                            <p>Ниво на трудност: Много Трудно</p>
-                        {% endif %}
-
-                        {% if object.additional_landmark_info.is_transition %}
-                            {% if object.additional_landmark_info.duration %}
-                                <p>Времетраене: {{ object.additional_landmark_info.duration|format_duration }} </p>
-                            {% else %}
-                                <p>Времетраене: Няма информация</p>
-                            {% endif %}
-
-                            {% if object.additional_landmark_info.distance_km %}
-                                <p>Километри: {{ object.additional_landmark_info.distance_km }} км</p>
-                            {% else %}
-                                <p>Километри: Няма</p>
-                            {% endif %}
-                        {% endif %}
-
-
-                        {% if object.additional_landmark_info.suitable_for_children %}
-                            <p>Подходящо за деца: Да</p>
-                        {% elif not object.additional_landmark_info.suitable_for_children %}
-                            <p>Подходящо за деца: Не</p>
-                        {% else %}
-                            <p>Подходящо за деца: Няма информация</p>
-                        {% endif %}
-
-
-                        {% if object.additional_landmark_info.has_eating_places %}
-                            <p>Места за ядене: Да</p>
-                        {% elif not object.additional_landmark_info.has_eating_places %}
-                            <p>Места за ядене: Не</p>
-                        {% else %}
-                            <p>Подходящо за деца: Няма информация</p>
-                        {% endif %}
-
-
-                        {% if object.additional_landmark_info.is_ennobled %}
-                            <p>Облагородено: Да</p>
-                        {% elif not object.additional_landmark_info.is_ennobled %}
-                            <p>Облагородено: Не</p>
-                        {% else %}
-                            <p>Подходящо за деца: Няма информация</p>
-                        {% endif %}
-
-                    </div>
-                    <div class="transition-right">
-                        {% if object.additional_landmark_info.is_transition %}
-                            {% if object.additional_landmark_info.start_point %}
-                                <p>Начална точка: {{ object.additional_landmark_info.start_point }}</p>
-                            {% else %}
-                                <p>Начална точка: Няма информация</p>
-                            {% endif %}
-
-                            {% if object.additional_landmark_info.end_point %}
-                                <p>Крайна точка: {{ object.additional_landmark_info.end_point }}</p>
-                            {% else %}
-                                <p>Крайна точка: Няма информация</p>
-                            {% endif %}
-                        {% endif %}
-
-                        {% if object.additional_landmark_info.accessible_by_car %}
-                            <p>Лесно дотъпно за кола: Да</p>
-                        {% elif not object.additional_landmark_info.accessible_by_car %}
-                            <p>Лесно дотъпно за кола: Не</p>
-                        {% else %}
-                            <p>Лесно дотъпно за кола: Няма информация</p>
-                        {% endif %}
-
-                        {% if object.additional_landmark_info.has_parking %}
-                            <p><p>Паркинг: Да</p></p>
-                        {% elif not object.additional_landmark_info.has_parking %}
-                            <p><p>Паркинг: Не</p>
-                        {% else %}
-                            <p>Паркинг: Няма информация</p>
-                        {% endif %}
-
-                        <p>Последно обновено: {{ object.updated_at|date:"m.d.Y" }}</p>
-                    </div>
+                    {% for i in empty_stars %}
+                        <span class="star empty"></span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.5l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2.5z"
+                                  fill="#ccc"/>
+                        </svg>
+                    {% endfor %}
+                    <p class="stars-integer">{{ average_rating }} ({{ total_reviews }})</p>
                 </div>
             </div>
+        </div>
 
-            <div class="transition-card">
-                <div class="transition-availability">
-                    <p>Тип на забележителността</p>
-                </div>
+        <p class="landmark-description">
+            {{ landmark.description }}
+        </p>
 
-                <div class="transition-info">
-                    <div class="transition-left">
-
-                    </div>
-                    <div class="transition-right">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="landmark-map">
-                <iframe
-                        src="{{ object.map_location }}"
-                        class="map-frame"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-
-
-            <div class="landmark-stats">
-                <p class="landmark-likes">Likes: {{ object.likes.count }}</p>
-                <p class="landmark-visits">Visits: {{ object.visits.count }}</p>
-            </div>
-
-            <div class="landmark-actions">
-                <button class="btn landmark-btn" onclick="location.href='{% url 'like-landmark' landmark.pk %}'">
-                    {% if object.has_liked %}
-                        Liked <i class="fa-solid fa-heart" style="color: #FF0000;"></i>  <!-- Liked -->
-                    {% else %}
-                        Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
-                    {% endif %}
-                </button>
-                <button id="addReviewBtn" class="btn landmark-btn">Add review</button>
-                <button class="btn landmark-btn" onclick="location.href='{% url 'share-landmark' landmark.id %}'">Share
-                    <i class="fa-regular fa-share-from-square"></i></button>
-                <button class="btn landmark-btn" onclick="location.href='{% url 'visit-landmark' landmark.pk %}'">
-                    {% if object.has_visited %}
-                        Visited <i class="fa-solid fa-person-hiking" style="color: #FFFF00;"></i>
-                    {% else %}
-                        Visit <i class="fa-solid fa-person-hiking"></i>
-                    {% endif %}
-                </button>
-            </div>
-
-            <!-- Modal for Add Review -->
-            <div id="reviewModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h2>Add Your Review</h2>
-                    <form method="post" action="{% url 'add_review' pk=landmark.pk %}">
-                        {% csrf_token %}
-
-                        <label for="reviewStars">Your Rating:</label>
-                        <div id="reviewStars" class="review-star">
-                            <input type="radio" id="star5" name="rating" value="5">
-                            <label for="star5" title="5 stars">&#9733;</label>
-
-                            <input type="radio" id="star4" name="rating" value="4">
-                            <label for="star4" title="4 stars">&#9733;</label>
-
-                            <input type="radio" id="star3" name="rating" value="3">
-                            <label for="star3" title="3 stars">&#9733;</label>
-
-                            <input type="radio" id="star2" name="rating" value="2">
-                            <label for="star2" title="2 stars">&#9733;</label>
-
-                            <input type="radio" id="star1" name="rating" value="1">
-                            <label for="star1" title="1 star">&#9733;</label>
-                        </div>
-
-                        <textarea class="review-comment" id="reviewText" name="comment" rows="4" cols="50"
-                                  placeholder="Write your review here..."></textarea><br>
-
-                        <button type="submit" class="btn submit-btn">Submit Review</button>
-                    </form>
-
-
-                </div>
-            </div>
-
-            <!-- reviews -->
-            {% for review in reviews %}
-                {% if review.comment == '' %}
-
+        <div class="transition-card">
+            <div class="transition-availability">
+                {% if object.additional_landmark_info.is_transition %}
+                    Преход за достигане на забележителността: Има
                 {% else %}
-                    <div class="landmark-review">
-                        <div class="landmark-comment">
-                            <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image"
-                                 class="comment-author-img">
-                            <div class="comment-content">
-                                <p class="comment-author">
-                                    {% if review.user.profile.get_full_name == 'Anonymous' %}
-                                        <strong>{{ review.user.profile.get_full_name }}</strong>
-                                    {% else %}
-                                        <a href="{% url 'profile-details' review.user.profile.pk %}">
-                                            <strong>{{ review.user.profile.get_full_name }}</strong>
-                                        </a>
-                                    {% endif %}
-                                </p>
-                                <div class="landmark-stars">
-                                    {% for star in review.full_stars %}
-                                        <span class="star">★</span>
-                                    {% endfor %}
-                                    {% for empty_star in review.empty_stars %}
-                                        <span class="star empty">☆</span>
-                                    {% endfor %}
-                                    <span class="comment-date">{{ review.created_at }}</span>
-                                </div>
-                                <p class="comment-text">
-                                    {{ review.comment }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    Преход за достигане на забележителността: Няма
                 {% endif %}
-            {% empty %}
+            </div>
+            <div class="transition-info">
+                <div class="transition-left">
+                    {% if landmark.level == 'Easy' %}
+                        <p>Ниво на трудност: Лесно</p>
+                    {% elif landmark.level == 'Medium' %}
+                        <p>Ниво на трудност: Средно</p>
+                    {% elif landmark.level == 'Hard' %}
+                        <p>Ниво на трудност: Трудно</p>
+                    {% else %}
+                        <p>Ниво на трудност: Много Трудно</p>
+                    {% endif %}
+
+                    {% if object.additional_landmark_info.is_transition %}
+                        {% if object.additional_landmark_info.duration %}
+                            <p>Времетраене: {{ object.additional_landmark_info.duration|format_duration }} </p>
+                        {% else %}
+                            <p>Времетраене: Няма информация</p>
+                        {% endif %}
+
+                        {% if object.additional_landmark_info.distance_km %}
+                            <p>Километри: {{ object.additional_landmark_info.distance_km }} км</p>
+                        {% else %}
+                            <p>Километри: Няма</p>
+                        {% endif %}
+                    {% endif %}
+
+
+                    {% if object.additional_landmark_info.suitable_for_children %}
+                        <p>Подходящо за деца: Да</p>
+                    {% elif not object.additional_landmark_info.suitable_for_children %}
+                        <p>Подходящо за деца: Не</p>
+                    {% else %}
+                        <p>Подходящо за деца: Няма информация</p>
+                    {% endif %}
+
+
+                    {% if object.additional_landmark_info.has_eating_places %}
+                        <p>Места за ядене: Да</p>
+                    {% elif not object.additional_landmark_info.has_eating_places %}
+                        <p>Места за ядене: Не</p>
+                    {% else %}
+                        <p>Подходящо за деца: Няма информация</p>
+                    {% endif %}
+
+
+                    {% if object.additional_landmark_info.is_ennobled %}
+                        <p>Облагородено: Да</p>
+                    {% elif not object.additional_landmark_info.is_ennobled %}
+                        <p>Облагородено: Не</p>
+                    {% else %}
+                        <p>Подходящо за деца: Няма информация</p>
+                    {% endif %}
+
+                </div>
+                <div class="transition-right">
+                    {% if object.additional_landmark_info.is_transition %}
+                        {% if object.additional_landmark_info.start_point %}
+                            <p>Начална точка: {{ object.additional_landmark_info.start_point }}</p>
+                        {% else %}
+                            <p>Начална точка: Няма информация</p>
+                        {% endif %}
+
+                        {% if object.additional_landmark_info.end_point %}
+                            <p>Крайна точка: {{ object.additional_landmark_info.end_point }}</p>
+                        {% else %}
+                            <p>Крайна точка: Няма информация</p>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if object.additional_landmark_info.accessible_by_car %}
+                        <p>Лесно дотъпно за кола: Да</p>
+                    {% elif not object.additional_landmark_info.accessible_by_car %}
+                        <p>Лесно дотъпно за кола: Не</p>
+                    {% else %}
+                        <p>Лесно дотъпно за кола: Няма информация</p>
+                    {% endif %}
+
+                    {% if object.additional_landmark_info.has_parking %}
+                        <p><p>Паркинг: Да</p></p>
+                    {% elif not object.additional_landmark_info.has_parking %}
+                        <p><p>Паркинг: Не</p>
+                    {% else %}
+                        <p>Паркинг: Няма информация</p>
+                    {% endif %}
+
+                    <p>Последно обновено: {{ object.updated_at|date:"m.d.Y" }}</p>
+                </div>
+            </div>
+        </div>
+
+{#        <div class="transition-card">#}
+{#            <div class="transition-availability">#}
+{#                <p>Тип на забележителността</p>#}
+{#            </div>#}
+{##}
+{#            <div class="transition-info">#}
+{#                <div class="transition-left">#}
+{##}
+{#                </div>#}
+{#                <div class="transition-right">#}
+{##}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+        <div class="landmark-map">
+            <iframe
+                    src="{{ object.map_location }}"
+                    class="map-frame"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+
+        <div class="landmark-stats">
+            <p class="landmark-likes">Likes: {{ object.likes.count }}</p>
+            <p class="landmark-visits">Visits: {{ object.visits.count }}</p>
+        </div>
+
+        <div class="landmark-actions">
+            <button class="btn landmark-btn" onclick="location.href='{% url 'like-landmark' landmark.pk %}'">
+                {% if object.has_liked %}
+                    Liked <i class="fa-solid fa-heart" style="color: #FF0000;"></i>  <!-- Liked -->
+                {% else %}
+                    Like <i class="fa-regular fa-heart"></i> <!-- Not liked -->
+                {% endif %}
+            </button>
+            <button id="addReviewBtn" class="btn landmark-btn">
+                Add review
+            </button>
+            {% if request.user.pk == landmark.user.profile.pk %}
+                <button class="btn landmark-btn" onclick="location.href='{% url 'edit-landmark' landmark.pk %}'">
+                    Edit Post <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+            {% endif %}
+            <button class="btn landmark-btn" onclick="location.href='{% url 'share-landmark' landmark.id %}'">
+                Share <i class="fa-regular fa-share-from-square"></i></button>
+            <button class="btn landmark-btn" onclick="location.href='{% url 'visit-landmark' landmark.pk %}'">
+                {% if object.has_visited %}
+                    Visited <i class="fa-solid fa-person-hiking" style="color: #FFFF00;"></i>
+                {% else %}
+                    Visit <i class="fa-solid fa-person-hiking"></i>
+                {% endif %}
+            </button>
+        </div>
+
+        <!-- Modal for Add Review -->
+        <div id="reviewModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add Your Review</h2>
+                <form method="post" action="{% url 'add_review' pk=landmark.pk %}">
+                    {% csrf_token %}
+
+                    <label for="reviewStars">Your Rating:</label>
+                    <div id="reviewStars" class="review-star">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars">&#9733;</label>
+
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars">&#9733;</label>
+
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars">&#9733;</label>
+
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars">&#9733;</label>
+
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star">&#9733;</label>
+                    </div>
+
+                    <textarea class="review-comment" id="reviewText" name="comment" rows="4" cols="50"
+                              placeholder="Write your review here..."></textarea><br>
+
+                    <button type="submit" class="btn submit-btn">Submit Review</button>
+                </form>
+
+
+            </div>
+        </div>
+
+        <!-- reviews -->
+        {% for review in reviews %}
+            {% if review.comment == '' %}
+
+            {% else %}
                 <div class="landmark-review">
                     <div class="landmark-comment">
-                        <p>There are no reviews yet.</p>
+                        <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image"
+                             class="comment-author-img">
+                        <div class="comment-content">
+                            <p class="comment-author">
+                                {% if review.user.profile.get_full_name == 'Anonymous' %}
+                                    <strong>{{ review.user.profile.get_full_name }}</strong>
+                                {% else %}
+                                    <a href="{% url 'profile-details' review.user.profile.pk %}">
+                                        <strong>{{ review.user.profile.get_full_name }}</strong>
+                                    </a>
+                                {% endif %}
+                            </p>
+                            <div class="landmark-stars">
+                                {% for star in review.full_stars %}
+                                    <span class="star">★</span>
+                                {% endfor %}
+                                {% for empty_star in review.empty_stars %}
+                                    <span class="star empty">☆</span>
+                                {% endfor %}
+                                <span class="comment-date">{{ review.created_at }}</span>
+                            </div>
+                            <p class="comment-text">
+                                {{ review.comment }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            {% endfor %}
+            {% endif %}
+        {% empty %}
+            <div class="landmark-review">
+                <div class="no-posts-container">
+                    <img src="{% static 'images/no-reviews-yet.webp' %}" alt="No Reviews Yet" class="no-posts-image">
+                    <p class="no-posts-text">No posts available yet...</p>
+                </div>
+            </div>
+        {% endfor %}
 
-        </div>
     </div>
 
     <script src="{% static 'js/script-landmark-review.js' %}"></script>

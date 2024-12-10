@@ -103,7 +103,7 @@ class PostDetailView(SidebarContextMixin, DetailView):
         # Add to the context
         context['comments'] = comment_data
         context['tagged_people'] = post.tagged_people.all()
-
+        context['total_comments_and_replies'] = post.total_comments_and_replies()  # Add the total count
         return context
 
 
@@ -163,7 +163,7 @@ def like_post_func(request, pk: int):
         like = PostLike(to_post_id=pk, user=request.user)
         like.save()
 
-    return redirect(request.META.get('HTTP_REFERER', 'post-detail'))
+    return redirect(request.META.get('HTTP_REFERER') + f'#{pk}')
 
 
 @login_required
@@ -219,4 +219,4 @@ def share_post_functionality(request, pk: int):
     copy(request.META.get('HTTP_HOST') + resolve_url('post-detail', pk))
     # HTTP_HOST = http://127.0.0.1/   + post/<int:pk>/ => http://127.0.0.1/post/<int:pk>/
 
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER') + f'#{pk}')

@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
@@ -25,6 +26,14 @@ class ProfileDetailView(SidebarContextMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['places_visited'] = Landmark.objects.filter(visits__user=self.request.user).distinct()
 
+        # Paginate the posts
+        posts = self.object.posts.all().order_by('-created_at') # Assuming posts is a related_name for the user's posts
+        paginator = Paginator(posts, 10)
+
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context['page_obj'] = page_obj  # Add the page object to context
         return context
 
 

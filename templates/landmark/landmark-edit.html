@@ -114,7 +114,16 @@
                 {{ additional_info_form.has_parking }}
                 {{ additional_info_form.has_parking.errors }}
             </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn">Edit Landmark</button>
+            </div>
         </form>
+    
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger" onclick="location.href='{% url 'delete-landmark' object.pk %}'">Delete Post</button>
+        </div>
+    
     </div>
 
 {% endblock %}

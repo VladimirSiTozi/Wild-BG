@@ -124,6 +124,14 @@
     text-decoration: underline;
 }
 
+.wide-input {
+    width: 100%; /* This makes the input take full width of its container */
+    max-width: 400px; /* Optionally limit the maximum width */
+    padding: 10px; /* Add some padding for better UX */
+    font-size: 16px; /* Increase font size for better readability */
+    box-sizing: border-box; /* Ensures padding does not increase overall width */
+}
+
 /* Responsive adjustments */
 @media (max-width: 500px) {
     .login-register-box {

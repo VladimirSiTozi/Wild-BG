@@ -44,6 +44,10 @@
                 <button type="submit" class="btn">Edit Post</button>
             </div>
         </form>
+    
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger" onclick="location.href='{% url 'delete-post' post.pk %}'">Delete Post</button>
+        </div>
     </div>
     
     <script src="{% static 'js/script-post-create-form.js' %}"></script>

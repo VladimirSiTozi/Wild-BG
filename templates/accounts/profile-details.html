@@ -63,20 +63,45 @@
                 {% endif %}
             </p>
         </div>
+        {% if request.user.pk == object.pk %}
+            <button class="btn landmark-btn" onclick="location.href='{% url 'profile-edit' object.pk %}'">Edit Profile</button>
+        {% endif %}
     </div>
 
     <div class="my-posts-header">
         My Posts
     </div>
 
-    <!-- Posts section -->
-    {% for post in object.posts.all %}
-        {% include 'common/post-card.html' %}
-    {% empty %}
-        <div class="no-posts-container">
-            <img src="{% static 'images/no-posts2.png' %}" alt="No Posts" class="no-posts-image">
-            <p class="no-posts-text">No posts available yet...</p> <!-- Optional text -->
-        </div>
-    {% endfor %}
+    <div class="my-posts">
+        {% for post in page_obj %}
+            {% include 'common/post-card.html' %}
+        {% empty %}
+            <div class="no-posts-container">
+                <img src="{% static 'images/no-posts2.png' %}" alt="No Posts" class="no-posts-image">
+                <p class="no-posts-text">No posts available yet...</p> <!-- Optional text -->
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Add Pagination -->
+    <div class="pagination">
+    <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+        <span class="step-links-buttons">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+        {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            {% endif %}
+    </span>
+    </div>
 
 {% endblock %}

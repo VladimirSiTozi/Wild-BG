@@ -93,7 +93,7 @@
 
 /* Info Section */
 .profile-info-section {
-    margin-top: 20px;
+    margin: 20px 0 20px 0;
     font-size: 15px;
     color: #666;
     padding: 12px;
@@ -210,6 +210,10 @@
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-profile-text {
+    margin-bottom: 20px;
 }
 
 /* Default styles for larger screens (already defined) */

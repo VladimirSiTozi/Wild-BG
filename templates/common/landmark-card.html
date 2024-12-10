@@ -89,8 +89,8 @@
         </div>
 
         <div class="post-see-more">
-            <button class="btn landmark-btn" onclick="location.href='{% url 'details-landmark' landmark.pk %}'">See more
-                information
+            <button class="btn landmark-btn" onclick="location.href='{% url 'details-landmark' landmark.pk %}'">More
+                Information
             </button>
         </div>
     </div>
@@ -111,7 +111,7 @@
             {% endif %}
         </button>
         {% if request.user.pk == landmark.user.profile.pk %}
-            <button class="btn landmark-btn" onclick="location.href='{% url 'home' %}'">Edit Post</button>
+            <button class="btn landmark-btn" onclick="location.href='{% url 'edit-landmark' landmark.pk %}'">Edit Post <i class="fa-regular fa-pen-to-square"></i></button>
         {% endif %}
         <button class="btn landmark-btn" onclick="location.href='{% url 'share-landmark' landmark.id %}'">Share <i class="fa-regular fa-share-from-square"></i></button>
         <button class="btn landmark-btn" onclick="location.href='{% url 'visit-landmark' landmark.pk %}'">
