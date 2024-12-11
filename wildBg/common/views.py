@@ -1,12 +1,17 @@
+from asgiref.sync import sync_to_async
 from django.contrib.auth import get_user_model
 from django.db.models import Avg, Count, Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from wildBg.accounts.models import Profile
 from wildBg.common.forms import SearchForm, SearchLandmarkForm
 from wildBg.landmark.models import Landmark
+from wildBg.landmark.serializer import LandmarkSerializer
 from wildBg.mixins import SidebarContextMixin
 from wildBg.post.forms import PostCommentForm
 from wildBg.post.models import Post
@@ -98,6 +103,56 @@ class LandmarksHomePageView(SidebarContextMixin, ListView):
             ). distinct()
 
         return queryset
+
+
+class LandmarkListAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    async def get(self, request, *args, **kwargs):
+        search_query = request.GET.get('search_query', None)
+        queryset = Landmark.objects.all().order_by('-created_at')
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(location_name__icontains=search_query)
+            ).distinct()
+
+        # Превръщаме queryset в списък асинхронно
+        landmarks = await sync_to_async(list)(queryset)
+        user = request.user if request.user.is_authenticated else None
+
+        async def get_extra_info(landmark):
+            total_reviews = await sync_to_async(lambda: landmark.reviews.count())()
+            average_rating_val = await sync_to_async(
+                lambda: landmark.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+            )()
+
+            has_liked = False
+            has_visited = False
+            if user:
+                has_liked = await sync_to_async(
+                    lambda: landmark.likes.filter(user=user).exists()
+                )()
+                has_visited = await sync_to_async(
+                    lambda: landmark.visits.filter(user=user).exists()
+                )()
+
+            return {
+                'has_liked': has_liked,
+                'has_visited': has_visited,
+                'total_reviews': total_reviews,
+                'average_rating': round(average_rating_val, 1)
+            }
+
+        enhanced_landmarks = []
+        for lmk in landmarks:
+            extra_info = await get_extra_info(lmk)
+            serialized = LandmarkSerializer(lmk).data
+            serialized.update(extra_info)
+            enhanced_landmarks.append(serialized)
+
+        return Response(enhanced_landmarks)
 
 
 def custom_404_view(request, exception=None):

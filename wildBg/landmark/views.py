@@ -1,3 +1,4 @@
+from asgiref.sync import sync_to_async
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Avg, Count
@@ -192,17 +193,16 @@ def add_review(request, pk: int):
 
 
 @login_required
-def like_func(request, pk: int):
-    liked_object = Like.objects.filter(
-        landmark=pk,
-        user=request.user
-    ).first()
+async def like_func(request, pk: int):
+    liked_object = await sync_to_async(
+        lambda: Like.objects.filter(landmark=pk, user=request.user).first()
+    )()
 
     if liked_object:
-        liked_object.delete()
+        await sync_to_async(liked_object.delete)()
     else:
         like = Like(landmark_id=pk, user=request.user)
-        like.save()
+        await sync_to_async(like.save)()
 
     return redirect(request.META.get('HTTP_REFERER'))
 
