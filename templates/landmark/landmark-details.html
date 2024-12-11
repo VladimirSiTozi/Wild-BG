@@ -264,7 +264,7 @@
             {% else %}
                 <div class="landmark-review">
                     <div class="landmark-comment">
-                    {% if not review.user.profile.profile_picture.url %}
+                    {% if review.user.profile.profile_picture.url %}
                         <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image" class="post-author-img">
                     {% else %}
                          <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Author Image" class="post-author-img">
