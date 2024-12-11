@@ -9,7 +9,7 @@
     <div class="post-card">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <div class="form-group">
                 {{ form.location.label_tag }}
                 {{ form.location }}
@@ -27,28 +27,17 @@
                 {{ form.description }}
                 {{ form.description.errors }}
             </div>
-
-            <div class="form-group">
-                <label for="id_tagged_people">Tagged People:</label>
-                <input type="text" id="search_tagged_people" class="form-control" placeholder="Search for people...">
-                <select id="id_tagged_people" class="form-control">
-                    <!-- Options will be dynamically added here -->
-                </select>
-                <button type="button" id="add_tagged_person" class="btn">Add Person</button>
-                <div id="tagged_people_list" class="tagged-list"></div>
-                <input type="hidden" id="id_tagged_people_hidden" name="tagged_people">
-                <small>Search and add multiple people to tag them in the post.</small>
-            </div>
+            
 
             <div class="form-group">
                 <button type="submit" class="btn">Edit Post</button>
             </div>
         </form>
-    
+
         <div class="form-group">
             <button type="submit" class="btn btn-danger" onclick="location.href='{% url 'delete-post' post.pk %}'">Delete Post</button>
         </div>
     </div>
-    
+
     <script src="{% static 'js/script-post-create-form.js' %}"></script>
 {% endblock %}

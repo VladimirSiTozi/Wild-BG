@@ -191,11 +191,11 @@ def add_reply(request, pk: int):
 
         if reply_form.is_valid():
             reply = reply_form.save(commit=False)
-            reply.comment = reply
+            reply.comment = comment  # ?
             reply.author = request.user
             reply.save()
 
-    return redirect(request.META.get('HTTP_REFERER', f'#{pk}'))
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required

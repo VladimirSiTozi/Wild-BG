@@ -1,28 +1,29 @@
+// script-post-create-form.js
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('search_tagged_people');
     const taggedPeopleSelect = document.getElementById('id_tagged_people');
     const addTaggedPersonButton = document.getElementById('add_tagged_person');
     const taggedPeopleList = document.getElementById('tagged_people_list');
-    const hiddenTaggedPeopleInput = document.getElementById('id_tagged_people_hidden');
+    const form = taggedPeopleList.closest('form');
 
-    // Parse pre-rendered tagged user IDs from the hidden input
-    let taggedPeopleIds = hiddenTaggedPeopleInput.value
-        ? hiddenTaggedPeopleInput.value.split(',').filter(Boolean) // Parse existing IDs
-        : [];
-
-    function updateHiddenInput() {
-        hiddenTaggedPeopleInput.value = taggedPeopleIds.join(',');
-    }
+    // Track tagged people IDs
+    let taggedPeopleIds = [];
 
     function addPersonToTaggedList(userId, userName) {
         if (taggedPeopleIds.includes(userId)) {
-            alert(`${userName} is already tagged.`);
+            alert(`${userName} is already tagged.`); // Fixed with backticks
             return;
         }
 
-        // Add the user ID to the array and update the hidden input
+        // Add the user ID to the array
         taggedPeopleIds.push(userId);
-        updateHiddenInput();
+
+        // Create a hidden input for the tagged person
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'tagged_people';
+        hiddenInput.value = userId;
+        form.appendChild(hiddenInput);
 
         // Create a new div for the tagged person
         const taggedPersonDiv = document.createElement('div');
@@ -36,8 +37,16 @@ document.addEventListener('DOMContentLoaded', function () {
         removeButton.textContent = 'Remove';
         removeButton.className = 'remove-btn';
         removeButton.addEventListener('click', function () {
+            // Remove the user ID from the array
             taggedPeopleIds = taggedPeopleIds.filter((id) => id !== userId);
-            updateHiddenInput();
+            // Remove the hidden input
+            const inputs = form.querySelectorAll('input[name="tagged_people"]');
+            inputs.forEach(input => {
+                if (input.value === userId) {
+                    input.remove();
+                }
+            });
+            // Remove the tagged person div
             taggedPersonDiv.remove();
         });
 
@@ -49,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const query = searchInput.value;
 
         if (query.length >= 2) {
-            fetch(`/search-users/?query=${query}`, {
+            fetch(`/search-users/?query=${encodeURIComponent(query)}`, {  // Fixed with backticks
                 method: 'GET',
                 headers: { 'X-Requested-With': 'XMLHttpRequest' },
             })

@@ -14,6 +14,8 @@ class AppUserAdmin(admin.ModelAdmin):
     form = AppUserChangeForm
 
     list_display = ('pk', 'email', 'is_staff', 'is_superuser', 'is_active', 'last_login')
+    list_display_links = ('email',)
+
     list_filter = ('is_staff', 'is_superuser', 'is_active')
 
     search_fields = ('email',)
@@ -51,7 +53,8 @@ class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     form = ProfileEditForm
 
-    list_display = ('user', 'get_full_name', 'level', 'points', 'date_of_birth')
+    list_display = ('pk', 'user', 'first_name', 'last_name', 'level', 'points', 'date_of_birth')
+    list_display_links = ('user',)
 
     list_filter = ('level', 'date_of_birth')
 
@@ -70,3 +73,6 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
     filter_horizontal = ('landmarks_visited',)
+
+    readonly_fields = ('user',)
+

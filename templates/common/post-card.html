@@ -10,9 +10,15 @@
                     <img src="{% static 'images/anonymous_full.jpg' %}" alt="Author Image" class="post-author-img">
                 {% endif %}
             </a>
-            <a href="{% url 'profile-details' post.author.profile.pk %}">
-                <p class="post-author">{{ post.author.profile.first_name }} {{ post.author.profile.last_name }}</p>
-            </a>
+            {% if post.author.profile.get_full_name == 'Anonymous' %}
+                <a href="{% url 'profile-details' post.author.profile.pk %}">
+                    <p class="post-author">{{ post.author.profile.get_full_name }} (Me)</p>
+                </a>
+            {% else %}
+                <a href="{% url 'profile-details' post.author.profile.pk %}">
+                    <p class="post-author">{{ post.author.profile.get_full_name }}</p>
+                </a>
+            {% endif %}
         </div>
         <div class="post-location-date">
             {% if post.location %}
@@ -26,11 +32,14 @@
         </div>
     </div>
 
-    <a href="{% url 'post-detail' post.pk %}">
-        <div class="post-image">
-            <img src="{{ post.post_image.url }}" alt="Location Picture">
-        </div>
-    </a>
+    {% if  post.post_image.url %}
+        <a href="{% url 'post-detail' post.pk %}">
+            <div class="post-image">
+                <img src="{{ post.post_image.url }}" alt="Location Picture">
+            </div>
+        </a>
+    {% endif %}
+
 
     <div class="tagged-info">
         {% for person in post.tagged_people.all %}
@@ -93,11 +102,14 @@
                         {{ detailed_comment.content }}
                     </p>
                     <div class="reply-section" style="display: none;">
-                        <textarea class="reply-box" placeholder="Write a reply..."></textarea>
-                        <button class="btn send-btn">Send</button>
-                        <button class="btn cancel-btn">X</button>
+                        <form method="post" action="{% url 'add-reply' detailed_comment.comment.pk %}">
+                            {% csrf_token %}
+                            <textarea class="reply-box" name="content" placeholder="Write a reply..."></textarea>
+                            <button type="submit" class="btn send-btn">Send</button>
+                            <button type="button" class="btn cancel-btn">X</button>
+                        </form>
                     </div>
-                    <button class="btn reply-btn">Reply</button>
+                    <button class="btn reply-btn" style="float: right;">Reply <i class="fa-regular fa-comment"></i></button>
                     {% for detailed_reply in detailed_comment.replies %}
                         <div class="comment">
                             <img src="{{ detailed_reply.author_profile_picture.url }}" alt="Author Image"

@@ -4,7 +4,8 @@ from .models import Post, PostComment, ReplyPostComment, PostLike
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'author_email', 'location', 'created_at')
+    list_display = ('pk', 'author_email', 'location', 'created_at')
+    list_display_links = ('author_email',)
     search_fields = ('author__email', 'description', 'location__name')
     list_filter = ('created_at', 'location')
     readonly_fields = ('created_at',)
@@ -29,7 +30,8 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(PostComment)
 class PostCommentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'author_email', 'post_id', 'created_at')
+    list_display = ('pk', 'author_email', 'post_id', 'created_at')
+    list_display_links = ('author_email',)
     search_fields = ('author__email', 'content', 'post__description')
     list_filter = ('created_at',)
     readonly_fields = ('created_at',)
@@ -50,7 +52,8 @@ class PostCommentAdmin(admin.ModelAdmin):
 
 @admin.register(ReplyPostComment)
 class ReplyPostCommentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'author_email', 'comment_id', 'comment_post_id', 'created_at')
+    list_display = ('pk', 'author_email', 'comment_id', 'comment_post_id', 'created_at')
+    list_display_links = ('author_email',)
     search_fields = ('author__email', 'content', 'comment__content')
     list_filter = ('created_at',)
     readonly_fields = ('created_at',)
@@ -78,7 +81,8 @@ class ReplyPostCommentAdmin(admin.ModelAdmin):
 
 @admin.register(PostLike)
 class PostLikeAdmin(admin.ModelAdmin):
-    list_display = ('id',  'user_email', 'post_id',)
+    list_display = ('pk',  'user_email', 'post_id',)
+    list_display_links = ('user_email',)
     search_fields = ('to_post__description', 'user__email')
     fieldsets = (
         ('Like Details', {

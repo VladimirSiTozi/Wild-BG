@@ -4,7 +4,8 @@ from .models import Landmark, AdditionalLandmarkInfo, Review, Like, Visit
 
 @admin.register(Landmark)
 class LandmarkAdmin(admin.ModelAdmin):
-    list_display = ('name', 'location_name', 'level', 'user', 'created_at', 'updated_at')
+    list_display = ('pk', 'name', 'location_name', 'level', 'user', 'created_at', 'updated_at')
+    list_display_links = ('name',)
     search_fields = ('name', 'location_name', 'user__email')
     list_filter = ('level', 'created_at')
     readonly_fields = ('created_at', 'updated_at')
@@ -20,7 +21,8 @@ class LandmarkAdmin(admin.ModelAdmin):
 
 @admin.register(AdditionalLandmarkInfo)
 class AdditionalLandmarkInfoAdmin(admin.ModelAdmin):
-    list_display = ('landmark', 'is_transition', 'is_accessible', 'distance_km', 'suitable_for_children')
+    list_display = ('pk', 'landmark', 'is_transition', 'is_accessible', 'distance_km', 'suitable_for_children')
+    list_display_links = ('landmark',)
     search_fields = ('landmark__name',)
     list_filter = ('is_transition', 'is_accessible', 'suitable_for_children', 'has_eating_places', 'is_ennobled')
     fieldsets = (
@@ -36,7 +38,8 @@ class AdditionalLandmarkInfoAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('user', 'landmark', 'rating', 'created_at')
+    list_display = ('pk', 'user', 'landmark', 'rating', 'created_at')
+    list_display_links = ('user',)
     search_fields = ('user__email', 'landmark__name')
     list_filter = ('rating', 'created_at')
     readonly_fields = ('created_at',)
@@ -49,7 +52,8 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(Like)
 class LikeAdmin(admin.ModelAdmin):
-    list_display = ('user', 'landmark', 'created_at')
+    list_display = ('pk', 'user', 'landmark', 'created_at')
+    list_display_links = ('user',)
     search_fields = ('user__email', 'landmark__name')
     readonly_fields = ('created_at',)
     fieldsets = (
@@ -61,7 +65,8 @@ class LikeAdmin(admin.ModelAdmin):
 
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-    list_display = ('user', 'landmark', 'created_at')
+    list_display = ('pk', 'user', 'landmark', 'created_at')
+    list_display_links = ('user',)
     search_fields = ('user__email', 'landmark__name')
     readonly_fields = ('created_at',)
     fieldsets = (

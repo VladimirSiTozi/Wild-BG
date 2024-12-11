@@ -1,3 +1,7 @@
+from wildBg.accounts.choices import UserLevelChoices
+from wildBg.accounts.models import Profile
+
+
 def give_profile_points(user, operation_type):
     if operation_type == 'post':
         ADD_POINTS = 10
@@ -8,13 +12,16 @@ def give_profile_points(user, operation_type):
 
     if hasattr(user, 'profile'):
         user.profile.points += ADD_POINTS
+        print(user.profile.level)
 
         if user.profile.points >= 1250:
-            user.profile.level = user.profile.level.EXPERT
+            user.profile.level = UserLevelChoices.EXPERT
         elif user.profile.points >= 700:
-            user.profile.level = user.profile.level.PROFESSIONAL
+            user.profile.level = UserLevelChoices.PROFESSIONAL
         elif user.profile.points >= 250:
-            user.profile.level = user.profile.level.INTERMEDIATE
+            user.profile.level = UserLevelChoices.INTERMEDIATE
+        else:
+            user.profile.level = UserLevelChoices.BEGINNER
 
         user.profile.save()
     else:

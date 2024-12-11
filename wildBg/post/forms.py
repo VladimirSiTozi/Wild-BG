@@ -7,18 +7,18 @@ from wildBg.post.models import PostComment, Post, ReplyPostComment
 UserModel = get_user_model()
 
 
+# wildBg/post/forms.py
+
 class PostBaseForm(forms.ModelForm):
     class Meta:
         model = Post
         exclude = ('author', )
-
         labels = {
             'location': 'Location',
             'post_image': 'Image',
             'description': 'Description',
             'tagged_people': 'Tagged People',
         }
-
         widgets = {
             'location': forms.Select(attrs={
                 'class': 'form-control',
@@ -33,12 +33,13 @@ class PostBaseForm(forms.ModelForm):
                 'placeholder': 'Enter a description of your post...',
                 'required': True
             }),
+            'tagged_people': forms.MultipleHiddenInput(),
         }
 
     tagged_people = forms.ModelMultipleChoiceField(
         queryset=UserModel.objects.all(),
-        required=False,  # Make the field optional
-        widget=forms.HiddenInput()  # Process via hidden input in the template
+        required=False,
+        widget=forms.MultipleHiddenInput()
     )
 
 

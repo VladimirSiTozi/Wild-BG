@@ -52,7 +52,7 @@ class LandmarkAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
         additional_info.landmark = landmark
         additional_info.save()
 
-        give_profile_points(self.request.user, 'post')
+        give_profile_points(self.request.user, 'landmark')
 
         return super().form_valid(landmark_form)
 
@@ -188,7 +188,7 @@ def add_review(request, pk: int):
             review.rating = request.POST.get('rating')
             review.save()
 
-    return redirect(request.META.get('HTTP_REFERER', f'#{pk}'))
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -204,7 +204,7 @@ def like_func(request, pk: int):
         like = Like(landmark_id=pk, user=request.user)
         like.save()
 
-    return redirect(request.META.get('HTTP_REFERER') + f'#{pk}')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -220,7 +220,7 @@ def visit_func(request, pk: int):
         visit = Visit(landmark_id=pk, user=request.user)
         visit.save()
 
-    return redirect(request.META.get('HTTP_REFERER') + f'#{pk}')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def share_landmark_functionality(request, pk: int):
