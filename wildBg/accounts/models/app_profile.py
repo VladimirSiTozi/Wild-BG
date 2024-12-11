@@ -42,6 +42,8 @@ class Profile(models.Model):
 
     background_image = models.ImageField(
         upload_to='background_images/',
+        blank=True,
+        null=True,
         # default='images/default_background.jpg',
     )
 

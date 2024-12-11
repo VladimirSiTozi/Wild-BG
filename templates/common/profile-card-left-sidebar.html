@@ -22,7 +22,7 @@
             {% if user_profile.description == '' %}
                 <p class="profile-p-info">No information</p>
             {% else %}
-                <p class="profile-p-info">{{ user_profile.description }}</p>
+                <p class="profile-p-info">{{ user_profile.description|truncatewords:20 }}</p>
             {% endif %}
         </div>
     {% else %}

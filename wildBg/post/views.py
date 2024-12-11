@@ -31,7 +31,7 @@ class PostAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
         context = super().get_context_data(**kwargs)
         # Add landmarks to the context
         context['landmarks'] = Landmark.objects.all()
-        context['tagged_people'] = AppUser.objects.all()
+        # context['tagged_people'] = AppUser.objects.all()
         return context
 
     def form_valid(self, form):
@@ -41,10 +41,10 @@ class PostAddView(LoginRequiredMixin, SidebarContextMixin, CreateView):
         post.save()
 
         # Process tagged people
-        tagged_people_ids = self.request.POST.get('tagged_people', '')  # Get IDs from the hidden field
-        if tagged_people_ids:
-            tagged_people_ids = tagged_people_ids.split(',')  # Convert to a list
-            post.tagged_people.set(tagged_people_ids)
+        # tagged_people_ids = self.request.POST.get('tagged_people', '')  # Get IDs from the hidden field
+        # if tagged_people_ids:
+        #     tagged_people_ids = tagged_people_ids.split(',')  # Convert to a list
+        #     post.tagged_people.set(tagged_people_ids)
 
         form.save_m2m()  # Save many-to-many relationships, if any
 

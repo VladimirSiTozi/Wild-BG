@@ -6,7 +6,7 @@
             <h2 class="location name">{{ landmark_data.landmark.location_name }}</h2>
             <img src="{{ landmark_data.landmark.image.url }}" alt="Location Picture" class="location-picture">
             <p class="description">
-                {{ landmark_data.landmark.description }}
+                {{ landmark_data.landmark.description|truncatewords:55 }}
             </p>
             <div class="rating">
                 {% for i in landmark_data.full_stars %}

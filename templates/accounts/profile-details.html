@@ -23,9 +23,6 @@
             </div>
             <div class="profile-details">
                 <h2 class="profile-name">{{ object.profile.get_full_name }}</h2>
-                {% if request.user.is_authenticated %}
-                    <p class="profile-dob">{{ object.profile.user.email }}</p>
-                {% endif %}
                 {% if not object.profile.date_of_birth %}
                     <p class="profile-dob">Date of Birth: </p>
                 {% else %}
@@ -48,7 +45,7 @@
                 {% for place in places_visited %}
                     <li>{{ place.name }}</li>
                 {% empty %}
-                    <li>No information</li>
+                    <li>No visited places</li>
                 {% endfor %}
             </ul>
         </div>

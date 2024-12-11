@@ -41,13 +41,13 @@
     {% endif %}
 
 
-    <div class="tagged-info">
-        {% for person in post.tagged_people.all %}
-            <a href="{% url 'profile-details' person.profile.pk %}">
-                <p class="tagged-people">{{ person.profile.get_full_name }}</p>
-            </a>
-        {% endfor %}
-    </div>
+{#    <div class="tagged-info">#}
+{#        {% for person in post.tagged_people.all %}#}
+{#            <a href="{% url 'profile-details' person.profile.pk %}">#}
+{#                <p class="tagged-people">{{ person.profile.get_full_name }}</p>#}
+{#            </a>#}
+{#        {% endfor %}#}
+{#    </div>#}
     <div class="post-description">
         <p>{{ post.description }}</p>
     </div>
