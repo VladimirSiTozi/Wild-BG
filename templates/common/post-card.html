@@ -41,13 +41,13 @@
     {% endif %}
 
 
-{#    <div class="tagged-info">#}
-{#        {% for person in post.tagged_people.all %}#}
-{#            <a href="{% url 'profile-details' person.profile.pk %}">#}
-{#                <p class="tagged-people">{{ person.profile.get_full_name }}</p>#}
-{#            </a>#}
-{#        {% endfor %}#}
-{#    </div>#}
+    {#    <div class="tagged-info">#}
+    {#        {% for person in post.tagged_people.all %}#}
+    {#            <a href="{% url 'profile-details' person.profile.pk %}">#}
+    {#                <p class="tagged-people">{{ person.profile.get_full_name }}</p>#}
+    {#            </a>#}
+    {#        {% endfor %}#}
+    {#    </div>#}
     <div class="post-description">
         <p>{{ post.description }}</p>
     </div>
@@ -109,11 +109,17 @@
                             <button type="button" class="btn cancel-btn">X</button>
                         </form>
                     </div>
-                    <button class="btn reply-btn" style="float: right;">Reply <i class="fa-regular fa-comment"></i></button>
+                    <button class="btn reply-btn" style="float: right;">Reply <i class="fa-regular fa-comment"></i>
+                    </button>
                     {% for detailed_reply in detailed_comment.replies %}
                         <div class="comment">
-                            <img src="{{ detailed_reply.author_profile_picture.url }}" alt="Author Image"
-                                 class="comment-author-img">
+                            {% if detailed_reply.author_profile_picture.url %}
+                                <img src="{{ detailed_reply.author_profile_picture.url }}" alt="Author Image"
+                                     class="comment-author-img">
+                            {% else %}
+                                <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Author Image"
+                                     class="comment-author-img">
+                            {% endif %}
                             <div class="comment-content">
                                 <p class="comment-author">
                                     <strong>{{ detailed_reply.author_name }}</strong> - <span
