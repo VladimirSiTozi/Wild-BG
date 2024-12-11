@@ -127,6 +127,9 @@ class AdditionalLandmarkInfo(models.Model):
         default=False,
     )
 
+    def __str__(self):
+        return f'Additional Landmark Info for "{self.landmark.name}"'
+
 
 class Review(models.Model):
     user = models.ForeignKey(
