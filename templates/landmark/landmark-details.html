@@ -264,8 +264,11 @@
             {% else %}
                 <div class="landmark-review">
                     <div class="landmark-comment">
-                        <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image"
-                             class="comment-author-img">
+                    {% if not review.user.profile.profile_picture.url %}
+                        <img src="{{ review.user.profile.profile_picture.url }}" alt="Author Image" class="post-author-img">
+                    {% else %}
+                         <img src="{% static 'images/anonymous_bear.jpg' %}" alt="Author Image" class="post-author-img">
+                    {% endif %}
                         <div class="comment-content">
                             <p class="comment-author">
                                 {% if review.user.profile.get_full_name == 'Anonymous' %}
