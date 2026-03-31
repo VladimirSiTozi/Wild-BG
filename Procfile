@@ -1,1 +1,1 @@
-web: gunicorn divotobg.wsgi
+web: gunicorn wildBg.wsgi
