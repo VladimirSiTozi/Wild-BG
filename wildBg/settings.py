@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'rest_framework',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     # My apps
     "wildBg.accounts.apps.AccountsConfig",
@@ -57,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
