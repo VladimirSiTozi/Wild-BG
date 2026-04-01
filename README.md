@@ -19,7 +19,7 @@ The application helps users:
 - Plan future visits efficiently  
 
 Homepage view
-<img width="1916" height="982" alt="image" src="https://github.com/user-attachments/assets/194032dd-7b4a-4873-be36-9ef0aa4b321e" />
+<img width="1788" height="1365" alt="wildbg_homepage" src="https://github.com/user-attachments/assets/642d3711-f1fa-4cb2-ae0f-d136c1a68616" />
 
 
 ## 🚀 Features
