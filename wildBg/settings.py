@@ -90,16 +90,16 @@ WSGI_APPLICATION = 'wildBg.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": config('MY_ENGINE'),
-        "NAME": config('MY_DATABASE_NAME'),
-        "USER": config('MY_DATABASE_USERNAME'),
-        "PASSWORD": config('MY_DATABASE_PASSWORD'),
-        "HOST": config('MY_HOST'),
-        "PORT": config('MY_PORT'),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": config('MY_ENGINE'),
+#         "NAME": config('MY_DATABASE_NAME'),
+#         "USER": config('MY_DATABASE_USERNAME'),
+#         "PASSWORD": config('MY_DATABASE_PASSWORD'),
+#         "HOST": config('MY_HOST'),
+#         "PORT": config('MY_PORT'),
+#     }
+# }
 
 DATABASES = {
     'default': dj_database_url.config(
