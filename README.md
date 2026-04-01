@@ -8,7 +8,6 @@ A community-driven web application built with **Python & Django** that enables u
   <a href="https://wild-bg.onrender.com/"><strong><ion-icon name="enter-outline"></ion-icon>Live Demo</strong></a>
 </p>
 
----
 
 ## 📌 Overview
 
@@ -22,7 +21,7 @@ The application helps users:
 Homepage view
 <img width="1916" height="982" alt="image" src="https://github.com/user-attachments/assets/194032dd-7b4a-4873-be36-9ef0aa4b321e" />
 
----
+
 ## 🚀 Features
 
 ### 👤 Authentication
@@ -50,7 +49,9 @@ Homepage view
 - Trip planning – Organize visits to landmarks
 - Interactive experience – Feed, comments, maps, and profiles
 
-## 📝 Post Structure
+---
+
+### 📝 Post Structure
 
 Each post in the application contains the following elements:
 
@@ -69,7 +70,9 @@ Each post in the application contains the following elements:
 
 <img width="682" height="938" alt="image" src="https://github.com/user-attachments/assets/521f6f57-ec55-495d-9c7b-3cd64245284e" />
 
-## 🗺️ Landmark (Object) Structure
+---
+
+### 🗺️ Landmark (Object) Structure
 
 Each landmark in the application includes detailed information to help users explore and plan visits:
 
@@ -91,13 +94,28 @@ Each landmark in the application includes detailed information to help users exp
 
 <img width="600" height="1400" alt="image (2)crop" src="https://github.com/user-attachments/assets/716fe6fc-0033-490b-b5bf-85fe392d879c" />
 
-### 🔍 Discovery & Navigation
+## ⭐ Top Locations Sidebar
+
+The left sidebar highlights the **Top 3 Most Liked Landmarks** in the platform.
+
+### 📊 Features
+
+- 🥇 Displays the **top 3 locations based on user likes**
+- 🔄 Updates dynamically based on user activity  
+- 🖼️ Includes preview (image + name) of each location  
+- 🚀 Quick access to the most popular places  
+
+This section helps users quickly discover trending and highly recommended destinations.
+
+<img width="419" height="680" alt="image (1)" src="https://github.com/user-attachments/assets/5a148617-d69c-4238-9244-63f468178a9d" />
+
+---
+
+## 🔍 Discovery & Navigation
 - **Social Feed** – Browse content like a social media platform  
 - **Search System** – Find landmarks quickly  
 - **Categories & Tags** – Filter and explore places  
 - **Map Integration** – View locations and plan visits  
-
----
 
 ## 🏗️ Tech Stack
 
@@ -107,14 +125,13 @@ Each landmark in the application includes detailed information to help users exp
 - **Frontend:** Django Templates (HTML, CSS)  
 - **Maps:** Leaflet / Google Maps  
 
----
+## 🎯 Future Improvements
+- ❤️ Like / Favorite system
+- 📍 Save places for later
+- 🧭 Advanced trip planner
+- 🔔 Notifications system
+- 📱 Mobile optimization
 
-## 📸 Screenshots
 
-_Add your screenshots here_
-
-```md
-![Home Page](./screenshots/home.png)
-![Feed](./screenshots/feed.png)
-![Map](./screenshots/map.png)
-![Profile](./screenshots/profile.png)
+##💡 About
+- WildBg (DivotoBg) is inspired by the idea of making Bulgaria’s hidden beauty more accessible through technology and community sharing.
