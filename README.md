@@ -107,7 +107,7 @@ The left sidebar highlights the **Top 3 Most Liked Landmarks** in the platform.
 
 This section helps users quickly discover trending and highly recommended destinations.
 
-<img width="419" height="680" alt="image (1)" src="https://github.com/user-attachments/assets/5a148617-d69c-4238-9244-63f468178a9d" />
+<img width="300" height="540" alt="image (1)" src="https://github.com/user-attachments/assets/5a148617-d69c-4238-9244-63f468178a9d" />
 
 ---
 
