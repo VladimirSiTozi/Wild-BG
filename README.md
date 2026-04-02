@@ -46,6 +46,7 @@ Homepage view
 ### 🧩 Core Concepts
 - User-generated content – Users create and share places
 - Exploration-focused – Discover new and interesting destinations
+- Landmark rating – Users can rate and review landmarks ⭐
 - Trip planning – Organize visits to landmarks
 - Interactive experience – Feed, comments, maps, and profiles
 
@@ -132,6 +133,5 @@ This section helps users quickly discover trending and highly recommended destin
 - 🔔 Notifications system
 - 📱 Mobile optimization
 
-
-##💡 About
+## 💡 About
 - WildBg (DivotoBg) is inspired by the idea of making Bulgaria’s hidden beauty more accessible through technology and community sharing.
